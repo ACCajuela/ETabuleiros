@@ -3,46 +3,16 @@ from django.shortcuts import render
 def home(request):
     return render(request, 'HTML/home.html')
 
-def cadastro(request):
-    return render(request, 'HTML/cadastro.html')
+def editCliente(request):
+    return render(request, 'HTML/editCliente.html')
 
-def carrinho(request):
-    return render(request, 'HTML/carrinho.html')
+def editFuncionarioAdm(request):
+    return render(request, 'HTML/editFuncionarioAdm.html')
 
-def categoriaJogosCartas(request):
-    return render(request, 'HTML/categoriaJogosCartas.html')
+def login(request):
+    return render(request, 'HTML/login.html')
 
-def cadastro(request):
-    return render(request, 'HTML/cadastro.html')
-def cadastro(request):
-    return render(request, 'HTML/cadastro.html')
-def cadastro(request):
-    return render(request, 'HTML/cadastro.html')
-def cadastro(request):
-    return render(request, 'HTML/cadastro.html')
-def cadastro(request):
-    return render(request, 'HTML/cadastro.html')
-def cadastro(request):
-    return render(request, 'HTML/cadastro.html')
-def cadastro(request):
-    return render(request, 'HTML/cadastro.html')
-def cadastro(request):
-    return render(request, 'HTML/cadastro.html')
-def cadastro(request):
-    return render(request, 'HTML/cadastro.html')
-def cadastro(request):
-    return render(request, 'HTML/cadastro.html')
-def cadastro(request):
-    return render(request, 'HTML/cadastro.html')
-def cadastro(request):
-    return render(request, 'HTML/cadastro.html')
-def cadastro(request):
-    return render(request, 'HTML/cadastro.html')
-def cadastro(request):
-    return render(request, 'HTML/cadastro.html')
-def cadastro(request):
-    return render(request, 'HTML/cadastro.html')
-def cadastro(request):
-    return render(request, 'HTML/cadastro.html')
-def cadastro(request):
-    return render(request, 'HTML/cadastro.html')
+def pedido(request):
+    return render(request, 'HTML/pedido.html')
+
+

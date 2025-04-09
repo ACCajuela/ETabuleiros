@@ -21,4 +21,8 @@ from starmeeple import views
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', views.home, name='home'),
+    path('adm/editClient', views.editCliente, name='editClient'),
+    path('adm/editEmployee', views.editFuncionarioAdm, name='editEmployee'),
+    path('login', views.login, name='login'),
+    path('pay', views.pedido, name='pedido'),
 ]
