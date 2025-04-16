@@ -83,7 +83,7 @@ DATABASES = {
         'NAME': 'labbd2',
         'USER': 'root',
         'PASSWORD': '12345',
-        'HOST': 'localhost',
+        'HOST': '127.0.0.1',
         'PORT': '3306', 
     }
 }
