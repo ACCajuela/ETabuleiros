@@ -1,8 +1,8 @@
 ------------------------------------- Alicia -------------------------------------
-16- perfil
-19- suporteCliente
+**16- perfil
+**19- suporteCliente
 5- categoriaProibidao
-2- carrinho
+**2- carrinho
 20- suporteFuncionario
 
 ------------------------------------- Ana -------------------------------------
