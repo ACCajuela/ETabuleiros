@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
 from django.http import JsonResponse
-from .services import criar_usuario
+from etabuleiros.services import criar_usuario
 
 
 def home(request):
@@ -107,7 +107,7 @@ def fazer_login(request):
         try:
             user = fazer_login(request, email, senha)
             return redirect('home')
-        except ValidationError as e:
+        except ValueError as e:
             return render(request, 'login', {'erro': str(e)})
 
     return render(request, 'login')
