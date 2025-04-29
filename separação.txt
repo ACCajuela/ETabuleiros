@@ -1,29 +1,41 @@
 ------------------------------------- Alicia -------------------------------------
-***16- perfil
-***19- suporteCliente
-***5- categoriaProibidao
-***2- carrinho
-***20- suporteFuncionario
-***21- categoriaFamilia
+*** 16- perfil
+*** 19- suporteCliente
+*** 5- categoriaProibidao
+*** 2- carrinho
+*** 20- suporteFuncionario
+*** 21- categoriaFamilia
 22- chat
+*** 23- painelFuncionario
 
 ------------------------------------- Ana -------------------------------------
-***9- editFuncionarioAdm
-***17- problemaPedido
-***8- editCliente
-***13- login
-***15- pedido
+*** 9- editFuncionarioAdm
+*** 17- problemaPedido
+*** 8- editCliente
+*** 13- login
+*** 15- pedido
 
 ------------------------------------- Rillory -------------------------------------
+<<<<<<< HEAD
 7- categoriaRPG
 1- cadastro
 14- painelADM
 6- categoriaQuebraCabeca
+=======
+*** 7- categoriaRPG
+*** 1- cadastro
+*** 14- painelADM
+*** 6- categoriaQuebraCabeca
+>>>>>>> 7ab3b56 (socorro)
 4- categoriaJogosTabuleiro
 
 ------------------------------------- Victor -------------------------------------
-18- produto
+*** 18- produto
 10- editProdutoCategoria
+<<<<<<< HEAD
 3- categoriaJogosCartas
+=======
+*** 3- categoriaJogosCartas
+>>>>>>> 7ab3b56 (socorro)
 11- exportaFinanca
 12- listaDesejos
