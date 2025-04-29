@@ -1,26 +1,29 @@
 ------------------------------------- Alicia -------------------------------------
-**16- perfil
-**19- suporteCliente
-5- categoriaProibidao
-**2- carrinho
-20- suporteFuncionario
+***16- perfil
+***19- suporteCliente
+***5- categoriaProibidao
+***2- carrinho
+***20- suporteFuncionario
+***21- categoriaFamilia
+22- chat
 
 ------------------------------------- Ana -------------------------------------
-9- editFuncionarioAdm
-17- problemaPedido
-8- editCliente
-13- login
-15- pedido
+***9- editFuncionarioAdm
+***17- problemaPedido
+***8- editCliente
+***13- login
+***15- pedido
 
 ------------------------------------- Rillory -------------------------------------
-7- categoriaRPG - Esqueleto HTML
+7- categoriaRPG
 1- cadastro
 14- painelADM
-6- categoriaQuebraCabeca - Esqueleto HTML
-4- categoriaJogosTabuleiro - Esqueleto HTML
+6- categoriaQuebraCabeca
+4- categoriaJogosTabuleiro
+
 ------------------------------------- Victor -------------------------------------
 18- produto
 10- editProdutoCategoria
-3- categoriaJogosCartas - Esqueleto HTML
+3- categoriaJogosCartas
 11- exportaFinanca
 12- listaDesejos

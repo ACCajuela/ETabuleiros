@@ -1,3 +1,8 @@
 from django.db import models
+from django.utils import timezone
 
-# Create your models here.
+class Carrinho(models.Model):
+    usuario = models.ForeignKey('Usuario', on_delete=models.CASCADE)
+    produto = models.ForeignKey('Produto', on_delete=models.CASCADE)
+    quantidade = models.PositiveIntegerField()
+    data = models.DateTimeField(default=timezone.now) 
