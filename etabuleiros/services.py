@@ -6,14 +6,12 @@ from django.contrib.auth import logout
 def criar_usuario(nome, email, senha):
     if User.objects.filter(email=email).exists():
         raise ValueError("Email já cadastrado")
-
-    usuario = [
-        username = email,
-        email = email,
-        password = senha,
-        first_name = nome
-    ]
-
+    usuario = User.objects.create_user(
+        username=email,
+        email=email,
+        password=senha,
+        first_name=nome
+    )
     return usuario
 
 def editar_usuario (id_usuario, nome=None, email=None, senha=None):
