@@ -22,7 +22,7 @@ def categoriaQuebraCabeca(request):
     return render(request, 'HTML/cateoriaQuebraCabeca.html')
 
 def categoriaRPG(request):
-    return render(request, 'HTML/cateoriaRPG.html')
+    return render(request, 'HTML/categoriaRPG.html')
 
 def editCliente(request):
     return render(request, 'HTML/editCliente.html')

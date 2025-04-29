@@ -25,4 +25,5 @@ urlpatterns = [
     path('adm/editEmployee', views.editFuncionarioAdm, name='editEmployee'),
     path('login', views.login, name='login'),
     path('pay', views.pedido, name='pedido'),
+    path('categoriaRPG', views.categoriaRPG, name='categoriaRPG'),
 ]

@@ -1,18 +1,73 @@
 <!DOCTYPE html>
 <html lang="pt-br">
-
-    <!-- Rillory -->
-
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Star Meeple</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>RPG - StarMeeple</title>
+  <link rel="stylesheet" href="/static/css/style.css">
 </head>
 <body>
-    <nav class="navbar">
-        <search class="searchbarNav"> </search>
+  <header class="topbar">
+    <div class="logo"><img src="/static/img/logo.png" alt="StarMeeple"></div>
+    <input type="text" placeholder="O que você está procurando?">
+    <button class="search-btn">🔍</button>
+    <nav class="menu">
+      <a href="#">Família</a>
+      <a href="#">Cartas</a>
+      <a href="#">RPG</a>
+      <a href="#">Quebra-Cabeça</a>
+      <a href="#">Tabuleiro</a>
+      <span class="adulto">+18</span>
     </nav>
+    <div class="perfil">
+      <img src="/static/img/perfil.png" alt="Perfil">
+      <span class="notificacoes">3</span>
+    </div>
+  </header>
 
-    <footer class="footer"> </footer>
+  <section class="categoria">
+    <h1>RPG</h1>
+    <h2>Destaques</h2>
+    <div class="destaques">
+      <img src="/static/img/luna.png" alt="Luna Capital">
+      <img src="/static/img/reload.png" alt="Reload">
+      <img src="/static/img/memoriadani.png" alt="Memória Dani">
+    </div>
+  </section>
+
+  <section class="produtos">
+    <h2>Produtos</h2>
+    <div class="grid-produtos">
+      <!-- Exemplo de item -->
+      <div class="produto">
+        <img src="/static/img/blackstories.png" alt="Black Stories">
+        <div class="info">
+          <p>BlackStories</p>
+          <span>R$49,99</span>
+          <button class="carrinho">🛒</button>
+        </div>
+      </div>
+      <!-- Repetir estrutura acima com os outros produtos -->
+      <!-- Substitua com loop em Django se for dinâmico -->
+    </div>
+  </section>
+
+  <footer class="rodape">
+    <div>
+      <h4>Formas de Pagamento</h4>
+      <img src="/static/img/visa.png">
+      <img src="/static/img/master.png">
+      <img src="/static/img/amex.png">
+    </div>
+    <div class="marca">
+      <img src="/static/img/logo.png">
+      <p>StarMeeple 2025</p>
+    </div>
+    <div>
+      <h4>Nos sigam nas redes sociais:</h4>
+      <p><img src="/static/img/instagram.png"> Instagram</p>
+      <p><img src="/static/img/facebook.png"> Facebook</p>
+    </div>
+  </footer>
 </body>
 </html>
