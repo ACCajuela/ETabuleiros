@@ -1,4 +1,7 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
+from django.http import JsonResponse
+from etabuleiros.services import criar_usuario
+
 
 def home(request):
     return render(request, 'HTML/home.html')
@@ -60,4 +63,65 @@ def suporteCliente(request):
 def suporteFuncionario(request):
     return render(request, 'HTML/suporteFuncionario.html')
 
+def cadastrar_usuario(request):
+    if request.method == 'POST':
+        nome = request.POST.get('nome')
+        email = request.POST.get('email')
+        senha = request.POST.get('senha')
 
+        try:
+            usuario = criar_usuario(nome, email, senha)
+            return JsonResponse({'id': usuario.id, 'nome': usuario.first_name})
+        except ValueError as e:
+            return JsonResponse({'erro': str(e)}, status=400)
+        
+def editar_usuario(request):
+    if request.method == 'POST':
+        user_id = request.POST.get('id')  
+        nome = request.POST.get('nome')
+        email = request.POST.get('email')
+        senha = request.POST.get('senha')  
+
+        try:
+            usuario = editar_usuario(user_id, nome, email, senha)
+            return JsonResponse({'status': 'ok', 'usuario': usuario.first_name})
+        except ValueError as e:
+            return JsonResponse({'erro': str(e)}, status=400)
+        
+def desativar_usuario(request):
+    if request.method == 'POST':
+        user_id = request.user.id 
+
+        try:
+            desativar_usuario(user_id)
+            return JsonResponse({'status': 'Conta desativada com sucesso'})
+        except ValueError as e:
+            return JsonResponse({'erro': str(e)}, status=400)
+
+
+def fazer_login(request):
+    if request.method == 'POST':
+        email = request.POST.get('email')
+        senha = request.POST.get('senha')
+        
+        try:
+            user = fazer_login(request, email, senha)
+            return redirect('home')
+        except ValueError as e:
+            return render(request, 'login', {'erro': str(e)})
+
+    return render(request, 'login')
+
+def fazer_logout(request):
+    fazer_logout(request)
+    return redirect('home')
+
+def desativar_usuario(request):
+    if request.method == 'POST':
+        user_id = request.user.id 
+
+        try:
+            desativar_usuario(user_id)
+            return JsonResponse({'status': 'Conta desativada com sucesso'})
+        except ValueError as e:
+            return JsonResponse({'erro': str(e)}, status=400)
