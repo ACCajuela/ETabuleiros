@@ -13,15 +13,14 @@
 15- pedido
 
 ------------------------------------- Rillory -------------------------------------
-7- categoriaRPG
+7- categoriaRPG - Esqueleto HTML
 1- cadastro
 14- painelADM
-6- categoriaQuebraCabeca
-4- categoriaJogosTabuleiro
-
+6- categoriaQuebraCabeca - Esqueleto HTML
+4- categoriaJogosTabuleiro - Esqueleto HTML
 ------------------------------------- Victor -------------------------------------
 18- produto
 10- editProdutoCategoria
-3- categoriaJogosCartas
+3- categoriaJogosCartas - Esqueleto HTML
 11- exportaFinanca
 12- listaDesejos

@@ -80,7 +80,7 @@ WSGI_APPLICATION = 'etabuleiros.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'labbd2',
+        'NAME': BASE_DIR / 'db' / 'labbd2.db',
         'USER': 'root',
         'PASSWORD': '12345',
         'HOST': '127.0.0.1',
