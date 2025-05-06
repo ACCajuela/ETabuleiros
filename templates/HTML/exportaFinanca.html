@@ -32,19 +32,40 @@
         <div class="infoFinanca">
           <h3>Finanças por Produto</h3>
           <button>Ver planilha</button>
-          <button>Exportar planilha</button>
+          <button onclick="mostrarPopupNome()">Exportar planilha</button>
         </div>
         <div class="infoFinanca">
           <h3>Finanças por Categoria</h3>
           <button>Ver planilha</button>
-          <button>Exportar planilha</button>
+          <button onclick="mostrarPopupNome()">Exportar planilha</button>
         </div>
         <div class="infoFinanca">
           <h3>Finanças Gerais</h3>
           <button>Ver planilha</button>
-          <button>Exportar planilha</button>
+          <button onclick="mostrarPopupSeguranca()">Exportar planilha</button>
         </div>
       </div>
+
+      <div class="popupNome" id="popupNome" class="popupNome">
+        <div class="popup-content">
+            <h3>Nome do produto ou categoria</h3>
+            <input type="text">
+            <button onclick="mostrarPopupSeguranca">Confirmar</button>
+            <button class="close" onclick="esconderPopup()">Cancelar</button>
+        </div>
+    </div>
+
+    <div class="popupSeguranca" id="popupSeguranca" class="popupSeguranca">
+        <div class="popup-content">
+            <p>Coloque seu usuário de administrador</p>
+            <input type="text">
+            <p>Coloque sua senha</p>
+            <input type="text">
+            <button>Confirmar</button>
+            <span class="close" onclick="esconderPopupSeguranca()">Cancelar</span>
+        </div>
+    </div>
+
     </main>
 
     <footer>
@@ -64,5 +85,23 @@
         <a href="#">Facebook</a>
       </div>
     </footer>
+
+    <script>
+      function mostrarPopupNome() {
+        document.getElementById("popupNome").style.display = "block";
+      }
+      
+      function esconderPopupNome() {
+        document.getElementById("popupNome").style.display = "none";
+      }
+
+      function mostrarPopupSeguranca() {
+        document.getElementById("popupSeguranca").style.display = "block";
+      }
+      
+      function esconderPopupSeguranca() {
+        document.getElementById("popupSeguranca").style.display = "none";
+      }
+  </script>
   </body>
 </html>

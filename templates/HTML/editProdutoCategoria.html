@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+ <!DOCTYPE html>
 <html lang="pt-br">
   <head>
     <meta charset="UTF-8" />
@@ -32,85 +32,85 @@
         <div class="listaCategorias">
           <div class="InfoCategoria">
             <p>nomeCategoria</p>
-            <button>Editar</button>
-            <button>Excluir</button>
+            <button onclick="mostrarPopupCategoria()">Editar</button>
+            <button onclick="mostrarPopupSeguranca()">Excluir</button>
           </div>
           <div class="InfoCategoria">
             <p>nomeCategoria</p>
-            <button>Editar</button>
-            <button>Excluir</button>
+            <button onclick="mostrarPopupCategoria()">Editar</button>
+            <button onclick="mostrarPopupSeguranca()">Excluir</button>
           </div>
           <div class="InfoCategoria">
             <p>nomeCategoria</p>
-            <button>Editar</button>
-            <button>Excluir</button>
+            <button onclick="mostrarPopupCategoria()">Editar</button>
+            <button onclick="mostrarPopupSeguranca()">Excluir</button>
           </div>
           <div class="InfoCategoria">
             <p>nomeCategoria</p>
-            <button>Editar</button>
-            <button>Excluir</button>
+            <button onclick="mostrarPopupCategoria()">Editar</button>
+            <button onclick="mostrarPopupSeguranca()">Excluir</button>
           </div>
         </div>
-        <button>+ Nova Categoria</button>
+        <button onclick="mostrarPopupCategoria">+ Nova Categoria</button>
       </div>
       <div class="produtos">
-        <button>+ Novo Produto</button>
+        <button onclick="mostrarPopupProduto()">+ Novo Produto</button>
         <div class="listaProdutos">
           <div class="infoProduto">
             <p>NomeProduto</p>
             <img src="" alt="Foto do Produto" />
-            <button>Editar</button>
-            <button>Excluir</button>
+            <button onclick="mostrarPopupProduto()">Editar</button>
+            <button onclick="esconderPopupProduto()">Excluir</button>
           </div>
           <div class="infoProduto">
             <p>NomeProduto</p>
             <img src="" alt="Foto do Produto" />
-            <button>Editar</button>
-            <button>Excluir</button>
+            <button onclick="mostrarPopupProduto()">Editar</button>
+            <button onclick="esconderPopupProduto()">Excluir</button>
           </div>
           <div class="infoProduto">
             <p>NomeProduto</p>
             <img src="" alt="Foto do Produto" />
-            <button>Editar</button>
-            <button>Excluir</button>
+            <button onclick="mostrarPopupProduto()">Editar</button>
+            <button onclick="esconderPopupProduto()">Excluir</button>
           </div>
           <div class="infoProduto">
             <p>NomeProduto</p>
             <img src="" alt="Foto do Produto" />
-            <button>Editar</button>
-            <button>Excluir</button>
+            <button onclick="mostrarPopupProduto()">Editar</button>
+            <button onclick="esconderPopupProduto()">Excluir</button>
           </div>
           <div class="infoProduto">
             <p>NomeProduto</p>
             <img src="" alt="Foto do Produto" />
-            <button>Editar</button>
-            <button>Excluir</button>
+            <button onclick="mostrarPopupProduto()">Editar</button>
+            <button onclick="esconderPopupProduto()">Excluir</button>
           </div>
         </div>
       </div>
       <h3>Cupons e Promoções</h3>
       <div class="cupons">
-        <button>+ Novo Cupom</button>
+        <button onclick="mostrarPopupCupom()">+ Novo Cupom</button>
         <div class="listaCupons">
           <div class="InfoCupom">
             <p>nomeCupom</p>
-            <button>Editar</button>
-            <button>Excluir</button>
+            <button onclick="mostrarPopupCupom()">Editar</button>
+            <button onclick="mostrarPopupSeguranca()">Excluir</button>
           </div>
           <div class="InfoCupom">
             <p>nomeCupom</p>
-            <button>Editar</button>
-            <button>Excluir</button>
+            <button onclick="mostrarPopupCupom()">Editar</button>
+            <button onclick="mostrarPopupSeguranca()">Excluir</button>
           </div>
           <div class="InfoCupom">
             <p>nomeCupom</p>
-            <button>Editar</button>
-            <button>Excluir</button>
+            <button onclick="mostrarPopupCupom()">Editar</button>
+            <button onclick="mostrarPopupSeguranca()">Excluir</button>
           </div>
           <div class="InfoCupom">
             <p>nomeCupom</p>
-            <button>Editar</button>
-            <button>Excluir</button>
+            <button onclick="mostrarPopupCupom()">Editar</button>
+            <button onclick="mostrarPopupSeguranca()">Excluir</button>
           </div>
         </div>
       </div>
@@ -139,6 +139,79 @@
           </div>
         </div>
       </div>
+
+      <!-- ------------------------------POPUPS------------------------------------ -->
+
+      <div class="popupSeguranca" id="popupSeguranca" class="popupSeguranca">
+        <div class="popup-content">
+            <p>Coloque seu usuário de administrador</p>
+            <input type="text">
+            <p>Coloque sua senha</p>
+            <input type="text">
+            <button>Confirmar</button>
+            <button class="close" onclick="esconderPopupSeguranca()">Cancelar</button>
+        </div>
+      </div>
+
+      <div class="popupProduto" id="popupProduto" class="popupProduto">
+        <div class="popup-content">
+          <h3>Novo Produto</h3>
+            <p>Nome</p>
+            <input type="text">
+            <p>Categoria</p>
+            <input type="text">
+            <p>N° de jogadores</p>
+            <input type="text">
+            <p>Descrição</p>
+            <input type="text">
+            <p>Quantidade em estoque</p>
+            <input type="text">
+            <p>Autor</p>
+            <input type="text">
+            <p>Editora</p>
+            <input type="text">
+            <p>Classificação Indicativa</p>
+            <input type="text">
+
+            <button onclick="mostrarPopupSeguranca()">Confirmar</button>
+            <button class="close" onclick="esconderPopupProduto()">Cancelar</button>
+        </div>
+      </div>
+
+      <div class="popupCategoria" id="popupCategoria" class="popupCategoria">
+        <div class="popup-content">
+          <h3>Nova Categoria</h3>
+            <p>Nome</p>
+            <input type="text">
+
+            <button onclick="mostrarPopupSeguranca()">Confirmar</button>
+            <button class="close" onclick="esconderPopupCategoria()">Cancelar</button>
+        </div>
+      </div>
+
+      <div class="popupCupom" id="popupCupom" class="popupCupom">
+        <div class="popup-content">
+          <h3>Novo Cupom</h3>
+            <p>Nome</p>
+            <input type="text">
+            <p>Situação</p>
+            <input type="text">
+            <p>Metodo de desconto</p>
+            <select name="metodoDesconto" id="metodoDesconto">
+              <option value="percentual">Percentual</option>
+              <option value="preco">Preço</option>
+            </select>
+            <p>Preço de desconto</p>
+            <input type="text">
+            <p>Data de validação</p>
+            <input type="date">
+            <input type="date">
+
+            <button onclick="mostrarPopupSeguranca()">Confirmar</button>
+            <button class="close" onclick="esconderPopupCupom()">Cancelar</button>
+        </div>
+      </div>
+
     </main>
 
     <footer>
@@ -158,5 +231,47 @@
         <a href="#">Facebook</a>
       </div>
     </footer>
+
+    <script>
+      function mostrarPopupSeguranca() {
+          document.getElementById("popupSeguranca").style.display = "block";
+        }
+        
+      function esconderPopupSeguranca() {
+        document.getElementById("popupSeguranca").style.display = "none";
+      }
+
+      function mostrarPopupProduto() {
+          document.getElementById("popupProduto").style.display = "block";
+        }
+        
+      function esconderPopupProduto() {
+        document.getElementById("popupProduto").style.display = "none";
+      }
+
+      function mostrarPopupCategoria() {
+          document.getElementById("popupCategoria").style.display = "block";
+        }
+        
+      function esconderPopupCategoria() {
+        document.getElementById("popupCategoria").style.display = "none";
+      }
+
+      function mostrarPopupCupom() {
+          document.getElementById("popupCupom").style.display = "block";
+        }
+        
+      function esconderPopupCupom() {
+        document.getElementById("popupCupom").style.display = "none";
+      }
+
+      function mostrarPopupPromocao() {
+          document.getElementById("popupPromocao").style.display = "block";
+        }
+        
+      function esconderPopupPromocao() {
+        document.getElementById("popupPromocao").style.display = "none";
+      }
+    </script>
   </body>
 </html>

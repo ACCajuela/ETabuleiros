@@ -35,33 +35,72 @@
         <div class="listaClientes">
             <div class="infoCliente">
                 <p>Fulano da Silva</p>
-                <button>Editar</button>
-                <button>Excluir</button>
+                <button onclick="mostrarPopupEdit">Editar</button>
+                <button onclick="mostrarPopupConfirma">Excluir</button>
             </div>
             <div class="infoCliente">
                 <p>JOsivaldo KArinho</p>
-                <button>Editar</button>
-                <button>Excluir</button>
+                <button onclick="mostrarPopupEdit">Editar</button>
+                <button onclick="mostrarPopupConfirma">Excluir</button>
             </div>
             <div class="infoCliente">
                 <p>Jurema Peiche</p>
-                <button>Editar</button>
-                <button>Excluir</button>
+                <button onclick="mostrarPopupEdit">Editar</button>
+                <button onclick="mostrarPopupConfirma">Excluir</button>
             </div>
             <div class="infoCliente">
                 <p>Tutu D'Feijón</p>
-                <button>Editar</button>
-                <button>Excluir</button>
+                <button onclick="mostrarPopupEdit">Editar</button>
+                <button onclick="mostrarPopupConfirma">Excluir</button>
             </div>
             <div class="infoCliente">
                 <p>Jubicleuza Sardinni</p>
-                <button>Editar</button>
-                <button>Excluir</button>
+                <button onclick="mostrarPopupEdit">Editar</button>
+                <button onclick="mostrarPopupConfirma">Excluir</button>
             </div>
             <div class="infoCliente">
                 <p>Geroldo Matuzalen</p>
-                <button>Editar</button>
-                <button>Excluir</button>
+                <button onclick="mostrarPopupEdit">Editar</button>
+                <button onclick="mostrarPopupConfirma">Excluir</button>
+            </div>
+        </div>
+        
+
+        <div class="popupEdit" id="popupEdit" class="popupEdit">
+            <div class="popup-content">
+                <p>Nome</p>
+                <input type="text">
+                <p>CPF</p>
+                <input type="text">
+                <p>Idade</p>
+                <input type="text">
+                <p>N° Conta Bancária</p>
+                <input type="text">
+                <p>Telefone</p>
+                <input type="text">
+                <p>Endereço</p>
+                <input type="text">
+                <button onclick="mostrarPopupSeguranca">Confirmar</button>
+                <button class="close" onclick="esconderPopupEdit()">Cancelar</button>
+            </div>
+        </div>
+
+        <div class="popupConfirma" id="popupConfirma" class="popupConfirma">
+            <div class="popup-content">
+                <p>Você tem certeza que deseja excluir?</p>
+                <button onclick="mostrarPopupSeguranca">Confirmar</button>
+                <button class="close" onclick="esconderPopupConfirma()">Cancelar</button>
+            </div>
+        </div>
+
+        <div class="popupSeguranca" id="popupSeguranca" class="popupSeguranca">
+            <div class="popup-content">
+                <p>Coloque seu usuário de administrador</p>
+                <input type="text">
+                <p>Coloque sua senha</p>
+                <input type="text">
+                <button>Confirmar</button>
+                <button class="close" onclick="esconderPopupSeguranca()">Cancelar</button>
             </div>
         </div>
     </main>
@@ -83,6 +122,32 @@
         <a href="#">Facebook</a>
         </div>
     </footer>
+
+    <script>
+        function mostrarPopupEdit() {
+          document.getElementById("popupNome").style.display = "block";
+        }
+        
+        function esconderPopupEdit() {
+          document.getElementById("popupNome").style.display = "none";
+        }
+  
+        function mostrarPopupSeguranca() {
+          document.getElementById("popupSeguranca").style.display = "block";
+        }
+        
+        function esconderPopupSeguranca() {
+          document.getElementById("popupSeguranca").style.display = "none";
+        }
+
+        function mostrarPopupConfirma() {
+          document.getElementById("popupConfirma").style.display = "block";
+        }
+        
+        function esconderPopupConfirma() {
+          document.getElementById("popupConfirma").style.display = "none";
+        }
+    </script>
 
 </body>
 </html>

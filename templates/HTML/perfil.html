@@ -33,7 +33,7 @@
     <main>
         <div class="perfil">
             <h2>Olá, Fulano de Tal!</h2>
-            <button>Deletar Conta</button>
+            <button onclick="mostrarPopup()">Deletar Conta</button>
             <div class="infoUser">
                 <img src="" alt="Fotode perfil do usuário">
                 <p>Nome completo: Fulano de Tal da SIlva</p>
@@ -45,7 +45,7 @@
                 <p>Email: principefulanodetal@hotmail.com</p>
             </div>
             <button>Fale Conosco</button>
-            <button>Segurança</button>
+            <button onclick="mostrarPopupSeguranca()">Segurança</button>
         </div>
         <div class="pedidos">
             <h2>Acompanhe seus pedidos</h2>
@@ -100,6 +100,23 @@
                 </div>
             </div>
         </div>
+
+        <div class="popupConta" id="popupConta" class="popupConta">
+            <div class="popup-content">
+                <h3>Você tem certeza que deseja apagar sua conta?</h3>
+                <p>Todos os seus dados serão apagados depois de 30 dias.</p>
+                <button class="close" onclick="esconderPopup()">Cancelar</button>
+                <button>Apagar</button>
+            </div>
+        </div>
+
+        <div class="popupSeguranca" id="popupSeguranca" class="popupSeguranca">
+            <div class="popup-content">
+                <p>Deseja reportar um problema de segurança, como vazamento de senhas, dados sensíveis, entre outros, etc...?</p>
+                <button class="close" onclick="esconderPopupSeguranca()">Cancelar</button>
+                <button>Reportar</button>
+            </div>
+        </div>
     </main>
 
     <footer>
@@ -119,5 +136,23 @@
         <a href="#">Facebook</a>
         </div>
     </footer>
+
+    <script>
+        function mostrarPopup() {
+          document.getElementById("popupConta").style.display = "block";
+        }
+        
+        function esconderPopup() {
+          document.getElementById("popupConta").style.display = "none";
+        }
+
+        function mostrarPopupSeguranca() {
+          document.getElementById("popupSeguranca").style.display = "block";
+        }
+        
+        function esconderPopupSeguranca() {
+          document.getElementById("popupSeguranca").style.display = "none";
+        }
+    </script>
 </body>
 </html>
