@@ -1,8 +1,20 @@
-from django.contrib.auth import authenticate, login
 from django.contrib.auth.models import User
+from django.contrib.auth import authenticate, login as django_login, logout
 from django.core.exceptions import ValidationError
-from django.contrib.auth import logout
 from django.utils import timezone
+
+'''def get_usuario_por_email(email):
+    try:
+        return Usuario.objects.get(email=email)
+    except Usuario.DoesNotExist:
+        raise ValueError('Usuário não encontrado')
+
+def get_produto_por_id(produto_id):
+    try:
+        return Produto.objects.get(id=produto_id)
+    except Produto.DoesNotExist:
+        raise ValueError('Produto não encontrado')
+'''
 
 def criar_usuario(nome, email, senha):
     if User.objects.filter(email=email).exists():
@@ -34,7 +46,7 @@ def editar_usuario (id_usuario, nome=None, email=None, senha=None):
 def fazer_logout(request):
     logout(request)
 
-def login (request,email,senha):
+def fazer_login (request,email,senha):
     try:
         user = User.objects.get(email=email)
     except User.DoesNotExist:
@@ -43,7 +55,7 @@ def login (request,email,senha):
     user = authenticate(request, username=user.email, password=senha)
     
     if user is not None:
-        login(request, user)
+        django_login(request, user)
         return user
     else:
         raise ValidationError("Senha incorreta")
@@ -117,4 +129,96 @@ def remover_item_carrinho(email, produto_id):
         carrinho.delete()
     except carrinho.DoesNotExist:
         raise ValueError('Produto não está no carrinho')
+    
+    return True
 
+def incluir_item_desejos(email, produto_id):
+    try:
+        usuario = usuario.objects.get(email=email)
+    except usuario.DoesNotExist:
+        raise ValueError('Usuário não encontrado')
+    try:
+        produto = produto.objects.get(id=produto_id)
+    except produto.DoesNotExist:
+        raise ValueError('Produto não encontrado')
+    desejos = desejos.objects.create(
+        usuario=usuario,
+        produto=produto,
+        data=timezone.now()  
+    )
+
+    return desejos
+
+def remover_item_desejos(email, produto_id):
+    try:
+        usuario = usuario.objects.get(email=email)
+    except usuario.DoesNotExist:
+        raise ValueError('Usuário não encontrado')
+    try:
+        produto = produto.objects.get(id=produto_id)
+    except produto.DoesNotExist:
+        raise ValueError('Produto não encontrado')
+    try:
+        desejos= desejos.objects.get(usuario=usuario, produto=produto)
+        desejos.delete()
+    except desejos.DoesNotExist:
+        raise ValueError('Produto não está no carrinho')
+    
+    return True
+
+def criar_promocoes_categoria(email, categoria_id):
+    try:
+        usuario = usuario.objects.get(email=email)
+    except usuario.DoesNotExist:
+        raise ValueError('Usuário não encontrado')
+    try:
+        categoria = categoria.objects.get(id=categoria_id)
+    except categoria.DoesNotExist:
+        raise ValueError('Categoria não encontrada')
+    promocao_categoria = promocao_categoria.objects.create(
+        usuario=usuario,
+        categoria=categoria,
+        data_inicio=timezone.now() 
+    )
+
+    return promocao_categoria
+
+def criar_promocoes_condicao(email, condicao_id):
+    try:
+        usuario = usuario.objects.get(email=email)
+    except usuario.DoesNotExist:
+        raise ValueError('Usuário não encontrado')
+    try:
+        condicao = condicao.objects.get(id=condicao_id)
+    except condicao.DoesNotExist:
+        raise ValueError('Categoria não encontrada')
+    promocao_condicao = promocao_condicao.objects.create(
+        usuario=usuario,
+        condicao=condicao,
+        data_inicio=timezone.now() 
+    )
+
+    return promocao_condicao
+
+def editar_promocoes():
+    pass
+def remover_promocoes():
+    pass
+def criar_produto():
+    pass
+def editar_produto():
+    pass
+def remover_produto():
+    pass
+def criar_pedido():
+    pass
+def editar_pedido():
+    pass
+def remover_pedido():
+    pass
+def criar_cupom():
+    pass
+def editar_cupom():
+    pass
+def remover_cupom():
+    pass

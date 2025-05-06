@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
 from django.http import JsonResponse
-from etabuleiros.services import criar_usuario, incluir_item_no_carrinho, atualizar_item_carrinho, remover_item_carrinho
+from etabuleiros.services import criar_usuario, incluir_item_no_carrinho, atualizar_item_carrinho, remover_item_carrinho, incluir_item_desejos, remover_item_desejos
 from django.utils.timezone import localtime 
 
 
@@ -174,7 +174,7 @@ def incluir_desejos(request):
         email = request.POST.get('email')
         produto_id = request.POST.get('produto')
         try:
-            desejos = incluir_item_no_desejos(email, produto_id)
+            desejos = incluir_item_desejos(email, produto_id)
             return JsonResponse({
                 'id': desejos.id,
                 'produto': desejos.produto.id,
@@ -183,10 +183,13 @@ def incluir_desejos(request):
             })
         except ValueError as e:
             return JsonResponse({'erro': str(e)}, status=400)
-        
-''''
-  `id_des` int NOT NULL AUTO_INCREMENT,
-  `id_des_user` int NOT NULL,
-  `data_alteracao_LD` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
-  `id_des_prod` int DEFAULT NULL,
-'''
+
+def excluir_desejos(request):
+    if request.method == 'POST': 
+        email = request.POST.get('email')
+        produto_id = request.POST.get('produto')
+        try:
+            remover_item_desejos(email, produto_id)
+            return JsonResponse({'mensagem': 'Produto removido do carrinho com sucesso'})
+        except ValueError as e:
+            return JsonResponse({'erro': str(e)}, status=400)
