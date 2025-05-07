@@ -32,6 +32,8 @@ DEBUG = True
 
 ALLOWED_HOSTS = []
 
+#mudar a tabela de usuário
+AUTH_USER_MODEL = 'etabuleiros.Usuario'
 
 # Application definition
 
