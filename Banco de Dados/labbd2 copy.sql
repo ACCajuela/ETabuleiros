@@ -1,37 +1,4 @@
-
--- Copiando estrutura para tabela labbd2.categorias
-CREATE TABLE IF NOT EXISTS `categorias` (
-  `cat_id` int NOT NULL AUTO_INCREMENT,
-  `nome_categoria` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
-  PRIMARY KEY (`cat_id`),
-  UNIQUE KEY `nome_categoria` (`nome_categoria`)
-) ENGINE=InnoDB AUTO_INCREMENT=21 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
--- Copiando dados para a tabela labbd2.categorias: ~0 rows (aproximadamente)
-DELETE FROM `categorias`;
-INSERT INTO `categorias` (`cat_id`, `nome_categoria`) VALUES
-	(2, 'Cooperativo'),
-	(1, 'Estratégia'),
-	(4, 'Eurogame'),
-	(8, 'Jogos de Aventura'),
-	(16, 'Jogos de Azar'),
-	(5, 'Jogos de Cartas'),
-	(12, 'Jogos de Cartas Colecionáveis'),
-	(9, 'Jogos de Construção'),
-	(7, 'Jogos de Dedução'),
-	(10, 'Jogos de Guerra'),
-	(18, 'Jogos de Lógica'),
-	(15, 'Jogos de Memória'),
-	(6, 'Jogos de Miniaturas'),
-	(17, 'Jogos de Palavras'),
-	(14, 'Jogos de Quebra-Cabeça'),
-	(13, 'Jogos de RPG'),
-	(19, 'Jogos de Simulação'),
-	(11, 'Jogos de Tabuleiro'),
-	(20, 'Jogos de Terror'),
-	(3, 'Party Game');
-
--- Copiando estrutura para tabela labbd2.cupons_desconto
+- Copiando estrutura para tabela labbd2.cupons_desconto
 CREATE TABLE IF NOT EXISTS `cupons_desconto` (
   `cupom_id` int NOT NULL AUTO_INCREMENT,
   `codigo` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,

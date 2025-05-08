@@ -32,9 +32,6 @@ DEBUG = True
 
 ALLOWED_HOSTS = []
 
-#mudar a tabela de usuário
-AUTH_USER_MODEL = 'etabuleiros.Usuario'
-
 # Application definition
 
 INSTALLED_APPS = [
@@ -44,7 +41,9 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'etabuleiros'
 ]
+
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -82,7 +81,7 @@ WSGI_APPLICATION = 'etabuleiros.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': BASE_DIR / 'db' / 'labbd2.db',
+        'NAME': 'labbd2',
         'USER': 'root',
         'PASSWORD': '12345',
         'HOST': '127.0.0.1',
