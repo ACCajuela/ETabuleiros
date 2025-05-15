@@ -153,7 +153,7 @@ class DjangoSession(models.Model):
     class Meta:
         managed = False
         db_table = 'django_session'
-              
+
 class Usuario(AbstractUser):
     TIPO_CHOICES = [
         ('cliente', 'Cliente'),
@@ -161,10 +161,8 @@ class Usuario(AbstractUser):
         ('admin', 'Administrador'),
     ]
     
-    # Remova o campo 'username' pois vamos usar email como identificador
     username = None
     
-    # Campos personalizados mantendo compatibilidade com sua tabela
     user_id = models.AutoField(primary_key=True)
     nome = models.CharField(max_length=255, null=True, blank=True)
     
@@ -195,7 +193,6 @@ class Usuario(AbstractUser):
     
     endereco = models.TextField(null=True, blank=True)
     
-    # Tornar email obrigatório e único
     email = models.EmailField(
         'email address',
         unique=True,

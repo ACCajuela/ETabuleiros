@@ -2,10 +2,11 @@ from django.contrib.auth.models import User
 from django.contrib.auth import authenticate, login as django_login, logout
 from django.core.exceptions import ValidationError
 from django.utils import timezone
+from etabuleiros.models import Usuario, Produto, Categoria, CupomDesconto, Promocao, ListaDesejos, Pedido, CarrinhoCompras, Devolucao, Duvida, Fornecedor, Frete, Editora, Notificacao
 
-'''def get_usuario_por_email(email):
+def get_usuario_por_id(usuario_id):
     try:
-        return Usuario.objects.get(email=email)
+        return Usuario.objects.get(id = usuario_id)
     except Usuario.DoesNotExist:
         raise ValueError('Usuário não encontrado')
 
@@ -14,8 +15,43 @@ def get_produto_por_id(produto_id):
         return Produto.objects.get(id=produto_id)
     except Produto.DoesNotExist:
         raise ValueError('Produto não encontrado')
-'''
+    
+def get_categoria_por_id(categoria_id):
+    try:
+        return Categoria.objects.get(id=categoria_id)
+    except Categoria.DoesNotExist:
+        raise ValueError('Categoria não encontrada')
+    
+def get_cupom_por_id(cupom_id):
+    try:
+        return CupomDesconto.objects.get(id=cupom_id)
+    except CupomDesconto.DoesNotExist:
+        raise ValueError('Cupom não encontrado')
+    
+def get_promocao_por_id(promocao_id):
+    try:
+        return Promocao.objects.get(id=promocao_id)
+    except Promocao.DoesNotExist:
+        raise ValueError('Promoção não encontrada')
+    
+def get_lista_por_id(lista_id):
+    try:
+        return ListaDesejos.objects.get(id=lista_id)
+    except ListaDesejos.DoesNotExist:
+        raise ValueError('Lista não encontrada')
+    
+def get_pedido_por_id(pedido_id):
+    try:
+        return Pedido.objects.get(id=pedido_id)
+    except Pedido.DoesNotExist:
+        raise ValueError('Pedido não encontrado')
 
+def get_carrinho_por_id(carrinho_id):
+    try:
+        return CarrinhoCompras.objects.get(id=carrinho_id)
+    except CarrinhoCompras.DoesNotExist:
+        raise ValueError('Carrinho não encontrado')
+    
 def criar_usuario(nome, email, senha):
     if User.objects.filter(email=email).exists():
         raise ValueError("Email já cadastrado")
