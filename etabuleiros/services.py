@@ -164,17 +164,29 @@ def incluir_item_no_carrinho(email, produto_id, quantidade):
     )
     return carrinho
 
-def atualizar_item_carrinho(email, produto_id, nova_quantidade):
+#Parte Carrinho   
+def incluir_item_no_carrinho(usuario_id, produto_id, quantidade):
+    usuario = get_usuario_por_id(usuario_id)
+    produto = get_produto_por_id(produto_id)
     try:
-        usuario = usuario.objects.get(email=email)
-    except usuario.DoesNotExist:
-        raise ValueError('Usuário não encontrado')
+        quantidade = int(quantidade)
+        if quantidade <= 0:
+            raise ValueError('A quantidade deve ser maior que zero')
+    except ValueError:
+        raise ValueError('Quantidade inválida')
+    carrinho = carrinho.objects.create(
+        usuario=usuario,
+        produto=produto,
+        quantidade=quantidade,
+        data=timezone.now()  
+    )
+    return carrinho
+
+def atualizar_item_carrinho(usuario_id, produto_id, quantidade, nova_quantidade):
+    usuario = get_usuario_por_id(usuario_id)
+    produto = get_produto_por_id(produto_id)
     try:
-        produto = produto.objects.get(id=produto_id)
-    except produto.DoesNotExist:
-        raise ValueError('Produto não encontrado')
-    try:
-        nova_quantidade = int(nova_quantidade)
+        quantidade += int(nova_quantidade)
         if nova_quantidade <= 0:
             raise ValueError('A quantidade deve ser maior que zero')
     except ValueError:
@@ -184,27 +196,24 @@ def atualizar_item_carrinho(email, produto_id, nova_quantidade):
         carrinho.quantidade = nova_quantidade
         carrinho.save()
     except carrinho.DoesNotExist:
-        raise ValueError('Produto não encontrado no carrinho')
+        raise ValueError('Carrinho não encontrado')
     return carrinho
 
-
-def remover_item_carrinho(email, produto_id):
+def remover_item_carrinho(usuario_id, produto_id, quantidade):
+    usuario = get_usuario_por_id(usuario_id)
+    produto = get_produto_por_id(produto_id)
     try:
-        usuario = usuario.objects.get(email=email)
-    except usuario.DoesNotExist:
-        raise ValueError('Usuário não encontrado')
-    try:
-        produto = produto.objects.get(id=produto_id)
-    except produto.DoesNotExist:
-        raise ValueError('Produto não encontrado')
+        quantidade = 0
+    except ValueError:
+        raise ValueError('Quantidade inválida')
     try:
         carrinho = carrinho.objects.get(usuario=usuario, produto=produto)
-        carrinho.delete()
+        carrinho.save()
     except carrinho.DoesNotExist:
-        raise ValueError('Produto não está no carrinho')
+        raise ValueError('Carrinho não encontrado')
     
     return True
-
+    
 def incluir_item_desejos(email, produto_id):
     try:
         usuario = usuario.objects.get(email=email)
