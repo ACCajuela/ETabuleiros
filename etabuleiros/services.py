@@ -51,6 +51,43 @@ def get_carrinho_por_id(carrinho_id):
         return CarrinhoCompras.objects.get(id=carrinho_id)
     except CarrinhoCompras.DoesNotExist:
         raise ValueError('Carrinho não encontrado')
+
+
+def get_devolucao_por_id(devolucao_id):
+    try:
+        return Devolucao.objects.get(id=devolucao_id)
+    except Devolucao.DoesNotExist:
+        raise ValueError('Devolucao não encontrada')
+    
+def get_duvida_por_id(duvida_id):
+    try:
+        return Duvida.objects.get(id=duvida_id)
+    except Duvida.DoesNotExist:
+        raise ValueError('Duvida não encontrada')
+    
+def get_fornecedor_por_id(fornecedor_id):
+    try:
+        return Fornecedor.objects.get(id=fornecedor_id)
+    except Fornecedor.DoesNotExist:
+        raise ValueError('Fornecedor não encontrado')
+    
+def get_frete_por_id(frete_id):
+    try:
+        return Frete.objects.get(id=frete_id)
+    except Frete.DoesNotExist:
+        raise ValueError('Frete não encontrada')
+    
+def get_editora_por_id(editora_id):
+    try:
+        return Editora.objects.get(id=editora_id)
+    except Editora.DoesNotExist:
+        raise ValueError('Editora não encontrada')
+    
+def get_notificacao_por_id(notificacao_id):
+    try:
+        return Notificacao.objects.get(id=notificacao_id)
+    except Notificacao.DoesNotExist:
+        raise ValueError('Notificacao não encontrada')
     
 def criar_usuario(nome, email, senha):
     if User.objects.filter(email=email).exists():
