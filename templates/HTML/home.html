@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Star Meeple</title>
-    <link rel="stylesheet" href="css/home.css">
+    <link rel="stylesheet" href="CSS/home.css">
     <link rel="shortcut icon" href="midia/icon.png" type="image/x-icon">
     <!-- Bootstrap CSS -->
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
@@ -17,15 +17,26 @@
 
 </head>
 <body>
-    <header>
-        <div>
-            <img src="midia/fotoPerfil.png" alt="">
-        </div>
-        <h1>Star Meeple</h1>
-        <div class="search">
-            <input type="text" id="box_search">
-        </div>
-    </header>
+  <header>
+    <nav>
+      <div>
+        <img src="midia/logoStarMeeple.png" alt="StarMeeple">
+        <input type="text" placeholder="O que você está procurando?">
+        <button>🔍</button>
+        <button>💬</button>
+        <img src="avatar.png" alt="Avatar do usuário">
+        <span>3</span>
+      </div>
+      <ul>
+        <li>Jogos de Cartas</li>
+        <li>Jogos de tabuleiro</li>
+        <li>Quebra-cabeças</li>
+        <li>Familia</li>
+        <li>RPG</li>
+        <li>+18</li>
+      </ul>
+    </nav>
+  </header>
     <!-- DIV DE CATEGORIAS -->
     <div class="categories">
         <ul>
@@ -130,7 +141,56 @@
           </div>
     </div>
     <footer>
-        <p>Alícia Ribeiro, Ana Carolina Cajuela, Rillory Teodora, Victor Murta</p>
-    </footer>
-</body>
+      <div>
+      <p>Formas de Pagamento</p>
+      <img src="visa.png" alt="Visa">
+      <img src="mastercard.png" alt="Mastercard">
+      <img src="elo.png" alt="Elo">
+      </div>
+      <div>
+      <img src="logo.png" alt="StarMeeple logo">
+      <p>StarMeeple 2025</p>
+      </div>
+      <div>
+      <p>Nos sigam nas redes sociais:</p>
+      <a href="#">Instagram</a>
+      <a href="#">Facebook</a>
+      </div>
+  </footer>
+
+  <!-- Script para consumir API-->
+  <script>
+  document.addEventListener("DOMContentLoaded", () => {
+    fetch("/api/recomendados/")
+      .then(response => {
+        if (!response.ok) {
+          throw new Error("Erro ao buscar recomendações");
+        }
+        return response.json();
+      })
+      .then(jogos => {
+        const container = document.getElementById("recomendados-container");
+        container.innerHTML = "";
+        jogos.forEach((jogo, index) => {
+          const ativo = index === 0 ? "active" : "";
+          const item = `
+            <div class="carousel-item ${ativo}">
+              <img class="d-block w-100" src="${jogo.image}" alt="${jogo.nome}">
+            </div>
+          `;
+          container.insertAdjacentHTML("beforeend", item);
+        });
+      })
+      .catch(error => {
+        console.error("Erro ao carregar recomendações:", error);
+        document.getElementById("recomendados-container").innerHTML = `
+          <div class="carousel-item active text-center p-5 bg-light">
+            Não foi possível carregar as recomendações.
+          </div>
+        `;
+      });
+  });
+
+    </script>
+  </body>
 </html>

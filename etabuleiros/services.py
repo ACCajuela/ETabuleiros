@@ -143,43 +143,42 @@ def desativar_usuario(id_usuario):
     except User.DoesNotExist:
         raise ValueError("Usuário não encontrado")
     
-def incluir_item_no_carrinho(email, produto_id, quantidade):
+
+#Parte Carrinho 
+def criar_carrinho(usuario_id, carrinho_id):
+    usuario = get_usuario_por_id(usuario_id)
+    guarda = get_carrinho_por_id(carrinho_id)
     try:
-        usuario = usuario.objects.get(email=email)
-    except usuario.DoesNotExist:
-        raise ValueError('Usuário não encontrado')
-    try:
-        produto = produto.objects.get(id=produto_id)
-    except produto.DoesNotExist:
-        raise ValueError('Produto não encontrado')
-    try:
-        quantidade = int(quantidade)
-    except ValueError:
-        raise ValueError('Quantidade inválida')
-    carrinho = carrinho.objects.create(
-        usuario=usuario,
-        produto=produto,
-        quantidade=quantidade,
-        data=timezone.now()  
-    )
+        carrinho = CarrinhoCompras.objects.create(
+            usuario = usuario,
+            guarda = guarda
+        )
+        CarrinhoCompras.save()
+    except CarrinhoCompras.DoesNotExist:
+        raise ValueError("Falha ao criar carrinho")
     return carrinho
 
-#Parte Carrinho   
-def incluir_item_no_carrinho(usuario_id, produto_id, quantidade):
+def incluir_item_no_carrinho(usuario_id, carrinho_id, produto_id, quantidade):
     usuario = get_usuario_por_id(usuario_id)
     produto = get_produto_por_id(produto_id)
+    carrinho = get_carrinho_por_id(carrinho_id)
     try:
         quantidade = int(quantidade)
         if quantidade <= 0:
             raise ValueError('A quantidade deve ser maior que zero')
     except ValueError:
         raise ValueError('Quantidade inválida')
-    carrinho = carrinho.objects.create(
-        usuario=usuario,
-        produto=produto,
-        quantidade=quantidade,
-        data=timezone.now()  
-    )
+    try:
+        carrinho = CarrinhoCompras.objects.get(
+            carrinho=carrinho,
+            usuario=usuario,
+            produto=produto,
+            quantidade=quantidade,
+            data=timezone.now()  
+        )
+        CarrinhoCompras.save( )
+    except CarrinhoCompras.DoesNotExist:
+        raise ValueError('Carrinho não encontrado')
     return carrinho
 
 def atualizar_item_carrinho(usuario_id, produto_id, quantidade, nova_quantidade):
@@ -192,13 +191,17 @@ def atualizar_item_carrinho(usuario_id, produto_id, quantidade, nova_quantidade)
     except ValueError:
         raise ValueError('Quantidade inválida')
     try:
-        carrinho = carrinho.objects.get(usuario=usuario, produto=produto)
-        carrinho.quantidade = nova_quantidade
-        carrinho.save()
+        carrinho = CarrinhoCompras.objects.get(
+            usuario=usuario, 
+            produto=produto,
+            quantidade=nova_quantidade
+            )
+        CarrinhoCompras.save()
     except carrinho.DoesNotExist:
         raise ValueError('Carrinho não encontrado')
     return carrinho
 
+'''
 def remover_item_carrinho(usuario_id, produto_id, quantidade):
     usuario = get_usuario_por_id(usuario_id)
     produto = get_produto_por_id(produto_id)
@@ -207,28 +210,37 @@ def remover_item_carrinho(usuario_id, produto_id, quantidade):
     except ValueError:
         raise ValueError('Quantidade inválida')
     try:
-        carrinho = carrinho.objects.get(usuario=usuario, produto=produto)
-        carrinho.save()
-    except carrinho.DoesNotExist:
+        carrinho = CarrinhoCompras.objects.get(usuario=usuario, produto=produto)
+        CarrinhoCompras.save()
+    except CarrinhoCompras.DoesNotExist:
         raise ValueError('Carrinho não encontrado')
     
     return True
-    
-def incluir_item_desejos(email, produto_id):
+'''
+
+#Parte Lista 
+def criar_desejos(usuario_id, desejos_id):
+    usuario = get_usuario_por_id(usuario_id)
+    lista = get_lista_por_id(desejos_id)
     try:
-        usuario = usuario.objects.get(email=email)
-    except usuario.DoesNotExist:
-        raise ValueError('Usuário não encontrado')
-    try:
-        produto = produto.objects.get(id=produto_id)
-    except produto.DoesNotExist:
-        raise ValueError('Produto não encontrado')
-    desejos = desejos.objects.create(
+        desejos = ListaDesejos.objects.create(
+            usuario = usuario,
+            lista = lista
+        )
+        ListaDesejos.save()
+    except ListaDesejos.DoesNotExist:
+        raise ValueError("Falha ao criar a Lista de Desejos")
+    return desejos
+
+def incluir_item_desejos(usuario_id, produto_id):
+    usuario = get_usuario_por_id(usuario_id)
+    produto = get_produto_por_id(produto_id)
+    desejos = ListaDesejos.objects.get(
         usuario=usuario,
         produto=produto,
         data=timezone.now()  
     )
-
+    ListaDesejos.save()
     return desejos
 
 def remover_item_desejos(email, produto_id):

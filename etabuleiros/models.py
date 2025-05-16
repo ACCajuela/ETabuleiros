@@ -268,7 +268,7 @@ class AvaliacaoProduto(models.Model):
     
 class CarrinhoCompras(models.Model):
     carrinho_id = models.AutoField(primary_key=True)
-    user = models.ForeignKey(
+    user = models.OneToOneField(
         'Usuario',  # Replace with your actual user model path if different
         on_delete=models.CASCADE,
         db_column='user_id',
@@ -433,7 +433,7 @@ class Devolucao(models.Model):
     def pode_ser_processada(self):
         """Verifica se a devolução está no status pendente"""
         return self.status_devolucao == self.StatusDevolucao.PENDENTE
-     
+
 class Duvida(models.Model):
     duvida_id = models.AutoField(primary_key=True)
     usuario = models.ForeignKey(

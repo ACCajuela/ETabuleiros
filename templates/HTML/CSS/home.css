@@ -1,0 +1,29 @@
+@import url('https://fonts.googleapis.com/css2?family=Bruno+Ace&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap');
+
+*{
+    font-family: "Roboto", sans-serif;
+}
+
+h1, h2, h3{
+    font-family: "Bruno Ice", sans-serif;
+    color: #F29057;
+}
+
+#header, #footer{
+    background-color: #282E40;
+    font-family: "Bruno Ice", sans-serif;
+}
+
+#header nav{
+    display: flex;
+    flex-direction: column;
+}
+#header div{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+body{
+    background: linear-gradient(45deg, #3C6D73, #282E40); 
+}
