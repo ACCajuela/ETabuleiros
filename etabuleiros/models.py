@@ -16,6 +16,7 @@ from django.utils.translation import gettext_lazy as _
 from django.core.validators import MinLengthValidator
 import re
 from django.core.exceptions import ValidationError
+from django.contrib.auth.models import AbstractUser, UserManager  # Adicione UserManager aqui
 
 class Produto(models.Model):
     prod_id = models.AutoField(primary_key=True)
@@ -161,8 +162,15 @@ class Usuario(AbstractUser):
         ('admin', 'Administrador'),
     ]
     
+    
+    
+    # Removendo o username pois usaremos email
     username = None
     
+    #campo de login
+    email = models.EmailField(unique=True)
+    
+    # Campos adicionais
     user_id = models.AutoField(primary_key=True)
     nome = models.CharField(max_length=255, null=True, blank=True)
     
@@ -193,14 +201,6 @@ class Usuario(AbstractUser):
     
     endereco = models.TextField(null=True, blank=True)
     
-    email = models.EmailField(
-        'email address',
-        unique=True,
-        error_messages={
-            'unique': "Já existe um usuário com este email.",
-        }
-    )
-    
     tipo = models.CharField(
         max_length=11,
         choices=TIPO_CHOICES,
@@ -209,17 +209,18 @@ class Usuario(AbstractUser):
 
     # Configurações para autenticação por email
     USERNAME_FIELD = 'email'
-    REQUIRED_FIELDS = ['cpf', 'nome']
+    REQUIRED_FIELDS = ['cpf', 'nome','username']
+
+    objects = UserManager()
 
     class Meta:
-        db_table = 'usuarios'
+        db_table = 'Usuario'  # Usando o mesmo nome da tabela original
         verbose_name = 'Usuário'
         verbose_name_plural = 'Usuários'
     
     def __str__(self):
         return self.nome or self.email
     
-    # Sobrescreva save para garantir consistência
     def save(self, *args, **kwargs):
         if not self.nome and (self.first_name or self.last_name):
             self.nome = f"{self.first_name} {self.last_name}".strip()
@@ -970,4 +971,3 @@ class ReclamacaoSuporte(models.Model):
 
     def __str__(self):
         return f'Reclamação {self.reclamacao_id} - {self.status}'
-    
