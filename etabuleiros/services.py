@@ -3,6 +3,8 @@ from django.contrib.auth import authenticate, login as django_login, logout
 from django.core.exceptions import ValidationError
 from django.utils import timezone
 from etabuleiros.models import Usuario, Produto, Categoria, CupomDesconto, Promocao, ListaDesejos, Pedido, CarrinhoCompras, Devolucao, Duvida, Fornecedor, Frete, Editora, Notificacao
+from datetime import timedelta
+
 
 def get_usuario_por_id(usuario_id):
     try:
@@ -52,7 +54,6 @@ def get_carrinho_por_id(carrinho_id):
     except CarrinhoCompras.DoesNotExist:
         raise ValueError('Carrinho não encontrado')
 
-
 def get_devolucao_por_id(devolucao_id):
     try:
         return Devolucao.objects.get(id=devolucao_id)
@@ -89,10 +90,11 @@ def get_notificacao_por_id(notificacao_id):
     except Notificacao.DoesNotExist:
         raise ValueError('Notificacao não encontrada')
     
-def criar_usuario(nome, email, senha):
-    if User.objects.filter(email=email).exists():
+def criar_usuario(id_usuario, nome, email, senha):
+    if Usuario.objects.filter(email=email).exists():
         raise ValueError("Email já cadastrado")
-    usuario = User.objects.create_user(
+    usuario = Usuario.objects.create_user(
+        id = id_usuario,
         username=email,
         email=email,
         password=senha,
@@ -101,19 +103,17 @@ def criar_usuario(nome, email, senha):
     return usuario
 
 def editar_usuario (id_usuario, nome=None, email=None, senha=None):
-    try:
-        usuario = User.objects.get(id=id_usuario)
-    except User.DoesNotExist:
-        raise ValueError("Usuário não encontrado")
-
+    usuario = get_usuario_por_id(id_usuario)
     if nome:
-        usuario.first_name = nome
+        usuario.nome = nome
     if email:
         usuario.email = email
         usuario.username = email 
     if senha:
         usuario.set_password(senha)
+
     usuario.save()
+
     return usuario
 
 def fazer_logout(request):
@@ -243,7 +243,7 @@ def incluir_item_desejos(usuario_id, produto_id):
     ListaDesejos.save()
     return desejos
 
-def remover_item_desejos(email, produto_id):
+'''def remover_item_desejos(email, produto_id):
     try:
         usuario = usuario.objects.get(email=email)
     except usuario.DoesNotExist:
@@ -259,37 +259,31 @@ def remover_item_desejos(email, produto_id):
         raise ValueError('Produto não está no carrinho')
     
     return True
+    '''
 
-def criar_promocoes_categoria(email, categoria_id):
-    try:
-        usuario = usuario.objects.get(email=email)
-    except usuario.DoesNotExist:
-        raise ValueError('Usuário não encontrado')
-    try:
-        categoria = categoria.objects.get(id=categoria_id)
-    except categoria.DoesNotExist:
-        raise ValueError('Categoria não encontrada')
-    promocao_categoria = promocao_categoria.objects.create(
-        usuario=usuario,
+#Parte Promocao
+def criar_promocoes_categoria(categoria_id, dias_de_duracao):
+    categoria = get_categoria_por_id(categoria_id)
+    data_inicio = timezone.now()
+    data_fim = data_inicio + timedelta(days=dias_de_duracao)
+
+    promocao_categoria = Promocao.objects.create(
         categoria=categoria,
-        data_inicio=timezone.now() 
+        data_inicio=data_inicio,
+        data_fim=data_fim
     )
 
     return promocao_categoria
 
-def criar_promocoes_condicao(email, condicao_id):
-    try:
-        usuario = usuario.objects.get(email=email)
-    except usuario.DoesNotExist:
-        raise ValueError('Usuário não encontrado')
-    try:
-        condicao = condicao.objects.get(id=condicao_id)
-    except condicao.DoesNotExist:
-        raise ValueError('Categoria não encontrada')
-    promocao_condicao = promocao_condicao.objects.create(
-        usuario=usuario,
+def criar_promocoes_condicao(condicao, dias_de_duracao):
+    condicao = condicao
+    data_inicio = timezone.now()
+    data_fim = data_inicio + timedelta(days=dias_de_duracao)
+
+    promocao_condicao= Promocao.objects.create(
         condicao=condicao,
-        data_inicio=timezone.now() 
+        data_inicio=data_inicio,
+        data_fim=data_fim
     )
 
     return promocao_condicao
