@@ -29,6 +29,11 @@ class Produto(models.Model):
     numero_jogadores = models.CharField(max_length=20, null=True, blank=True)
     itens_inclusos = models.CharField(max_length=200, null=True, blank=True)
     descri = models.CharField(max_length=100, null=True, blank=True)
+    recomendado = models.BooleanField(
+        default=False,
+        verbose_name="Recomendado",
+        help_text="Marcar como produto recomendado"
+    )
     
     CLAS_IND_CHOICES = [
         ('L', 'L'),
@@ -47,7 +52,8 @@ class Produto(models.Model):
 
     autor = models.CharField(max_length=200, null=True, blank=True)
     categoria = models.TextField(null=True, blank=True)
-
+    data_criacao = models.DateTimeField(blank=True, null=True)
+    
     class Meta:
         db_table = 'produtos'       
 
