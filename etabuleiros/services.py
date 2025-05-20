@@ -197,7 +197,7 @@ def atualizar_item_carrinho(usuario_id, produto_id, quantidade, nova_quantidade)
             quantidade=nova_quantidade
             )
         CarrinhoCompras.save()
-    except carrinho.DoesNotExist:
+    except CarrinhoCompras.DoesNotExist:
         raise ValueError('Carrinho não encontrado')
     return carrinho
 
@@ -235,12 +235,15 @@ def criar_desejos(usuario_id, desejos_id):
 def incluir_item_desejos(usuario_id, produto_id):
     usuario = get_usuario_por_id(usuario_id)
     produto = get_produto_por_id(produto_id)
-    desejos = ListaDesejos.objects.get(
-        usuario=usuario,
-        produto=produto,
-        data=timezone.now()  
-    )
-    ListaDesejos.save()
+    try:
+        desejos = ListaDesejos.objects.get(
+            usuario=usuario,
+            produto=produto,
+            data=timezone.now()  
+        )
+        ListaDesejos.save()
+    except ListaDesejos.DoesNotExist:
+        raise ValueError("Lista de Desejos não encontrada")
     return desejos
 
 '''def remover_item_desejos(email, produto_id):
@@ -262,38 +265,63 @@ def incluir_item_desejos(usuario_id, produto_id):
     '''
 
 #Parte Promocao
-def criar_promocoes_categoria(categoria_id, dias_de_duracao):
+def criar_promocoes_categoria(categoria_id, dias_de_duracao, nome):
     categoria = get_categoria_por_id(categoria_id)
+    nome = nome
+    data_inicio = timezone.now()
+    data_fim = data_inicio + timedelta(days=dias_de_duracao)
+    try:
+        promocao = Promocao.objects.create(
+            categoria=categoria,
+            data_inicio=data_inicio,
+            data_fim=data_fim
+        )
+    except Promocao.DoesNotExist:
+        raise ValueError("Falha ao criar Promocao")
+
+    return promocao
+
+def editar_promocoes(categoria_id, dias_de_duracao, nome):
+    categoria = get_categoria_por_id(categoria_id)
+    nome = nome
     data_inicio = timezone.now()
     data_fim = data_inicio + timedelta(days=dias_de_duracao)
 
-    promocao_categoria = Promocao.objects.create(
+    try: 
+        promocao = Promocao.objects.get(
         categoria=categoria,
         data_inicio=data_inicio,
         data_fim=data_fim
-    )
+        )
+        Promocao.save()
+    except Promocao.DoesNotExist:
+        raise ValueError("Promocao nao encontrada")
+    
+    return promocao
 
-    return promocao_categoria
-
-def criar_promocoes_condicao(condicao, dias_de_duracao):
-    condicao = condicao
-    data_inicio = timezone.now()
-    data_fim = data_inicio + timedelta(days=dias_de_duracao)
-
-    promocao_condicao= Promocao.objects.create(
-        condicao=condicao,
-        data_inicio=data_inicio,
-        data_fim=data_fim
-    )
-
-    return promocao_condicao
-
-def editar_promocoes():
-    pass
+'''
 def remover_promocoes():
     pass
-def criar_produto():
-    pass
+'''
+
+def criar_produto(nome, categoria_id, fornecedor_id, autor, n_jogadores, quantidade):
+    categoria = get_categoria_por_id(categoria_id)
+    fornecedor = get_fornecedor_por_id(fornecedor_id)
+
+    try:
+        produto = Produto.objects.create(
+            nome = nome,
+            categoria = categoria,
+            fornecedor = fornecedor,
+            autor = autor,
+            n_jogadores = n_jogadores,
+            quantidade = quantidade
+        )
+    except Promocao.DoesNotExist:
+        raise ValueError("Falha ao criar produto")
+    
+    return produto
+    
 def editar_produto():
     pass
 def remover_produto():
