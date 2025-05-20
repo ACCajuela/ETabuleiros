@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
 from django.http import JsonResponse
-from etabuleiros.services import criar_usuario, incluir_item_no_carrinho, atualizar_item_carrinho, remover_item_carrinho, incluir_item_desejos, remover_item_desejos
+from etabuleiros.services import criar_usuario, incluir_item_no_carrinho, atualizar_item_carrinho, incluir_item_desejos
 from django.utils.timezone import localtime 
 
 
@@ -88,7 +88,8 @@ def editar_usuario(request):
             return JsonResponse({'status': 'ok', 'usuario': usuario.first_name})
         except ValueError as e:
             return JsonResponse({'erro': str(e)}, status=400)
-        
+
+'''
 def desativar_usuario(request):
     if request.method == 'POST':
         user_id = request.user.id 
@@ -98,6 +99,8 @@ def desativar_usuario(request):
             return JsonResponse({'status': 'Conta desativada com sucesso'})
         except ValueError as e:
             return JsonResponse({'erro': str(e)}, status=400)
+
+'''  
 
 
 def fazer_login(request):
@@ -158,7 +161,8 @@ def editar_carrinho(request):
             })
         except ValueError as e:
             return JsonResponse({'erro': str(e)}, status=400)
-        
+
+'''
 def excluir_do_carrinho(request):
     if request.method == 'POST': 
         email = request.POST.get('email')
@@ -168,6 +172,8 @@ def excluir_do_carrinho(request):
             return JsonResponse({'mensagem': 'Produto removido do carrinho com sucesso'})
         except ValueError as e:
             return JsonResponse({'erro': str(e)}, status=400)
+
+'''    
 
 def incluir_desejos(request):
     if request.method == 'POST':
@@ -183,7 +189,7 @@ def incluir_desejos(request):
             })
         except ValueError as e:
             return JsonResponse({'erro': str(e)}, status=400)
-
+'''
 def excluir_desejos(request):
     if request.method == 'POST': 
         email = request.POST.get('email')
@@ -193,3 +199,4 @@ def excluir_desejos(request):
             return JsonResponse({'mensagem': 'Produto removido do carrinho com sucesso'})
         except ValueError as e:
             return JsonResponse({'erro': str(e)}, status=400)
+'''

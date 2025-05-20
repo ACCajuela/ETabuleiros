@@ -39,6 +39,5 @@ urlpatterns = [
     path('pay/issue', views.problemaPedido, name='problemaPedido'),
     path('product', views.produto, name='produto'),
     path('custSuport', views.suporteCliente, name='suporteCliente'),
-    path('adm/custSuport', views.suporteFuncionario, name='suporteFuncionario'),
-    path('carrinho/excluir/', views.excluir_do_carrinho, name='excluir_do_carrinho')
+    path('adm/custSuport', views.suporteFuncionario, name='suporteFuncionario')
 ]

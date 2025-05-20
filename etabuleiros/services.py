@@ -345,20 +345,20 @@ def editar_produto(nome, categoria_id, fornecedor_id, autor, n_jogadores, quanti
 def remover_produto():
     pass
 '''
-
 def criar_pedido():
     pass
 def editar_pedido():
     pass
-
 '''
 def remover_pedido():
     pass
 '''
-
 def criar_cupom():
     pass
 def editar_cupom():
     pass
+'''
 def remover_cupom():
     pass
+'''
+
