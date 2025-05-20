@@ -322,16 +322,40 @@ def criar_produto(nome, categoria_id, fornecedor_id, autor, n_jogadores, quantid
     
     return produto
     
-def editar_produto():
-    pass
+def editar_produto(nome, categoria_id, fornecedor_id, autor, n_jogadores, quantidade):
+    categoria = get_categoria_por_id(categoria_id)
+    fornecedor = get_fornecedor_por_id(fornecedor_id)
+
+    try:
+        produto = Produto.objects.get(
+            nome = nome,
+            categoria = categoria,
+            fornecedor = fornecedor,
+            autor = autor,
+            n_jogadores = n_jogadores,
+            quantidade = quantidade
+        )
+        Produto.save()
+    except Promocao.DoesNotExist:
+        raise ValueError("Produto não existe")
+    
+    return produto
+
+'''
 def remover_produto():
     pass
+'''
+
 def criar_pedido():
     pass
 def editar_pedido():
     pass
+
+'''
 def remover_pedido():
     pass
+'''
+
 def criar_cupom():
     pass
 def editar_cupom():
