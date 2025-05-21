@@ -34,3 +34,13 @@ document.addEventListener("DOMContentLoaded", () => {
     window.location.href = "categoriaProibidao.html";
   });
 });
+document.addEventListener("DOMContentLoaded", () => {
+  const logo = document.getElementById("logoSite");
+
+  if (logo) {
+    logo.style.cursor = "pointer";
+    logo.addEventListener("click", () => {
+      window.location.href = "home.html"; // ou "index.html" se for o nome real
+    });
+  }
+});
