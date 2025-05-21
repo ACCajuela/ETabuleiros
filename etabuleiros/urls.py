@@ -17,6 +17,8 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 from starmeeple import views
+from django.urls import path
+from starmeeple.views import ProdutosRecomendadosAPIView
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -39,5 +41,10 @@ urlpatterns = [
     path('pay/issue', views.problemaPedido, name='problemaPedido'),
     path('product', views.produto, name='produto'),
     path('custSuport', views.suporteCliente, name='suporteCliente'),
+<<<<<<< Updated upstream
     path('adm/custSuport', views.suporteFuncionario, name='suporteFuncionario')
+=======
+    path('adm/custSuport', views.suporteFuncionario, name='suporteFuncionario'),
+    path('api/produtos/recomendados/', ProdutosRecomendadosAPIView.as_view(), name='api-produtos-recomendados')
+>>>>>>> Stashed changes
 ]
