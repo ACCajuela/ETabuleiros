@@ -2,9 +2,14 @@ from django.shortcuts import render, redirect
 from django.http import JsonResponse
 from etabuleiros.services import criar_usuario, incluir_item_no_carrinho, atualizar_item_carrinho, incluir_item_desejos
 from django.utils.timezone import localtime 
-from rest_framework import generics
+from rest_framework import generics, status
 from etabuleiros.models import Produto
-from .serializers import ProdutoRecomendadoSerializer
+from starmeeple.serializers import ProdutoRecomendadoSerializer,  RegistroSerializer, LoginSerializer, UsuarioSerializer
+from rest_framework.authtoken.models import Token
+from rest_framework.views import APIView
+from rest_framework.response import Response
+from rest_framework.authtoken.models import Token
+from rest_framework.permissions import IsAuthenticated
 
 def home(request):
     return render(request, 'HTML/home.html')
@@ -225,3 +230,28 @@ class ProdutosRecomendadosAPIView(generics.ListAPIView):
             queryset = queryset.filter(categoria__slug=categoria)
             
         return queryset
+    
+    
+class RegistroAPIView(APIView):
+    def post(self, request):
+        serializer = RegistroSerializer(data=request.data)
+        if serializer.is_valid():
+            user = serializer.save()
+            token, _ = Token.objects.get_or_create(user=user)
+            return Response({'token': token.key, 'user': UsuarioSerializer(user).data}, status=201)
+        return Response(serializer.errors, status=400)
+
+class LoginAPIView(APIView):
+    def post(self, request):
+        serializer = LoginSerializer(data=request.data)
+        if serializer.is_valid():
+            user = serializer.validated_data
+            token, _ = Token.objects.get_or_create(user=user)
+            return Response({'token': token.key, 'user': UsuarioSerializer(user).data}, status=200)
+        return Response(serializer.errors, status=400)
+
+class UsuarioLogadoAPIView(APIView):
+    permission_classes = [IsAuthenticated]
+
+    def get(self, request):
+        return Response(UsuarioSerializer(request.user).data)

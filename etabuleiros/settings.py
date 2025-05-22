@@ -49,7 +49,8 @@ INSTALLED_APPS = [
     'etabuleiros',
     'rest_framework',
     'starmeeple',
-    'corsheaders'
+    'corsheaders',
+    'rest_framework.authtoken'
 ]
 
 

@@ -15,13 +15,12 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
-from django.urls import path
+from django.urls import path, include
 from starmeeple import views
-from django.urls import path
 from starmeeple.views import ProdutosRecomendadosAPIView
 from django.conf import settings
 from django.conf.urls.static import static
-
+from starmeeple.views import RegistroAPIView, LoginAPIView, UsuarioLogadoAPIView
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -45,7 +44,10 @@ urlpatterns = [
     path('product', views.produto, name='produto'),
     path('custSuport', views.suporteCliente, name='suporteCliente'),
     path('adm/custSuport', views.suporteFuncionario, name='suporteFuncionario'),
-    path('api/recomendados/', ProdutosRecomendadosAPIView.as_view(), name='api-recomendados')
+    path('api/recomendados/', ProdutosRecomendadosAPIView.as_view(), name='api-recomendados'),
+    path('registro/', RegistroAPIView.as_view(), name='registro'),
+    path('login-page', LoginAPIView.as_view(), name='login-api'),
+    path('usuario/', UsuarioLogadoAPIView.as_view(), name='usuario-logado')
 ]
 
 if settings.DEBUG:

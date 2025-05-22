@@ -50,5 +50,31 @@
     </div>
     
     </body>
+
+    <script>
+document.querySelector('form').addEventListener('submit', async (e) => {
+    e.preventDefault();
+
+    const dados = {
+        nome: document.getElementById('nomeUser').value,
+        email: document.getElementById('email').value,
+        password: document.getElementById('senha').value,
+        dataNasc: document.getElementById('data').value,
+    };
+
+    const response = await fetch('/api/usuarios/registro/', {
+        method: 'POST',
+        headers: {'Content-Type': 'application/json'},
+        body: JSON.stringify(dados)
+    });
+
+    const resultado = await response.json();
+    if (response.ok) {
+        alert("Cadastro feito com sucesso! Token: " + resultado.token);
+    } else {
+        alert("Erro: " + JSON.stringify(resultado));
+    }
+});
+</script>
     </html>
     
