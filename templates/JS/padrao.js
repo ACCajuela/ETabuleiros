@@ -40,7 +40,18 @@ document.addEventListener("DOMContentLoaded", () => {
   if (logo) {
     logo.style.cursor = "pointer";
     logo.addEventListener("click", () => {
-      window.location.href = "home.html"; // ou "index.html" se for o nome real
+      window.location.href = "home.html"; 
     });
   }
 });
+document.addEventListener("DOMContentLoaded", () => {
+  const logo = document.getElementById("logoUsuario");
+
+  if (logo) {
+    logo.style.cursor = "pointer";
+    logo.addEventListener("click", () => {
+      window.location.href = "perfil.html"; 
+    });
+  }
+});
+
