@@ -2,7 +2,9 @@ from django.shortcuts import render, redirect
 from django.http import JsonResponse
 from etabuleiros.services import criar_usuario, incluir_item_no_carrinho, atualizar_item_carrinho, incluir_item_desejos
 from django.utils.timezone import localtime 
-
+from rest_framework import generics
+from etabuleiros.models import Produto
+from .serializers import ProdutoRecomendadoSerializer
 
 def home(request):
     return render(request, 'HTML/home.html')
@@ -99,6 +101,8 @@ def desativar_usuario(request):
             return JsonResponse({'status': 'Conta desativada com sucesso'})
         except ValueError as e:
             return JsonResponse({'erro': str(e)}, status=400)
+'''
+
 
 '''  
 
@@ -119,6 +123,8 @@ def fazer_logout(request):
     fazer_logout(request)
     return redirect('home')
 
+
+'''
 def desativar_usuario(request):
     if request.method == 'POST':
         user_id = request.user.id 
@@ -128,6 +134,8 @@ def desativar_usuario(request):
         except ValueError as e:
             return JsonResponse({'erro': str(e)}, status=400)
         
+'''
+
 def incluir_carrinho(request):
     if request.method == 'POST':
         email = request.POST.get('email')
@@ -161,7 +169,6 @@ def editar_carrinho(request):
             })
         except ValueError as e:
             return JsonResponse({'erro': str(e)}, status=400)
-
 '''
 def excluir_do_carrinho(request):
     if request.method == 'POST': 
@@ -172,6 +179,7 @@ def excluir_do_carrinho(request):
             return JsonResponse({'mensagem': 'Produto removido do carrinho com sucesso'})
         except ValueError as e:
             return JsonResponse({'erro': str(e)}, status=400)
+'''      
 
 '''    
 
@@ -200,3 +208,20 @@ def excluir_desejos(request):
         except ValueError as e:
             return JsonResponse({'erro': str(e)}, status=400)
 '''
+class ProdutosRecomendadosAPIView(generics.ListAPIView):
+    """
+    API para listar produtos marcados como recomendados
+    """
+    serializer_class = ProdutoRecomendadoSerializer
+    
+    def get_queryset(self):
+        queryset = Produto.objects.filter(
+            recomendado=True, 
+        ).order_by('-data_criacao')[:12]  # Limita a 12 produtos mais recentes
+        
+        # Filtro opcional por categoria via query parameter
+        categoria = self.request.query_params.get('categoria')
+        if categoria:
+            queryset = queryset.filter(categoria__slug=categoria)
+            
+        return queryset

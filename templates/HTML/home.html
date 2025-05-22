@@ -164,39 +164,48 @@
 
   <!-- Script para consumir API-->
   <script>
-  document.addEventListener("DOMContentLoaded", () => {
-    fetch("/api/recomendados/")
-      .then(response => {
-        if (!response.ok) {
-          throw new Error("Erro ao buscar recomendações");
-        }
-        return response.json();
-      })
-      .then(jogos => {
-        const container = document.getElementById("recomendados-container");
-        container.innerHTML = "";
-        jogos.forEach((jogo, index) => {
-          const ativo = index === 0 ? "active" : "";
-          const item = `
-            <div class="carousel-item ${ativo}">
-              <img class="d-block w-100" src="${jogo.image}" alt="${jogo.nome}">
-            </div>
-          `;
-          container.insertAdjacentHTML("beforeend", item);
-        });
-      })
-      .catch(error => {
-        console.error("Erro ao carregar recomendações:", error);
-        document.getElementById("recomendados-container").innerHTML = `
+document.addEventListener("DOMContentLoaded", () => {
+  fetch("http://localhost:8000/api/recomendados/")
+    .then(response => {
+      if (!response.ok) {
+        throw new Error("Erro ao buscar recomendações");
+      }
+      return response.json();
+    })
+    .then(jogos => {
+      const container = document.querySelector("#carouselExampleControls .carousel-inner");
+      container.innerHTML = "";
+
+      if (!Array.isArray(jogos) || jogos.length === 0) {
+        container.innerHTML = `
           <div class="carousel-item active text-center p-5 bg-light">
-            Não foi possível carregar as recomendações.
+            Nenhuma recomendação disponível no momento.
           </div>
         `;
-      });
-  });
+        return;
+      }
 
-    </script>
-  <script src="/templates/JS/home.js"></script>
-  <script src="/templates/JS/padrao.js"></script>
+      jogos.forEach((jogo, index) => {
+        const ativo = index === 0 ? "active" : "";
+        const imagem = jogo.imagem_url ? jogo.imagem_url : "/static/images/default-product.jpg";
+        const item = `
+          <div class="carousel-item ${ativo}">
+            <img class="d-block w-100" src="${imagem}" alt="${jogo.nome}">
+          </div>
+        `;
+        container.insertAdjacentHTML("beforeend", item);
+      });
+    })
+    .catch(error => {
+      console.error("Erro ao carregar recomendações:", error);
+      document.getElementById("recomendados-container").innerHTML = `
+        <div class="carousel-item active text-center p-5 bg-light">
+          Não foi possível carregar as recomendações.
+        </div>
+      `;
+    });
+});
+</script>
+    
   </body>
 </html>

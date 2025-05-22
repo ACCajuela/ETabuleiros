@@ -1,13 +1,16 @@
 from rest_framework import serializers
-from etabuleiros.models import Produto
+from etabuleiros.models import Produto, ImagemProduto
 
 class ProdutoRecomendadoSerializer(serializers.ModelSerializer):
+    nome = serializers.CharField(source='nome_prod')
+    imagem_url = serializers.SerializerMethodField()
+
     class Meta:
         model = Produto
-        fields = ['id', 'nome', 'preco', 'descricao_curta', 'imagem_url']  # Ajuste com os campos que você quer retornar
-        
-    # Exemplo de campo customizado
-    descricao_curta = serializers.SerializerMethodField()
-    
-    def get_descricao_curta(self, obj):
-        return obj.descricao[:100] + '...' if len(obj.descricao) > 100 else obj.descricao
+        fields = ['nome', 'imagem_url']
+
+    def get_imagem_url(self, obj):
+        imagem = ImagemProduto.objects.filter(prod_id=obj.prod_id).order_by('ordem').first()
+        if imagem and imagem.imagem:
+            return imagem.imagem.url
+        return None

@@ -17,6 +17,11 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 from starmeeple import views
+from django.urls import path
+from starmeeple.views import ProdutosRecomendadosAPIView
+from django.conf import settings
+from django.conf.urls.static import static
+
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -39,5 +44,9 @@ urlpatterns = [
     path('pay/issue', views.problemaPedido, name='problemaPedido'),
     path('product', views.produto, name='produto'),
     path('custSuport', views.suporteCliente, name='suporteCliente'),
-    path('adm/custSuport', views.suporteFuncionario, name='suporteFuncionario')
+    path('adm/custSuport', views.suporteFuncionario, name='suporteFuncionario'),
+    path('api/recomendados/', ProdutosRecomendadosAPIView.as_view(), name='api-recomendados')
 ]
+
+if settings.DEBUG:
+    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
