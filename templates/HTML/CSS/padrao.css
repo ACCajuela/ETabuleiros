@@ -1,5 +1,43 @@
 @import url('https://fonts.googleapis.com/css2?family=Bruno+Ace&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap');
 
+/* Bloco dedicado a tornar o js usavel - não tem fins esteticos*/
+#linkFamilia {
+  cursor: pointer;
+  color: inherit;
+  text-decoration: none;
+}
+#linkJogosCartas {
+  cursor: pointer;
+  color: inherit;
+  text-decoration: none;
+}
+#linkJogosTabuleiro {
+  cursor: pointer;
+  color: inherit;
+  text-decoration: none;
+}
+#linkQuebraCabecas{
+    cursor: pointer;
+    color: inherit;
+    text-decoration: none;
+}
+#linkRPG{
+    cursor: pointer;
+    color: inherit;
+    text-decoration: none;
+}
+#link18{
+    cursor: pointer;
+    color: inherit;
+    text-decoration: none;
+}
+#logoSite {
+  cursor: pointer;
+}
+#logoUsuario {
+  cursor: pointer;
+}
+/*End*/
 *{
     font-family: "Roboto", sans-serif;
 }

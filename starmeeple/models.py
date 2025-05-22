@@ -7,3 +7,4 @@ class Carrinho(models.Model):
     produto = models.ForeignKey('etabuleiros.Produto', on_delete=models.CASCADE)
     quantidade = models.PositiveIntegerField()
     data = models.DateTimeField(default=timezone.now) 
+    
