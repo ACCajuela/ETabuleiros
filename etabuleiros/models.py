@@ -161,25 +161,46 @@ class DjangoSession(models.Model):
         managed = False
         db_table = 'django_session'
 
+class UsuarioManager(BaseUserManager):
+    use_in_migrations = True
+
+    def create_user(self, email, password=None, **extra_fields):
+        if not email:
+            raise ValueError('O campo email é obrigatório.')
+        email = self.normalize_email(email)
+        extra_fields.setdefault('is_active', True)
+        user = self.model(email=email, **extra_fields)
+        user.set_password(password)
+        user.save(using=self._db)
+        return user
+
+    def create_superuser(self, email, password=None, **extra_fields):
+        extra_fields.setdefault('is_staff', True)
+        extra_fields.setdefault('is_superuser', True)
+        extra_fields.setdefault('tipo', 'admin')
+
+        if extra_fields.get('is_staff') is not True:
+            raise ValueError('Superusuário precisa ter is_staff=True.')
+        if extra_fields.get('is_superuser') is not True:
+            raise ValueError('Superusuário precisa ter is_superuser=True.')
+
+        return self.create_user(email, password, **extra_fields)
+
+
 class Usuario(AbstractUser):
     TIPO_CHOICES = [
         ('cliente', 'Cliente'),
         ('funcionario', 'Funcionário'),
         ('admin', 'Administrador'),
     ]
-    
-    
-    
-    # Removendo o username pois usaremos email
+
+    # Remover username e usar email como campo de login
     username = None
-    
-    #campo de login
     email = models.EmailField(unique=True)
-    
-    # Campos adicionais
+
     user_id = models.AutoField(primary_key=True)
     nome = models.CharField(max_length=255, null=True, blank=True)
-    
+
     cpf_validator = RegexValidator(
         regex=r'^\d{3}\.\d{3}\.\d{3}-\d{2}$',
         message='CPF deve estar no formato XXX.XXX.XXX-XX'
@@ -191,9 +212,9 @@ class Usuario(AbstractUser):
         blank=True,
         validators=[cpf_validator]
     )
-    
+
     dataNasc = models.DateTimeField(null=True, blank=True, db_column='dataNasc')
-    
+
     telefone_validator = RegexValidator(
         regex=r'^\(\d{2}\) \d{4,5}-\d{4}$',
         message='Telefone deve estar no formato (XX) XXXX-XXXX ou (XX) XXXXX-XXXX'
@@ -204,29 +225,28 @@ class Usuario(AbstractUser):
         blank=True,
         validators=[telefone_validator]
     )
-    
+
     endereco = models.TextField(null=True, blank=True)
-    
+
     tipo = models.CharField(
         max_length=11,
         choices=TIPO_CHOICES,
         default='cliente'
     )
 
-    # Configurações para autenticação por email
     USERNAME_FIELD = 'email'
-    REQUIRED_FIELDS = ['cpf', 'nome','username']
+    REQUIRED_FIELDS = ['cpf', 'nome']  # username removido!
 
-    objects = UserManager()
+    objects = UsuarioManager()
 
     class Meta:
-        db_table = 'Usuario'  # Usando o mesmo nome da tabela original
+        db_table = 'Usuario'
         verbose_name = 'Usuário'
         verbose_name_plural = 'Usuários'
-    
+
     def __str__(self):
         return self.nome or self.email
-    
+
     def save(self, *args, **kwargs):
         if not self.nome and (self.first_name or self.last_name):
             self.nome = f"{self.first_name} {self.last_name}".strip()
@@ -806,7 +826,7 @@ class HistoricoPreco(models.Model):
 class ImagemProduto(models.Model):
     imagem_id = models.AutoField(primary_key=True)
     prod = models.ForeignKey('Produto', on_delete=models.CASCADE, db_column='prod_id')
-    caminho_imagem = models.CharField(max_length=255)
+    imagem = models.ImageField(upload_to='ProdImagens/')
     ordem = models.IntegerField(default=1)
 
     class Meta:

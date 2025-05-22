@@ -22,6 +22,9 @@ pymysql.install_as_MySQLdb()
 
 AUTH_USER_MODEL = 'etabuleiros.Usuario'
 
+MEDIA_URL = '/media/'
+
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/5.2/howto/deployment/checklist/
@@ -45,7 +48,8 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'etabuleiros',
     'rest_framework',
-    'starmeeple'
+    'starmeeple',
+    'corsheaders'
 ]
 
 
@@ -57,6 +61,8 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'corsheaders.middleware.CorsMiddleware',
+    'django.middleware.common.CommonMiddleware'
 ]
 
 ROOT_URLCONF = 'etabuleiros.urls'
@@ -78,6 +84,12 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'etabuleiros.wsgi.application'
 
+CORS_ALLOWED_ORIGINS = [
+    "http://127.0.0.1:5500",
+    "http://localhost:5500",
+]
+
+CORS_ALLOW_ALL_ORIGINS = True
 
 # Database
 # https://docs.djangoproject.com/en/5.2/ref/settings/#databases

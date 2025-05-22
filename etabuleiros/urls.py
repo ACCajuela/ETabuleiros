@@ -19,6 +19,9 @@ from django.urls import path
 from starmeeple import views
 from django.urls import path
 from starmeeple.views import ProdutosRecomendadosAPIView
+from django.conf import settings
+from django.conf.urls.static import static
+
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -42,5 +45,8 @@ urlpatterns = [
     path('product', views.produto, name='produto'),
     path('custSuport', views.suporteCliente, name='suporteCliente'),
     path('adm/custSuport', views.suporteFuncionario, name='suporteFuncionario'),
-    path('api/produtos/recomendados/', ProdutosRecomendadosAPIView.as_view(), name='api-produtos-recomendados')
+    path('api/recomendados/', ProdutosRecomendadosAPIView.as_view(), name='api-recomendados')
 ]
+
+if settings.DEBUG:
+    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
