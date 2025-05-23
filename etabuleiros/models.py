@@ -186,7 +186,6 @@ class UsuarioManager(BaseUserManager):
 
         return self.create_user(email, password, **extra_fields)
 
-
 class Usuario(AbstractUser):
     TIPO_CHOICES = [
         ('cliente', 'Cliente'),
@@ -216,8 +215,8 @@ class Usuario(AbstractUser):
     dataNasc = models.DateTimeField(null=True, blank=True, db_column='dataNasc')
 
     telefone_validator = RegexValidator(
-        regex=r'^\(\d{2}\) \d{4,5}-\d{4}$',
-        message='Telefone deve estar no formato (XX) XXXX-XXXX ou (XX) XXXXX-XXXX'
+        regex=r'^\(\d{2}\)\d{4,5}-\d{4}$',
+        message='Telefone deve estar no formato (XX)XXXX-XXXX ou (XX)XXXXX-XXXX'
     )
     telefone = models.CharField(
         max_length=20,

@@ -1,6 +1,9 @@
 from rest_framework import serializers
 from etabuleiros.models import Produto, ImagemProduto, Usuario
 from django.contrib.auth.hashers import make_password
+from django.contrib.auth import authenticate
+from django.contrib.auth import get_user_model
+from datetime import date
 
 class ProdutoRecomendadoSerializer(serializers.ModelSerializer):
     nome = serializers.CharField(source='nome_prod')
@@ -41,3 +44,55 @@ class UsuarioSerializer(serializers.ModelSerializer):
         validated_data.pop('password2')
         validated_data['password'] = make_password(validated_data['password'])
         return Usuario.objects.create(**validated_data)
+     
+User = get_user_model()
+
+class PerfilSerializer(serializers.ModelSerializer):
+    idade = serializers.SerializerMethodField()
+    
+    class Meta:
+        model = Usuario
+        fields = [
+            'nome',
+            'idade',
+            'cpf',
+            'endereco',
+            'telefone',
+            'email'
+        ]
+    
+    def get_idade(self, obj):
+        if obj.dataNasc:
+            today = date.today()
+            return today.year - obj.dataNasc.year - ((today.month, today.day) < (obj.dataNasc.month, obj.dataNasc.day))
+        return None
+
+class LoginSerializer(serializers.Serializer):
+    email = serializers.EmailField()
+    password = serializers.CharField(
+        style={'input_type': 'password'},
+        trim_whitespace=False,
+        write_only=True
+    )
+
+    def validate(self, attrs):
+        email = attrs.get('email')
+        password = attrs.get('password')
+
+        if email and password:
+            # Corrigindo a chamada do authenticate
+            user = authenticate(
+                request=self.context.get('request'),
+                email=email,
+                password=password
+            )
+            
+            if not user:
+                msg = 'Não foi possível fazer login com as credenciais fornecidas.'
+                raise serializers.ValidationError(msg, code='authorization')
+        else:
+            msg = 'Deve incluir "email" e "senha".'
+            raise serializers.ValidationError(msg, code='authorization')
+
+        attrs['user'] = user
+        return attrs
