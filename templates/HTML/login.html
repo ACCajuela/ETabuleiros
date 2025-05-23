@@ -32,7 +32,7 @@
         <button type="submit">Entrar</button>
     </form>
 
-    <p>Não tem uma conta? <a href="/cadastro">Cadastre-se</a></p>
+    <p>Não tem uma conta? <button id="btnCadastro">Cadastre-se</p>
 
     <script>
     document.getElementById('loginForm').addEventListener('submit', function(e) {
@@ -64,9 +64,9 @@
             
             // Redireciona conforme o tipo de usuário
             if(data.user.tipo === 'admin') {
-                window.location.href = '/admin';
+                window.location.href = "/admin";
             } else {
-                window.location.href = '/dashboard';
+                window.location.href = "perfil.html";
             }
         })
         .catch(error => {

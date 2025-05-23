@@ -8,6 +8,10 @@ from rest_framework_simplejwt.tokens import RefreshToken
 from etabuleiros.models import Produto, Usuario
 from .serializers import ProdutoRecomendadoSerializer, UsuarioSerializer, LoginSerializer
 from django.contrib.auth import get_user_model
+from rest_framework.permissions import IsAuthenticated
+from rest_framework.response import Response
+from rest_framework.decorators import api_view, permission_classes
+from .serializers import PerfilSerializer
 
 def home(request):
     return render(request, 'HTML/home.html')
@@ -99,7 +103,6 @@ class LoginView(generics.GenericAPIView):
                 "access": str(refresh.access_token),
             }
         }, status=status.HTTP_200_OK)
-        
 
 def painelADM(request):
     return render(request, 'HTML/painelADM.html')
@@ -109,6 +112,12 @@ def pedido(request):
 
 def perfil(request):
     return render(request, 'HTML/perfil.html')
+
+@api_view(['GET'])
+@permission_classes([IsAuthenticated])
+def perfil_api(request):
+    serializer = PerfilSerializer(request.user)
+    return Response(serializer.data)
 
 def problemaPedido(request):
     return render(request, 'HTML/problemaPedido.html')
