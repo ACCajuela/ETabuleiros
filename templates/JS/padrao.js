@@ -45,13 +45,20 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 });
 document.addEventListener("DOMContentLoaded", () => {
-  const logo = document.getElementById("logoUsuario");
+  const iconeUsuario = document.getElementById("iconeUsuario");
 
-  if (logo) {
-    logo.style.cursor = "pointer";
-    logo.addEventListener("click", () => {
-      window.location.href = "perfil.html"; 
+  if (iconeUsuario) {
+    iconeUsuario.style.cursor = "pointer";
+    iconeUsuario.addEventListener("click", () => {
+      const usuarioLogado = localStorage.getItem("usuarioLogado") === "true";
+
+      if (usuarioLogado) {
+        window.location.href = "perfil.html";
+      } else {
+        window.location.href = "login.html";
+      }
     });
   }
 });
+
 
