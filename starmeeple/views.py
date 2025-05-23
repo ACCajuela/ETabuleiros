@@ -2,15 +2,31 @@ from django.shortcuts import render, redirect
 from django.http import JsonResponse
 from etabuleiros.services import criar_usuario, incluir_item_no_carrinho, atualizar_item_carrinho, incluir_item_desejos
 from django.utils.timezone import localtime 
-from rest_framework import generics
-from etabuleiros.models import Produto
-from .serializers import ProdutoRecomendadoSerializer
+from rest_framework import generics, status
+from rest_framework.response import Response
+from etabuleiros.models import Produto, Usuario
+from .serializers import ProdutoRecomendadoSerializer, UsuarioSerializer
 
 def home(request):
     return render(request, 'HTML/home.html')
 
 def cadastro(request):
     return render(request, 'HTML/cadastro.html')
+
+class CadastroUsuarioView(generics.CreateAPIView):
+    queryset = Usuario.objects.all()
+    serializer_class = UsuarioSerializer
+    
+    def create(self, request, *args, **kwargs):
+        serializer = self.get_serializer(data=request.data)
+        serializer.is_valid(raise_exception=True)
+        self.perform_create(serializer)
+        headers = self.get_success_headers(serializer.data)
+        return Response(
+            {"message": "Usuário criado com sucesso!"},
+            status=status.HTTP_201_CREATED,
+            headers=headers
+        )
 
 def carrinho(request):
     return render(request, 'HTML/carrinho.html')

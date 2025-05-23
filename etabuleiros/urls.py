@@ -18,7 +18,7 @@ from django.contrib import admin
 from django.urls import path
 from starmeeple import views
 from django.urls import path
-from starmeeple.views import ProdutosRecomendadosAPIView
+from starmeeple.views import ProdutosRecomendadosAPIView, CadastroUsuarioView
 from django.conf import settings
 from django.conf.urls.static import static
 
@@ -45,7 +45,8 @@ urlpatterns = [
     path('product', views.produto, name='produto'),
     path('custSuport', views.suporteCliente, name='suporteCliente'),
     path('adm/custSuport', views.suporteFuncionario, name='suporteFuncionario'),
-    path('api/recomendados/', ProdutosRecomendadosAPIView.as_view(), name='api-recomendados')
+    path('api/recomendados/', ProdutosRecomendadosAPIView.as_view(), name='api-recomendados'),
+     path('api/cadastro/', CadastroUsuarioView.as_view(), name='cadastro-usuario')
 ]
 
 if settings.DEBUG:
