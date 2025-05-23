@@ -37,6 +37,13 @@
 #logoUsuario {
   cursor: pointer;
 }
+#btnCadastro {
+  cursor: pointer;
+  background-color: transparent;
+  border: none;
+  color: #007bff;
+  text-decoration: underline;
+}
 /*End*/
 *{
     font-family: "Roboto", sans-serif;

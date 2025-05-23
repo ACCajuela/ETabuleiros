@@ -60,5 +60,15 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 });
+document.addEventListener("DOMContentLoaded", () => {
+  const btnCadastro = document.getElementById("btnCadastro");
+
+  if (btnCadastro) {
+    btnCadastro.addEventListener("click", () => {
+      window.location.href = "cadastro.html";
+    });
+  }
+});
+
 
 
