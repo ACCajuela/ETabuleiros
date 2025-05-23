@@ -4,8 +4,10 @@ from etabuleiros.services import criar_usuario, incluir_item_no_carrinho, atuali
 from django.utils.timezone import localtime 
 from rest_framework import generics, status
 from rest_framework.response import Response
+from rest_framework_simplejwt.tokens import RefreshToken
 from etabuleiros.models import Produto, Usuario
-from .serializers import ProdutoRecomendadoSerializer, UsuarioSerializer
+from .serializers import ProdutoRecomendadoSerializer, UsuarioSerializer, LoginSerializer
+from django.contrib.auth import get_user_model
 
 def home(request):
     return render(request, 'HTML/home.html')
@@ -60,6 +62,44 @@ def listaDesejos (request):
 
 def login(request):
     return render(request, 'HTML/login.html')
+
+User = get_user_model()
+
+class LoginView(generics.GenericAPIView):
+    serializer_class = LoginSerializer
+
+    def post(self, request, *args, **kwargs):
+        serializer = self.get_serializer(data=request.data)
+        serializer.is_valid(raise_exception=True)
+        user = serializer.validated_data['user']
+        
+        # Verifica se o usuário está ativo
+        if not user.is_active:
+            return Response(
+                {"detail": "Esta conta está inativa."},
+                status=status.HTTP_401_UNAUTHORIZED
+            )
+
+        # Gera tokens JWT
+        refresh = RefreshToken.for_user(user)
+        
+        # Adiciona o user_id customizado ao token
+        refresh['user_id'] = user.user_id
+        
+        return Response({
+            "message": "Login realizado com sucesso",
+            "user": {
+                "user_id": user.user_id,  # Usando user_id em vez de id
+                "email": user.email,
+                "nome": user.nome,
+                "tipo": user.tipo
+            },
+            "tokens": {
+                "refresh": str(refresh),
+                "access": str(refresh.access_token),
+            }
+        }, status=status.HTTP_200_OK)
+        
 
 def painelADM(request):
     return render(request, 'HTML/painelADM.html')
