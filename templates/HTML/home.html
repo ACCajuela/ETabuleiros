@@ -40,7 +40,7 @@
     <!-- CARROSSEL LANÇAMENTOS -->
     <H2>Lançamentos</H2>
     <div class="carrosselLancamento">
-        <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
+        <div id="carouselLancamentos" class="carousel slide" data-ride="carousel">
             <div class="carousel-inner">
               <div class="carousel-item active">
                 <img class="d-block w-100" src="midia/catan.avif" alt="Primeiro Slide">
@@ -71,7 +71,7 @@
     <!-- CARROSSEL PROMOÇÕES -->
     <h2>Promoções</h2>
     <div class="carrosselPromocoes">
-        <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
+        <div id="carouselPromocoes" class="carousel slide" data-ride="carousel">
             <div class="carousel-inner">
               <div class="carousel-item active">
                 <img class="d-block w-100" src="midia/catan.avif" alt="Primeiro Slide">
@@ -102,7 +102,7 @@
     <!-- CARROSSEL MAIS VENDIDOS -->
     <h2>Mais Vendidos</h2>
     <div class="carrosselMaisVendidos">
-        <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
+        <div id="carouselRecomendados" class="carousel slide" data-ride="carousel">
             <div class="carousel-inner">
               <div class="carousel-item active">
                 <img class="d-block w-100" src="midia/catan.avif" alt="Primeiro Slide">
@@ -164,7 +164,7 @@ document.addEventListener("DOMContentLoaded", () => {
       return response.json();
     })
     .then(jogos => {
-      const container = document.querySelector("#carouselExampleControls .carousel-inner");
+      const container = document.querySelector("#carouselRecomendados .carousel-inner");
       container.innerHTML = "";
 
       if (!Array.isArray(jogos) || jogos.length === 0) {
@@ -207,7 +207,7 @@ document.addEventListener("DOMContentLoaded", () => {
       return response.json();
     })
     .then(jogos => {
-      const container = document.querySelector("#carouselExampleControls .carousel-inner");
+      const container = document.querySelector("#carouselLancamentos.carousel-inner");
       container.innerHTML = "";
 
       if (!Array.isArray(jogos) || jogos.length === 0) {
@@ -250,7 +250,7 @@ document.addEventListener("DOMContentLoaded", () => {
       return response.json();
     })
     .then(jogos => {
-      const container = document.querySelector("#carouselExampleControls .carousel-inner");
+      const container = document.querySelector("#carouselPromocoes .carousel-inner");
       container.innerHTML = "";
 
       if (!Array.isArray(jogos) || jogos.length === 0) {
