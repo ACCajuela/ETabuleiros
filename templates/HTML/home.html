@@ -38,7 +38,7 @@
     </nav>
   </header>
     <!-- CARROSSEL LANÇAMENTOS -->
-     <H2>Lançamentos</H2>
+    <H2>Lançamentos</H2>
     <div class="carrosselLancamento">
         <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
             <div class="carousel-inner">
@@ -69,7 +69,7 @@
           </div>
     </div>
     <!-- CARROSSEL PROMOÇÕES -->
-     <h2>Promoções</h2>
+    <h2>Promoções</h2>
     <div class="carrosselPromocoes">
         <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
             <div class="carousel-inner">
@@ -100,7 +100,7 @@
           </div>
     </div>
     <!-- CARROSSEL MAIS VENDIDOS -->
-     <h2>Mais Vendidos</h2>
+    <h2>Mais Vendidos</h2>
     <div class="carrosselMaisVendidos">
         <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
             <div class="carousel-inner">
@@ -154,6 +154,7 @@
 
   <!-- Script para consumir API-->
   <script>
+  //Recomendados
 document.addEventListener("DOMContentLoaded", () => {
   fetch("http://localhost:8000/api/recomendados/")
     .then(response => {
@@ -191,6 +192,92 @@ document.addEventListener("DOMContentLoaded", () => {
       document.getElementById("recomendados-container").innerHTML = `
         <div class="carousel-item active text-center p-5 bg-light">
           Não foi possível carregar as recomendações.
+        </div>
+      `;
+    });
+});
+
+//Lançamentos
+document.addEventListener("DOMContentLoaded", () => {
+  fetch("http://localhost:8000/api/lancamentos/")
+    .then(response => {
+      if (!response.ok) {
+        throw new Error("Erro ao buscar lançamentos");
+      }
+      return response.json();
+    })
+    .then(jogos => {
+      const container = document.querySelector("#carouselExampleControls .carousel-inner");
+      container.innerHTML = "";
+
+      if (!Array.isArray(jogos) || jogos.length === 0) {
+        container.innerHTML = `
+          <div class="carousel-item active text-center p-5 bg-light">
+            Nenhum lançamento disponível no momento.
+          </div>
+        `;
+        return;
+      }
+
+      jogos.forEach((jogo, index) => {
+        const ativo = index === 0 ? "active" : "";
+        const imagem = jogo.imagem_url ? jogo.imagem_url : "/static/images/default-product.jpg";
+        const item = `
+          <div class="carousel-item ${ativo}">
+            <img class="d-block w-100" src="${imagem}" alt="${jogo.nome}">
+          </div>
+        `;
+        container.insertAdjacentHTML("beforeend", item);
+      });
+    })
+    .catch(error => {
+      console.error("Erro ao carregar lançamentos:", error);
+      document.getElementById("lancamentos-container").innerHTML = `
+        <div class="carousel-item active text-center p-5 bg-light">
+          Não foi possível carregar os lançamentos.
+        </div>
+      `;
+    });
+});
+
+//Promocoes
+document.addEventListener("DOMContentLoaded", () => {
+  fetch("http://localhost:8000/api/promocao/")
+    .then(response => {
+      if (!response.ok) {
+        throw new Error("Erro ao buscar promoções");
+      }
+      return response.json();
+    })
+    .then(jogos => {
+      const container = document.querySelector("#carouselExampleControls .carousel-inner");
+      container.innerHTML = "";
+
+      if (!Array.isArray(jogos) || jogos.length === 0) {
+        container.innerHTML = `
+          <div class="carousel-item active text-center p-5 bg-light">
+            Nenhuma promoção disponível no momento.
+          </div>
+        `;
+        return;
+      }
+
+      jogos.forEach((jogo, index) => {
+        const ativo = index === 0 ? "active" : "";
+        const imagem = jogo.imagem_url ? jogo.imagem_url : "/static/images/default-product.jpg";
+        const item = `
+          <div class="carousel-item ${ativo}">
+            <img class="d-block w-100" src="${imagem}" alt="${jogo.nome}">
+          </div>
+        `;
+        container.insertAdjacentHTML("beforeend", item);
+      });
+    })
+    .catch(error => {
+      console.error("Erro ao carregar promoção:", error);
+      document.getElementById("promocoes-container").innerHTML = `
+        <div class="carousel-item active text-center p-5 bg-light">
+          Não foi possível carregar as promoções.
         </div>
       `;
     });
