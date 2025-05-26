@@ -187,13 +187,14 @@ document.addEventListener("DOMContentLoaded", () => {
         });
       })
       .catch(error => {
-        console.error(`Erro ao carregar dados de ${url}:`, error);
-        document.querySelector(seletorErro).innerHTML = `
-          <div class="carousel-item active text-center p-5 bg-light">
-            Não foi possível carregar os dados.
-          </div>
-        `;
-      });
+      console.error(`Erro ao carregar dados de ${url}:`, error);
+      const container = document.querySelector(`${seletorCarousel} .carousel-inner`);
+      container.innerHTML = `
+        <div class="carousel-item active text-center p-5 bg-light">
+        Não foi possível carregar os dados.
+        </div>
+      `;
+    });
   };
 
   // Chamadas para cada seção
