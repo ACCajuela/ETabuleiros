@@ -131,7 +131,7 @@ def suporteCliente(request):
 def suporteFuncionario(request):
     return render(request, 'HTML/suporteFuncionario.html')
 
-'''
+
 def cadastrar_usuario(request):
     if request.method == 'POST':
         nome = request.POST.get('nome')
@@ -143,7 +143,6 @@ def cadastrar_usuario(request):
             return JsonResponse({'id': usuario.id, 'nome': usuario.first_name})
         except ValueError as e:
             return JsonResponse({'erro': str(e)}, status=400)
-'''
         
 def editar_usuario(request):
     if request.method == 'POST':
