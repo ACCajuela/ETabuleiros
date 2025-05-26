@@ -17,7 +17,7 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 from starmeeple import views
-from django.urls import path
+from django.urls import path, include
 from starmeeple.views import ProdutosRecomendadosAPIView, CadastroUsuarioView, LoginView, perfil_api
 from django.conf import settings
 from django.conf.urls.static import static
@@ -45,11 +45,7 @@ urlpatterns = [
     path('product', views.produto, name='produto'),
     path('custSuport', views.suporteCliente, name='suporteCliente'),
     path('adm/custSuport', views.suporteFuncionario, name='suporteFuncionario'),
-    path('api/recomendados/', ProdutosRecomendadosAPIView.as_view(), name='api-recomendados'),
-    path('api/cadastro/', CadastroUsuarioView.as_view(), name='cadastro-usuario'),
-    path('api/login/', LoginView.as_view(), name='login'),
-    path('api/perfil/', perfil_api, name='api-perfil'),
-    path('api/usuario/<int:pk>/', UserDetailAPIView.as_view(), name='user-detail'),
+    path('api/', include('starmeeple.urls')),
 ]
 
 if settings.DEBUG:
