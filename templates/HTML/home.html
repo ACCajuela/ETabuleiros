@@ -58,12 +58,12 @@
                 <img class="d-block w-100" src="midia/theMind.jpg" alt="Quinto Slide">
               </div>
             </div>
-            <a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
-              <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <a class="carousel-lancamentos-prev" href="#carouselLancamentos" role="button" data-slide="prev">
+              <span class="carousel-lancamento-prev-icon" aria-hidden="true"></span>
               <span class="sr-only">Anterior</span>
             </a>
-            <a class="carousel-control-next" href="#carouselExampleControls" role="button" data-slide="next">
-              <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <a class="carousel-lancamentos-next" href="#carouselLancamentos" role="button" data-slide="next">
+              <span class="carousel-lancamentos-next-icon" aria-hidden="true"></span>
               <span class="sr-only">Próximo</span>
             </a>
           </div>
@@ -89,11 +89,11 @@
                 <img class="d-block w-100" src="midia/theMind.jpg" alt="Quinto Slide">
               </div>
             </div>
-            <a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
+            <a class="carousel-control-prev" href="#carouselPromocoes" role="button" data-slide="prev">
               <span class="carousel-control-prev-icon" aria-hidden="true"></span>
               <span class="sr-only">Anterior</span>
             </a>
-            <a class="carousel-control-next" href="#carouselExampleControls" role="button" data-slide="next">
+            <a class="carousel-control-next" href="#carouselPromocoes" role="button" data-slide="next">
               <span class="carousel-control-next-icon" aria-hidden="true"></span>
               <span class="sr-only">Próximo</span>
             </a>
@@ -120,11 +120,11 @@
                 <img class="d-block w-100" src="midia/theMind.jpg" alt="Quinto Slide">
               </div>
             </div>
-            <a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
+            <a class="carousel-control-prev" href="#carouselRecomendados" role="button" data-slide="prev">
               <span class="carousel-control-prev-icon" aria-hidden="true"></span>
               <span class="sr-only">Anterior</span>
             </a>
-            <a class="carousel-control-next" href="#carouselExampleControls" role="button" data-slide="next">
+            <a class="carousel-control-next" href="#carouselRecomendados" role="button" data-slide="next">
               <span class="carousel-control-next-icon" aria-hidden="true"></span>
               <span class="sr-only">Próximo</span>
             </a>
@@ -152,135 +152,54 @@
       </div>
     </footer>
 
-  <!-- Script para consumir API-->
-  <script>
-  //Recomendados
+<script>
 document.addEventListener("DOMContentLoaded", () => {
-  fetch("http://localhost:8000/api/recomendados/")
-    .then(response => {
-      if (!response.ok) {
-        throw new Error("Erro ao buscar recomendações");
-      }
-      return response.json();
-    })
-    .then(jogos => {
-      const container = document.querySelector("#carouselRecomendados .carousel-inner");
-      container.innerHTML = "";
+  const carregarCarrossel = (url, seletorCarousel, seletorErro) => {
+    fetch(url)
+      .then(response => {
+        if (!response.ok) {
+          throw new Error(`Erro ao buscar dados de ${url}`);
+        }
+        return response.json();
+      })
+      .then(jogos => {
+        const container = document.querySelector(`${seletorCarousel} .carousel-inner`);
+        container.innerHTML = "";
 
-      if (!Array.isArray(jogos) || jogos.length === 0) {
-        container.innerHTML = `
+        if (!Array.isArray(jogos) || jogos.length === 0) {
+          container.innerHTML = `
+            <div class="carousel-item active text-center p-5 bg-light">
+              Nenhum item disponível no momento.
+            </div>
+          `;
+          return;
+        }
+
+        jogos.forEach((jogo, index) => {
+          const ativo = index === 0 ? "active" : "";
+          const imagem = jogo.imagem_url ? jogo.imagem_url : "/static/images/default-product.jpg";
+          const item = `
+            <div class="carousel-item ${ativo}">
+              <img class="d-block w-100" src="${imagem}" alt="${jogo.nome}">
+            </div>
+          `;
+          container.insertAdjacentHTML("beforeend", item);
+        });
+      })
+      .catch(error => {
+        console.error(`Erro ao carregar dados de ${url}:`, error);
+        document.querySelector(seletorErro).innerHTML = `
           <div class="carousel-item active text-center p-5 bg-light">
-            Nenhuma recomendação disponível no momento.
+            Não foi possível carregar os dados.
           </div>
         `;
-        return;
-      }
-
-      jogos.forEach((jogo, index) => {
-        const ativo = index === 0 ? "active" : "";
-        const imagem = jogo.imagem_url ? jogo.imagem_url : "/static/images/default-product.jpg";
-        const item = `
-          <div class="carousel-item ${ativo}">
-            <img class="d-block w-100" src="${imagem}" alt="${jogo.nome}">
-          </div>
-        `;
-        container.insertAdjacentHTML("beforeend", item);
       });
-    })
-    .catch(error => {
-      console.error("Erro ao carregar recomendações:", error);
-      document.getElementById("recomendados-container").innerHTML = `
-        <div class="carousel-item active text-center p-5 bg-light">
-          Não foi possível carregar as recomendações.
-        </div>
-      `;
-    });
-});
+  };
 
-//Lançamentos
-document.addEventListener("DOMContentLoaded", () => {
-  fetch("http://localhost:8000/api/lancamentos/")
-    .then(response => {
-      if (!response.ok) {
-        throw new Error("Erro ao buscar lançamentos");
-      }
-      return response.json();
-    })
-    .then(jogos => {
-      const container = document.querySelector("#carouselLancamentos.carousel-inner");
-      container.innerHTML = "";
-
-      if (!Array.isArray(jogos) || jogos.length === 0) {
-        container.innerHTML = `
-          <div class="carousel-item active text-center p-5 bg-light">
-            Nenhum lançamento disponível no momento.
-          </div>
-        `;
-        return;
-      }
-
-      jogos.forEach((jogo, index) => {
-        const ativo = index === 0 ? "active" : "";
-        const imagem = jogo.imagem_url ? jogo.imagem_url : "/static/images/default-product.jpg";
-        const item = `
-          <div class="carousel-item ${ativo}">
-            <img class="d-block w-100" src="${imagem}" alt="${jogo.nome}">
-          </div>
-        `;
-        container.insertAdjacentHTML("beforeend", item);
-      });
-    })
-    .catch(error => {
-      console.error("Erro ao carregar lançamentos:", error);
-      document.getElementById("lancamentos-container").innerHTML = `
-        <div class="carousel-item active text-center p-5 bg-light">
-          Não foi possível carregar os lançamentos.
-        </div>
-      `;
-    });
-});
-
-//Promocoes
-document.addEventListener("DOMContentLoaded", () => {
-  fetch("http://localhost:8000/api/promocao/")
-    .then(response => {
-      if (!response.ok) {
-        throw new Error("Erro ao buscar promoções");
-      }
-      return response.json();
-    })
-    .then(jogos => {
-      const container = document.querySelector("#carouselPromocoes .carousel-inner");
-      container.innerHTML = "";
-
-      if (!Array.isArray(jogos) || jogos.length === 0) {
-        container.innerHTML = `
-          <div class="carousel-item active text-center p-5 bg-light">
-            Nenhuma promoção disponível no momento.
-          </div>
-        `;
-        return;
-      }
-
-      jogos.forEach((jogo, index) => {
-        const ativo = index === 0 ? "active" : "";
-        const imagem = jogo.imagem_url ? jogo.imagem_url : "/static/images/default-product.jpg";
-        const item = `
-          <div class="carousel-item ${ativo}">
-            <img class="d-block w-100" src="${imagem}" alt="${jogo.nome}">
-          </div>
-        `;
-        container.insertAdjacentHTML("beforeend", item);
-      });
-    })
-    .catch(error => {
-      console.error("Erro ao carregar promoção:", error);
-      document.getElementById("promocoes-container").innerHTML = `
-        <div class="carousel-item active text-center p-5 bg-light">
-          Não foi possível carregar as promoções.
-        </div>
-      `;
-    });
+  // Chamadas para cada seção
+  carregarCarrossel("http://localhost:8000/api/recomendados/", "#carouselRecomendados", "#recomendados-container");
+  carregarCarrossel("http://localhost:8000/api/lancamentos/", "#carouselLancamentos", "#lancamentos-container");
+  carregarCarrossel("http://localhost:8000/api/promocao/", "#carouselPromocoes", "#promocoes-container");
 });
 </script>
 <script src="/templates/JS/padrao.js"></script>
