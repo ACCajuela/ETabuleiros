@@ -48,7 +48,8 @@ urlpatterns = [
     path('api/recomendados/', ProdutosRecomendadosAPIView.as_view(), name='api-recomendados'),
     path('api/cadastro/', CadastroUsuarioView.as_view(), name='cadastro-usuario'),
     path('api/login/', LoginView.as_view(), name='login'),
-    path('api/perfil/', perfil_api, name='api-perfil')
+    path('api/perfil/', perfil_api, name='api-perfil'),
+    path('api/usuario/<int:pk>/', UserDetailAPIView.as_view(), name='user-detail'),
 ]
 
 if settings.DEBUG:
