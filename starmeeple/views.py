@@ -292,9 +292,10 @@ class ProdutosRecomendadosAPIView(generics.ListAPIView):
             
         return queryset
 
+'''
 User = get_user_model()
 
-class UserDetailAPIView(APIView):
+class UserDetailAPIView():
     def get(self, request, pk):
         try:
             user = Usuario.objects.get(pk=pk)
@@ -303,3 +304,4 @@ class UserDetailAPIView(APIView):
         
         serializer = UsuarioSerializer(user)
         return Response(serializer.data)
+'''

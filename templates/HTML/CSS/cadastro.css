@@ -1,0 +1,101 @@
+@import url("https://fonts.googleapis.com/css2?family=Bruno+Ace&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap");
+
+* {
+  font-family: "Roboto", sans-serif;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html, body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+#header, #footer{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #282e40;
+    color: #f29057;
+    margin: 0;
+    font-family: "Bruno Ace", sans-serif;
+    padding: 20px 10px;
+    flex-direction: column;
+}
+
+#header{
+    margin-bottom: 50px;
+}
+
+body {
+  background: linear-gradient(45deg, #3c6d73, #282e40);
+}
+
+#main{
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 50px;
+}
+
+h2 {
+  font-family: "Bruno Ace", sans-serif;
+  color: #f29057;
+  font-size: 50px;
+}
+
+#formCadastro{
+    color: #f29057;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 30px;
+    gap: 15px;
+    border: 1px solid #f29057;
+    border-radius: 20px;
+    width: 300px;
+}
+
+#formCadastro label{
+    margin-bottom: 5px;
+    font-weight: 500;
+}
+
+#formCadastro input {
+  padding: 10px;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  font-size: 16px;
+  width: 100%;
+}
+
+#formCadastro input:focus {
+  outline: none;
+  border-color: #f29057;
+  box-shadow: 0 0 5px #f29057;
+}
+
+#formCadastro button {
+    background-color: #f29057;
+    font-size: 15px;
+    width: 100px;
+    color: black;
+    padding: 10px;
+    border-radius: 5px;
+    border: none;
+    cursor: pointer;
+    font-weight: bold;
+    transition: background 0.3s ease;
+}
+
+#formCadastro button:hover {
+    background-color: #ffa96e;
+}
+

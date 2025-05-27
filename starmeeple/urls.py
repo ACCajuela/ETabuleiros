@@ -7,5 +7,4 @@ urlpatterns = [
     path('recomendados/', ProdutosRecomendadosAPIView.as_view(), name='api-recomendados'),
     path('login/', LoginView.as_view(), name='login'),
     path('perfil/', perfil_api, name='api-perfil'),
-    path('usuario/<int:pk>/', views.UserDetailAPIView.as_view(), name='user-detail'),
 ]
