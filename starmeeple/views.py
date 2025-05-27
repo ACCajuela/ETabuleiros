@@ -244,9 +244,6 @@ def excluir_do_carrinho(request):
             return JsonResponse({'mensagem': 'Produto removido do carrinho com sucesso'})
         except ValueError as e:
             return JsonResponse({'erro': str(e)}, status=400)
-'''      
-
-'''    
 
 def incluir_desejos(request):
     if request.method == 'POST':
