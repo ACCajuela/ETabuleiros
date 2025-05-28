@@ -63,10 +63,10 @@
             localStorage.setItem('user', JSON.stringify(data.user));
             
             // Redireciona conforme o tipo de usuário
-            if(data.user.tipo === 'admin') {
-                window.location.href = "/admin";
+            if (data.user.tipo === 'admin') {
+                window.location.href = 'http://localhost:8000/adm/panel';
             } else {
-                window.location.href = "perfil.html";
+                window.location.href = 'http://localhost:8000/perfil';
             }
         })
         .catch(error => {
