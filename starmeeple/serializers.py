@@ -44,7 +44,7 @@ class UsuarioSerializer(serializers.ModelSerializer):
         validated_data.pop('password2')
         validated_data['password'] = make_password(validated_data['password'])
         return Usuario.objects.create(**validated_data)
-     
+
 User = get_user_model()
 
 class PerfilSerializer(serializers.ModelSerializer):

@@ -2,19 +2,20 @@
 <html lang="pt-br">
 
 
-    <head>
+<head>
     <meta charset="UTF-8">
     <title>Login - StarMeeple</title>
-    </head>
-    <body>
+    <link rel="stylesheet" href="CSS/cadastro.css">
+</head>
+<body>
     <img id="logoSite" src="midia/logoStarMeeple.png" alt="StarMeeple">
 
     <div>
-        <header>
+        <header id="header">
             <h1>StarMeeple</h1>
         </header>
     
-        <main>
+        <main id="main">
             <form id="formCadastro">
                 <div>
                     <label for="nome">Nome Completo:</label><br>
@@ -48,11 +49,12 @@
                     <label for="endereco">Endereço:</label><br>
                     <textarea id="endereco" name="endereco"></textarea>
                 </div>
-                <button type="submit">Cadastrar</button>
+                <button id="btnSubmit" type="submit">Cadastrar</button>
             </form>
+            
         </main>
     
-        <footer>
+        <footer id="footer">
             <p>© StarMeeple 2025</p>
         </footer>
     </div>
