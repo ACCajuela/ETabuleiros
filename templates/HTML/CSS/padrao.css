@@ -1,4 +1,24 @@
-@import url('https://fonts.googleapis.com/css2?family=Bruno+Ace&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Bruno+Ace&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap");
+
+/* ---------------------- CSS PADRÃO  ---------------------------- */
+* {
+  font-family: "Roboto", sans-serif;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+h1,
+h2,
+h3 {
+  font-family: "Bruno Ace", sans-serif;
+  color: #f29057;
+}
+html,
+body {
+  width: 100%;
+  overflow-x: hidden;
+}
 
 /* Bloco dedicado a tornar o js usavel - não tem fins esteticos*/
 #linkFamilia {
@@ -16,20 +36,20 @@
   color: inherit;
   text-decoration: none;
 }
-#linkQuebraCabecas{
-    cursor: pointer;
-    color: inherit;
-    text-decoration: none;
+#linkQuebraCabecas {
+  cursor: pointer;
+  color: inherit;
+  text-decoration: none;
 }
-#linkRPG{
-    cursor: pointer;
-    color: inherit;
-    text-decoration: none;
+#linkRPG {
+  cursor: pointer;
+  color: inherit;
+  text-decoration: none;
 }
-#link18{
-    cursor: pointer;
-    color: inherit;
-    text-decoration: none;
+#link18 {
+  cursor: pointer;
+  color: inherit;
+  text-decoration: none;
 }
 #logoSite {
   cursor: pointer;
@@ -45,47 +65,187 @@
   text-decoration: underline;
 }
 /*End*/
-*{
-    font-family: "Roboto", sans-serif;
+
+/* ---------------------- CSS HEADER  ---------------------------- */
+#header {
+  background-color: #282e40;
+  font-family: "Bruno Ace", sans-serif;
+  padding: 20px 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 50px;
 }
 
-h1, h2, h3{
-    font-family: "Bruno Ice", sans-serif;
-    color: #F29057;
+#header nav {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+#header nav > div {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  flex-wrap: wrap;
+  margin: 0;
 }
 
-#header, #footer{
-    background-color: #282E40;
-    font-family: "Bruno Ice", sans-serif;
+#logoSite {
+  max-width: 200px;
+  max-height: auto;
+  margin: 5px;
 }
 
-#header nav{
-    display: flex;
-    flex-direction: column;
-}
-#header div{
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-}
-.formPagamento{
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
+/* Campo de busca */
+#header input[type="text"] {
+  padding: 10px;
+  width: 300px;
+  border: none;
+  border-radius: 4px;
+  font-size: 16px;
 }
 
-.imgsPagamento{
-    display: flex;
-    flex-direction: row;
+#header button:first-of-type {
+  background-color: #000;
+  color: #fff;
+  border: none;
+  padding: 10px;
+  border-radius: 50%;
+  cursor: pointer;
+  font-size: 18px;
 }
 
-#footer{
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
+#logoUsuario {
+  height: 50px;
+  width: 50px;
+  border-radius: 50%;
+  object-fit: cover;
+  position: relative;
 }
 
-body{
-    background: linear-gradient(45deg, #3C6D73, #282E40); 
+/* Balão de notificação */
+#header span {
+  position: relative;
+  top: -20px;
+  left: -20px;
+  background-color: red;
+  color: white;
+  font-size: 14px;
+  padding: 2px 6px;
+  border-radius: 50%;
+}
+
+#buttonChat {
+  font-size: 30px;
+  padding: 2px;
+  border: 1px solid #c4604d;
+  border-radius: 10px;
+  background-color: #c4604d;
+}
+
+/* Lista de categorias */
+#header ul {
+  display: flex;
+  justify-content: center;
+  gap: 40px;
+  list-style: none;
+  margin-top: 20px;
+}
+
+#header ul li {
+  font-family: "Bruno Ace", sans-serif;
+  color: #f29057;
+  font-size: 20px;
+  cursor: pointer;
+  transition: transform 0.3s;
+  text-align: center;
+}
+
+#header ul li:hover {
+  transform: scale(1.1);
+}
+
+#link18 {
+  background-color: #c4604d;
+  color: black !important;
+  border-radius: 50%;
+  width: 60px;
+  height: 60px;
+  font-weight: bold;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* ---------------------- CSS BODY  ---------------------------- */
+
+body {
+  background: linear-gradient(45deg, #3c6d73, #282e40);
+  display: block;
+}
+
+/* ---------------------- CSS FOOTER  ---------------------------- */
+#footer {
+  margin-top: 50px;
+  background-color: #272c3e;
+  color: #f89c63;
+  font-family: "Bruno Ace", sans-serif;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  padding: 40px 60px;
+  flex-wrap: wrap;
+}
+
+#footer .formPagamento,
+#footer .logoStar,
+#footer .linkSocial {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 10px;
+  flex: 1;
+  min-width: 200px;
+}
+
+#footer .logoStar img {
+  width: 300px;
+}
+
+#footer .formPagamento p,
+#footer .linkSocial p,
+#footer .logoStar p {
+  font-size: 20px;
+  margin: 0;
+}
+
+#footer .imgsPagamento img {
+  width: 40px;
+  margin: 5px;
+  transition: transform 0.3s;
+}
+
+#footer .imgsPagamento img:hover {
+  transform: scale(1.1);
+}
+
+#footer .linkSocial a {
+  color: #f3f3f3;
+  text-decoration: none;
+  margin: 4px 0;
+  font-size: 1rem;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+#footer .linkSocial img {
+  width: 30px;
+}
+
+#footer .linkSocial a:hover {
+  text-decoration: underline;
 }

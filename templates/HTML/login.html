@@ -1,66 +1,63 @@
 <!DOCTYPE html>
 <html lang="pt-br">
 
-    <head>
+<head>
     <meta charset="UTF-8">
     <title>Login - StarMeeple</title>
-    <link rel="stylesheet" href="CSS/padrao.css">
     <link rel="stylesheet" href="CSS/login.css">
-    </head>
-    <body>
+</head>
+<body>
     
+    <header id="header">
+        <img id="logoSite" src="midia/logoStarMeeple.png" alt="StarMeeple">
+        <h1>StarMeeple</h1>
+    </header>
     
-    <div>
-        <header>
-            <img id="logoSite" src="midia/logoStarMeeple.png" alt="StarMeeple">
-            <h1>StarMeeple</h1>
-        </header>
-    
-        <main>
-    <h2>Login</h2>
-    <form id="loginForm">
-        <div>
-            <label for="email">Email:</label><br>
-            <input type="email" id="email" name="email" required>
-        </div>
-        <br>
-        <div>
-            <label for="senha">Senha:</label><br>
-            <input type="password" id="senha" name="password" required>
-        </div>
-        <br>
-        <button type="submit">Entrar</button>
-    </form>
+    <main id="main">
+        <h2>Login</h2>
+        <form id="loginForm">
+            <div>
+                <label for="email">Email:</label><br>
+                <input type="email" id="email" name="email" required>
+            </div>
+            <br>
+            <div>
+                <label for="senha">Senha:</label><br>
+                <input type="password" id="senha" name="password" required>
+            </div>
+            <br>
+            <button id="btnSubmit" type="submit">Entrar</button>
+        </form>
 
-    <p>Não tem uma conta? <button id="btnCadastro">Cadastre-se</p>
+        <p>Não tem uma conta? <button id="btnCadastro">Cadastre-se</p>
 
-    <script>
-    document.getElementById('loginForm').addEventListener('submit', function(e) {
-        e.preventDefault();
+        <script>
+            document.getElementById('loginForm').addEventListener('submit', function(e) {
+                e.preventDefault();
         
-        const formData = {
-            email: document.getElementById('email').value,
-            password: document.getElementById('senha').value
-        };
+                const formData = {
+                    email: document.getElementById('email').value,
+                    password: document.getElementById('senha').value
+                };
 
-        fetch('http://localhost:8000/api/login/', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify(formData)
-        })
-        .then(response => {
-            if (!response.ok) {
-                return response.json().then(err => { throw err; });
-            }
-            return response.json();
-        })
-        .then(data => {
-            // Armazena os tokens e redireciona
-            localStorage.setItem('access_token', data.tokens.access);
-            localStorage.setItem('refresh_token', data.tokens.refresh);
-            localStorage.setItem('user', JSON.stringify(data.user));
+                fetch('http://localhost:8000/api/login/', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(formData)
+                })
+                .then(response => {
+                    if (!response.ok) {
+                        return response.json().then(err => { throw err; });
+                    }
+                    return response.json();
+                })
+                .then(data => {
+                    // Armazena os tokens e redireciona
+                    localStorage.setItem('access_token', data.tokens.access);
+                    localStorage.setItem('refresh_token', data.tokens.refresh);
+                    localStorage.setItem('user', JSON.stringify(data.user));
             
             // Redireciona conforme o tipo de usuário
             if (data.user.tipo === 'admin') {
@@ -77,11 +74,11 @@
     </script>
         </main>
     
-        <footer>
+    <footer id="footer">
         <p>© StarMeeple 2025</p>
-        </footer>
-    </div>
+    </footer>
+    
     <script src="/templates/JS/padrao.js"></script>
-    </body>
-    </html>
+</body>
+</html>
     

@@ -131,6 +131,7 @@ def suporteCliente(request):
 def suporteFuncionario(request):
     return render(request, 'HTML/suporteFuncionario.html')
 
+
 def cadastrar_usuario(request):
     if request.method == 'POST':
         nome = request.POST.get('nome')
@@ -287,3 +288,17 @@ class ProdutosRecomendadosAPIView(generics.ListAPIView):
             queryset = queryset.filter(categoria__slug=categoria)
             
         return queryset
+
+'''
+User = get_user_model()
+
+class UserDetailAPIView():
+    def get(self, request, pk):
+        try:
+            user = Usuario.objects.get(pk=pk)
+        except Usuario.DoesNotExist:
+            return Response({'error': 'Usuário não encontrado'}, status=status.HTTP_404_NOT_FOUND)
+        
+        serializer = UsuarioSerializer(user)
+        return Response(serializer.data)
+'''

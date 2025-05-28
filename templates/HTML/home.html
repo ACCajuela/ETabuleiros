@@ -1,201 +1,354 @@
 <!DOCTYPE html>
 <html lang="pt-br">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Star Meeple</title>
-    <link rel="stylesheet" href="CSS/padrao.css">
-    <link rel="stylesheet" href="CSS/home.css">
-    <link rel="shortcut icon" href="midia/icon.png" type="image/x-icon">
+    <link rel="stylesheet" href="CSS/padrao.css" />
+    <link rel="stylesheet" href="CSS/home.css" />
+    <link rel="shortcut icon" href="midia/icon.png" type="image/x-icon" />
     <!-- Bootstrap CSS -->
-    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <link
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
 
     <!-- jQuery (necessário para o funcionamento do carrossel) -->
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
 
     <!-- Bootstrap JS -->
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.bundle.min.js"></script>
-</head>
-<body>
-  <header>
-    <nav>
-      <div>
-        <img id="logoSite" src="midia/logoStarMeeple.png" alt="StarMeeple">
-        <input type="text" placeholder="O que você está procurando?">
-        <button>🔍</button>
-        <button>💬</button>
-        <img id="logoUsuario" src="avatar.png" alt="Avatar do usuário">
-        <span>3</span>
+  </head>
+  <body>
+    <header id="header">
+      <nav>
+        <div>
+          <img id="logoSite" src="midia/logoStarMeeple.png" alt="StarMeeple" />
+          <input type="text" placeholder="O que você está procurando?" />
+          <button>🔍</button>
+          <button id="buttonChat">💬</button>
+          <img
+            id="logoUsuario"
+            src="midia/avatar.png"
+            alt="Avatar do usuário"
+          />
+          <span>3</span>
+        </div>
+        <ul>
+          <li id="linkJogosCartas">Jogos de Cartas</li>
+          <li id="linkJogosTabuleiro">Jogos de tabuleiro</li>
+          <li id="linkQuebraCabecas">Quebra-cabeças</li>
+          <li id="linkFamilia">Familia</li>
+          <li id="linkRPG">RPG</li>
+          <li id="link18">+18</li>
+        </ul>
+      </nav>
+    </header>
+
+    <div class="conteudo">
+      <!-- CARROSSEL LANÇAMENTOS -->
+      <h2>Lançamentos</h2>
+      <div class="carrossel-container">
+        <a
+          class="carousel-btn prev"
+          href="#carouselLancamentos"
+          role="button"
+          data-slide="prev"
+        >
+          <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+          <span class="sr-only">Anterior</span>
+        </a>
+
+        <div
+          id="carouselLancamentos"
+          class="carousel slide carrossel-box"
+          data-ride="carousel"
+        >
+          <div class="carousel-inner">
+            <div class="carousel-item active">
+              <img
+                class="d-block w-100"
+                src="midia/catan.avif"
+                alt="Primeiro Slide"
+              />
+            </div>
+            <div class="carousel-item">
+              <img
+                class="d-block w-100"
+                src="midia/pandemic.jpg"
+                alt="Segundo Slide"
+              />
+            </div>
+            <div class="carousel-item">
+              <img
+                class="d-block w-100"
+                src="midia/uno.avif"
+                alt="Terceiro Slide"
+              />
+            </div>
+            <div class="carousel-item">
+              <img
+                class="d-block w-100"
+                src="midia/zombiecide.jfif"
+                alt="Quarto Slide"
+              />
+            </div>
+            <div class="carousel-item">
+              <img
+                class="d-block w-100"
+                src="midia/theMind.jpg"
+                alt="Quinto Slide"
+              />
+            </div>
+          </div>
+        </div>
+
+        <a
+          class="carousel-btn next"
+          href="#carouselLancamentos"
+          role="button"
+          data-slide="next"
+        >
+          <span class="carousel-control-next-icon" aria-hidden="true"></span>
+          <span class="sr-only">Próximo</span>
+        </a>
       </div>
-      <ul>
-        <li id="linkJogosCartas">Jogos de Cartas</li>
-        <li id="linkJogosTabuleiro">Jogos de tabuleiro</li>
-        <li id="linkQuebraCabecas">Quebra-cabeças</li>
-        <li id="linkFamilia">Familia</li>
-        <li id="linkRPG">RPG</li>
-        <li id="link18">+18</li>
-      </ul>
-    </nav>
-  </header>
-    <!-- CARROSSEL LANÇAMENTOS -->
-     <H2>Lançamentos</H2>
-    <div class="carrosselLancamento">
-        <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
-            <div class="carousel-inner">
-              <div class="carousel-item active">
-                <img class="d-block w-100" src="midia/catan.avif" alt="Primeiro Slide">
-              </div>
-              <div class="carousel-item">
-                <img class="d-block w-100" src="midia/pandemic.jpg" alt="Segundo Slide">
-              </div>
-              <div class="carousel-item">
-                <img class="d-block w-100" src="midia/uno.avif" alt="Terceiro Slide">
-              </div>
-              <div class="carousel-item">
-                <img class="d-block w-100" src="midia/zombiecide.jfif" alt="Quarto Slide">
-              </div>
-              <div class="carousel-item">
-                <img class="d-block w-100" src="midia/theMind.jpg" alt="Quinto Slide">
-              </div>
+
+      <!-- CARROSSEL PROMOÇÕES -->
+      <h2>Promoções</h2>
+      <div class="carrossel-container">
+        <a
+          class="carousel-btn prev"
+          href="#carouselPromocoes"
+          role="button"
+          data-slide="prev"
+        >
+          <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+          <span class="sr-only">Anterior</span>
+        </a>
+
+        <div
+          id="carouselPromocoes"
+          class="carousel slide carrossel-box"
+          data-ride="carousel"
+        >
+          <div class="carousel-inner">
+            <!-- slides iguais aos anteriores -->
+            <div class="carousel-item active">
+              <img
+                class="d-block w-100"
+                src="midia/catan.avif"
+                alt="Primeiro Slide"
+              />
             </div>
-            <a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
-              <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-              <span class="sr-only">Anterior</span>
-            </a>
-            <a class="carousel-control-next" href="#carouselExampleControls" role="button" data-slide="next">
-              <span class="carousel-control-next-icon" aria-hidden="true"></span>
-              <span class="sr-only">Próximo</span>
-            </a>
-          </div>
-    </div>
-    <!-- CARROSSEL PROMOÇÕES -->
-     <h2>Promoções</h2>
-    <div class="carrosselPromocoes">
-        <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
-            <div class="carousel-inner">
-              <div class="carousel-item active">
-                <img class="d-block w-100" src="midia/catan.avif" alt="Primeiro Slide">
-              </div>
-              <div class="carousel-item">
-                <img class="d-block w-100" src="midia/pandemic.jpg" alt="Segundo Slide">
-              </div>
-              <div class="carousel-item">
-                <img class="d-block w-100" src="midia/uno.avif" alt="Terceiro Slide">
-              </div>
-              <div class="carousel-item">
-                <img class="d-block w-100" src="midia/zombiecide.jfif" alt="Quarto Slide">
-              </div>
-              <div class="carousel-item">
-                <img class="d-block w-100" src="midia/theMind.jpg" alt="Quinto Slide">
-              </div>
+            <div class="carousel-item">
+              <img
+                class="d-block w-100"
+                src="midia/pandemic.jpg"
+                alt="Segundo Slide"
+              />
             </div>
-            <a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
-              <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-              <span class="sr-only">Anterior</span>
-            </a>
-            <a class="carousel-control-next" href="#carouselExampleControls" role="button" data-slide="next">
-              <span class="carousel-control-next-icon" aria-hidden="true"></span>
-              <span class="sr-only">Próximo</span>
-            </a>
-          </div>
-    </div>
-    <!-- CARROSSEL MAIS VENDIDOS -->
-     <h2>Mais Vendidos</h2>
-    <div class="carrosselMaisVendidos">
-        <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
-            <div class="carousel-inner">
-              <div class="carousel-item active">
-                <img class="d-block w-100" src="midia/catan.avif" alt="Primeiro Slide">
-              </div>
-              <div class="carousel-item">
-                <img class="d-block w-100" src="midia/pandemic.jpg" alt="Segundo Slide">
-              </div>
-              <div class="carousel-item">
-                <img class="d-block w-100" src="midia/uno.avif" alt="Terceiro Slide">
-              </div>
-              <div class="carousel-item">
-                <img class="d-block w-100" src="midia/zombiecide.jfif" alt="Quarto Slide">
-              </div>
-              <div class="carousel-item">
-                <img class="d-block w-100" src="midia/theMind.jpg" alt="Quinto Slide">
-              </div>
+            <div class="carousel-item">
+              <img
+                class="d-block w-100"
+                src="midia/uno.avif"
+                alt="Terceiro Slide"
+              />
             </div>
-            <a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
-              <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-              <span class="sr-only">Anterior</span>
-            </a>
-            <a class="carousel-control-next" href="#carouselExampleControls" role="button" data-slide="next">
-              <span class="carousel-control-next-icon" aria-hidden="true"></span>
-              <span class="sr-only">Próximo</span>
-            </a>
+            <div class="carousel-item">
+              <img
+                class="d-block w-100"
+                src="midia/zombiecide.jfif"
+                alt="Quarto Slide"
+              />
+            </div>
+            <div class="carousel-item">
+              <img
+                class="d-block w-100"
+                src="midia/theMind.jpg"
+                alt="Quinto Slide"
+              />
+            </div>
           </div>
+        </div>
+
+        <a
+          class="carousel-btn next"
+          href="#carouselPromocoes"
+          role="button"
+          data-slide="next"
+        >
+          <span class="carousel-control-next-icon" aria-hidden="true"></span>
+          <span class="sr-only">Próximo</span>
+        </a>
+      </div>
+
+      <!-- CARROSSEL MAIS VENDIDOS -->
+      <h2>Mais Vendidos</h2>
+      <div class="carrossel-container">
+        <a
+          class="carousel-btn prev"
+          href="#carouselRecomendados"
+          role="button"
+          data-slide="prev"
+        >
+          <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+          <span class="sr-only">Anterior</span>
+        </a>
+
+        <div
+          id="carouselRecomendados"
+          class="carousel slide carrossel-box"
+          data-ride="carousel"
+        >
+          <div class="carousel-inner">
+            <!-- slides iguais aos anteriores -->
+            <div class="carousel-item active">
+              <img
+                class="d-block w-100"
+                src="midia/catan.avif"
+                alt="Primeiro Slide"
+              />
+            </div>
+            <div class="carousel-item">
+              <img
+                class="d-block w-100"
+                src="midia/pandemic.jpg"
+                alt="Segundo Slide"
+              />
+            </div>
+            <div class="carousel-item">
+              <img
+                class="d-block w-100"
+                src="midia/uno.avif"
+                alt="Terceiro Slide"
+              />
+            </div>
+            <div class="carousel-item">
+              <img
+                class="d-block w-100"
+                src="midia/zombiecide.jfif"
+                alt="Quarto Slide"
+              />
+            </div>
+            <div class="carousel-item">
+              <img
+                class="d-block w-100"
+                src="midia/theMind.jpg"
+                alt="Quinto Slide"
+              />
+            </div>
+          </div>
+        </div>
+
+        <a
+          class="carousel-btn next"
+          href="#carouselRecomendados"
+          role="button"
+          data-slide="next"
+        >
+          <span class="carousel-control-next-icon" aria-hidden="true"></span>
+          <span class="sr-only">Próximo</span>
+        </a>
+      </div>
     </div>
-    <footer>
+
+    <footer id="footer">
       <div class="formPagamento">
-          <p>Formas de Pagamento</p>
-          <div class="imgsPagamento">
-            <img src="midia/visa.png" alt="Visa">
-            <img src="mastercard.png" alt="Mastercard">
-            <img src="elo.png" alt="Elo">
-          </div>  
+        <p>Formas de Pagamento</p>
+        <div class="imgsPagamento">
+          <img src="midia/pix.png" alt="Pix" />
+          <img src="midia/visa.png" alt="Visa" />
+          <img src="midia/mastercard.png" alt="Mastercard" />
+          <img src="midia/amex.png" alt="Elo" />
+        </div>
       </div>
 
       <div class="logoStar">
-          <img src="logo.png" alt="StarMeeple logo">
-          <p>StarMeeple 2025</p>
+        <img src="midia/logoStarMeeple.png" alt="StarMeeple logo" />
+        <p>StarMeeple 2025</p>
       </div>
 
       <div class="linkSocial">
-          <p>Nos sigam nas redes sociais:</p>
-          <a href="https://www.instagram.com">Instagram</a>
-          <a href="https://www.facebook.com">Facebook</a>
+        <p>Nos sigam nas redes sociais:</p>
+        <a href="https://www.instagram.com"
+          ><img src="midia/instagram.jpg" alt="" />Instagram</a
+        >
+        <a href="https://www.facebook.com"
+          ><img src="midia/facebook.png" alt="" />Facebook</a
+        >
       </div>
     </footer>
 
-  <!-- Script para consumir API-->
-  <script>
-document.addEventListener("DOMContentLoaded", () => {
-  fetch("http://localhost:8000/api/recomendados/")
-    .then(response => {
-      if (!response.ok) {
-        throw new Error("Erro ao buscar recomendações");
-      }
-      return response.json();
-    })
-    .then(jogos => {
-      const container = document.querySelector("#carouselExampleControls .carousel-inner");
-      container.innerHTML = "";
+    <script>
+      document.addEventListener("DOMContentLoaded", () => {
+        const carregarCarrossel = (url, seletorCarousel, seletorErro) => {
+          fetch(url)
+            .then((response) => {
+              if (!response.ok) {
+                throw new Error(`Erro ao buscar dados de ${url}`);
+              }
+              return response.json();
+            })
+            .then((jogos) => {
+              const container = document.querySelector(
+                `${seletorCarousel} .carousel-inner`
+              );
+              container.innerHTML = "";
 
-      if (!Array.isArray(jogos) || jogos.length === 0) {
-        container.innerHTML = `
-          <div class="carousel-item active text-center p-5 bg-light">
-            Nenhuma recomendação disponível no momento.
-          </div>
-        `;
-        return;
-      }
+              if (!Array.isArray(jogos) || jogos.length === 0) {
+                container.innerHTML = `
+            <div class="carousel-item active text-center p-5 bg-light">
+              Nenhum item disponível no momento.
+            </div>
+          `;
+                return;
+              }
 
-      jogos.forEach((jogo, index) => {
-        const ativo = index === 0 ? "active" : "";
-        const imagem = jogo.imagem_url ? jogo.imagem_url : "/static/images/default-product.jpg";
-        const item = `
-          <div class="carousel-item ${ativo}">
-            <img class="d-block w-100" src="${imagem}" alt="${jogo.nome}">
-          </div>
-        `;
-        container.insertAdjacentHTML("beforeend", item);
-      });
-    })
-    .catch(error => {
-      console.error("Erro ao carregar recomendações:", error);
-      document.getElementById("recomendados-container").innerHTML = `
+              jogos.forEach((jogo, index) => {
+                const ativo = index === 0 ? "active" : "";
+                const imagem = jogo.imagem_url
+                  ? jogo.imagem_url
+                  : "/static/images/default-product.jpg";
+                const item = `
+            <div class="carousel-item ${ativo}">
+              <img class="d-block w-100" src="${imagem}" alt="${jogo.nome}">
+            </div>
+          `;
+                container.insertAdjacentHTML("beforeend", item);
+              });
+            })
+            .catch((error) => {
+              console.error(`Erro ao carregar dados de ${url}:`, error);
+              const container = document.querySelector(
+                `${seletorCarousel} .carousel-inner`
+              );
+              container.innerHTML = `
         <div class="carousel-item active text-center p-5 bg-light">
-          Não foi possível carregar as recomendações.
+        Não foi possível carregar os dados.
         </div>
       `;
-    });
-});
-</script>
-<script src="/templates/JS/padrao.js"></script>
+            });
+        };
+
+        // Chamadas para cada seção
+        carregarCarrossel(
+          "http://localhost:8000/api/recomendados/",
+          "#carouselRecomendados",
+          "#recomendados-container"
+        );
+        carregarCarrossel(
+          "http://localhost:8000/api/lancamentos/",
+          "#carouselLancamentos",
+          "#lancamentos-container"
+        );
+        carregarCarrossel(
+          "http://localhost:8000/api/promocao/",
+          "#carouselPromocoes",
+          "#promocoes-container"
+        );
+      });
+    </script>
+    <script src="/templates/JS/padrao.js"></script>
   </body>
 </html>

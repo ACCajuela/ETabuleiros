@@ -45,7 +45,7 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 });
 document.addEventListener("DOMContentLoaded", () => {
-  const iconeUsuario = document.getElementById("iconeUsuario");
+  const iconeUsuario = document.getElementById("logoUsuario");
 
   if (iconeUsuario) {
     iconeUsuario.style.cursor = "pointer";
