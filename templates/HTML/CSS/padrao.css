@@ -64,6 +64,26 @@ body {
   color: #007bff;
   text-decoration: underline;
 }
+#edProdutoCategoria {
+  cursor: pointer;
+  color: inherit;
+  text-decoration: none;
+}
+#edFuncionarioAdm{
+  cursor: pointer;
+  color: inherit;
+  text-decoration: none;
+}
+#edCliente{
+  cursor: pointer;
+  color: inherit;
+  text-decoration: none;
+}
+#Dindin {
+  cursor: pointer;
+  color: inherit;
+  text-decoration: none;
+}
 /*End*/
 
 /* ---------------------- CSS HEADER  ---------------------------- */

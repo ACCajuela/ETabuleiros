@@ -69,7 +69,30 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 });
-
+document.addEventListener("DOMContentLoaded", () => {
+  const familia = document.getElementById("edProdutoCategoria");
+  familia.addEventListener("click", () => {
+    window.location.href = "editProdutoCategoria.html";
+  });
+});
+document.addEventListener("DOMContentLoaded", () => {
+  const familia = document.getElementById("edFuncionarioAdm");
+  familia.addEventListener("click", () => {
+    window.location.href = "editFuncionarioAdm.html";
+  });
+});
+document.addEventListener("DOMContentLoaded", () => {
+  const familia = document.getElementById("edCliente");
+  familia.addEventListener("click", () => {
+    window.location.href = "editCliente.html";
+  });
+});
+document.addEventListener("DOMContentLoaded", () => {
+  const familia = document.getElementById("Dindin");
+  familia.addEventListener("click", () => {
+    window.location.href = "exportaFinanca.html";
+  });
+});
 
 
 
