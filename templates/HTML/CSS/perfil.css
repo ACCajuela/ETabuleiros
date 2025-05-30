@@ -6,3 +6,14 @@
     flex-direction: column;
     justify-content: center;
 }
+
+.infoUser{
+    display: flex;
+    flex-direction: row;
+}
+
+.infosNFoto{
+    
+    display: flex;
+    flex-direction: column;
+}
