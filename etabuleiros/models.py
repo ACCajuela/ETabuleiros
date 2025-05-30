@@ -529,7 +529,7 @@ class Duvida(models.Model):
             from django.utils import timezone
             self.data_resposta = timezone.now()
         super().save(*args, **kwargs)
-               
+
 class Editora(models.Model):
     editora_id = models.AutoField(
         primary_key=True,
@@ -789,7 +789,7 @@ class HistoricoNavegacao(models.Model):
     def visualizacoes_recentes(cls, usuario, limit=5):
         """Returns recent viewed products for a user"""
         return cls.objects.filter(usuario=usuario).select_related('produto') \
-                         .order_by('-data_visualizacao')[:limit]
+                        .order_by('-data_visualizacao')[:limit]
 
 class HistoricoPagamento(models.Model):
     pagamento_id = models.AutoField(primary_key=True)
@@ -960,7 +960,7 @@ class ProdutoListaDesejos(models.Model):
 
     class Meta:
         db_table = 'produtos_lista_desejos'
-             
+
 class Promocao(models.Model):
     promocao_id = models.AutoField(primary_key=True)
     nome_promocao = models.CharField(max_length=255, null=True, blank=True)

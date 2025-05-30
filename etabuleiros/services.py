@@ -265,9 +265,10 @@ def incluir_item_desejos(usuario_id, produto_id):
     '''
 
 #Parte Promocao
-def criar_promocoes_categoria(categoria_id, dias_de_duracao, nome):
+def criar_promocoes_categoria(categoria_id, desconto, dias_de_duracao, nome):
     categoria = get_categoria_por_id(categoria_id)
     nome = nome
+    desconto = desconto 
     data_inicio = timezone.now()
     data_fim = data_inicio + timedelta(days=dias_de_duracao)
     try:

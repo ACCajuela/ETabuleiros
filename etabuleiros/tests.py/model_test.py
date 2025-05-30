@@ -13,5 +13,25 @@ def test_criar_usuario():
     assert usuario.endereco == "rua galvao"
 
 def test_criar_produto():
-    produto = Produto.objetcts.crete(nome="", qtd = , preco = , cat = , editora = , tempo_de_jogo = , numero_jogadores = , itens_inclusos = " ", descri = " ", recomendado = , clas_ind = , autor = " ", categoria = " ", data_criacao = )
+    produto = Produto.objetcts.crete(nome="", qtd = , preco = , cat = , editora = , tempo_de_jogo = , numero_jogadores = , itens_inclusos = " ", descri = " ", recomendado = , clas_ind = , autor = " ", data_criacao = )
     assert produto.nome == 
+    assert produto.nome == 
+    assert produto.nome == 
+    assert produto.nome == 
+    assert produto.nome == 
+    assert produto.nome == 
+    assert produto.nome == 
+    assert produto.nome == 
+    assert produto.nome == 
+    assert produto.nome == 
+    assert produto.nome == 
+    assert produto.nome == 
+
+def test_criar_promocao(nome_promocao=" ", desconto= , data_inicio= , data_fim= ):
+    promocao = Promocao.objects.create()
+    assert promocao.nome_promocao == 
+    assert promocao.desconto == 
+    assert promocao.data_inicio ==
+    assert promocao.data_fim ==
+
+S
