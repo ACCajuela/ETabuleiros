@@ -200,3 +200,6 @@ function redirectToLogin() {
     localStorage.removeItem('user');
     window.location.href = '/login/';
 }
+
+
+// Criação produto

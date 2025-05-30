@@ -9,9 +9,92 @@ from etabuleiros.models import Produto, Usuario
 from .serializers import ProdutoRecomendadoSerializer, UsuarioSerializer, LoginSerializer
 from django.contrib.auth import get_user_model
 from rest_framework.permissions import IsAuthenticated
-from rest_framework.response import Response
 from rest_framework.decorators import api_view, permission_classes
 from .serializers import PerfilSerializer
+from rest_framework import status
+from rest_framework.response import Response
+from rest_framework.views import APIView
+from .models import Produtos
+from .serializers import ProdutoSerializer
+from categoria.models import Categoria
+from editora.models import Editora
+from django.utils import timezone
+from rest_framework import status
+from rest_framework.response import Response
+from rest_framework.views import APIView
+from categoria.models import Categoria
+from .serializers import CategoriaSerializer
+
+class CriarCategoriaView(APIView):
+    def post(self, request):
+        serializer = CategoriaSerializer(data=request.data)
+        
+        if serializer.is_valid():
+            try:
+                categoria = serializer.save()
+                return Response(
+                    {
+                        "success": "Categoria criada com sucesso",
+                        "cat_id": categoria.cat_id,
+                        "nome_categoria": categoria.nome_categoria
+                    },
+                    status=status.HTTP_201_CREATED
+                )
+            except Exception as e:
+                return Response(
+                    {"error": str(e)},
+                    status=status.HTTP_500_INTERNAL_SERVER_ERROR
+                )
+        
+        # Tratamento especial para erros de unicidade
+        if 'nome_categoria' in serializer.errors and 'unique' in serializer.errors['nome_categoria'][0].code:
+            return Response(
+                {"error": "Esta categoria já existe."},
+                status=status.HTTP_400_BAD_REQUEST
+            )
+            
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+class CriarProdutoView(APIView):
+    def post(self, request):
+        serializer = ProdutoSerializer(data=request.data)
+        
+        if serializer.is_valid():
+            # Processar os dados antes de salvar
+            produto_data = serializer.validated_data
+            
+            # Verificar e obter categoria
+            if 'cat' in produto_data:
+                try:
+                    categoria = Categoria.objects.get(id=produto_data['cat'].id)
+                except Categoria.DoesNotExist:
+                    return Response(
+                        {"error": "Categoria não encontrada"},
+                        status=status.HTTP_400_BAD_REQUEST
+                    )
+            
+            # Verificar e obter editora
+            if 'editora' in produto_data and produto_data['editora']:
+                try:
+                    editora = Editora.objects.get(id=produto_data['editora'].id)
+                except Editora.DoesNotExist:
+                    return Response(
+                        {"error": "Editora não encontrada"},
+                        status=status.HTTP_400_BAD_REQUEST
+                    )
+            
+            # Adicionar data de criação
+            produto_data['data_criacao'] = timezone.now()
+            
+            # Salvar o produto
+            produto = Produtos.objects.create(**produto_data)
+            
+            return Response(
+                {"success": "Produto criado com sucesso", "produto_id": produto.prod_id},
+                status=status.HTTP_201_CREATED
+            )
+        
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 def home(request):
     return render(request, 'HTML/home.html')

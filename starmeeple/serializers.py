@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from etabuleiros.models import Produto, ImagemProduto, Usuario
+from etabuleiros.models import Produto, ImagemProduto, Usuario, Editora, Categoria
 from django.contrib.auth.hashers import make_password
 from django.contrib.auth import authenticate
 from django.contrib.auth import get_user_model
@@ -46,6 +46,34 @@ class UsuarioSerializer(serializers.ModelSerializer):
         return Usuario.objects.create(**validated_data)
 
 User = get_user_model()
+
+class CategoriaSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Categoria
+        fields = ['cat_id', 'nome_categoria']
+        extra_kwargs = {
+            'nome_categoria': {
+                'error_messages': {
+                    'unique': 'Esta categoria já existe.'
+                }
+            }
+        }
+
+class ProdutoSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Produtos
+        fields = '__all__'
+    
+    def validate_cat(self, value):
+        # Verifica se a categoria existe
+        if not Categoria.objects.filter(id=value.id).exists():
+            raise serializers.ValidationError("Categoria não encontrada")
+        return value
+    
+    def validate_editora(self, value):
+        if value and not Editora.objects.filter(id=value.id).exists():
+            raise serializers.ValidationError("Editora não encontrada")
+        return value
 
 class PerfilSerializer(serializers.ModelSerializer):
     idade = serializers.SerializerMethodField()

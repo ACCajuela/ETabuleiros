@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <title>Finalização do Pedido - StarMeeple</title>
     <link rel="stylesheet" href="CSS/padrao.css">
-    <link rel="stylesheet" href="CSS/editProdutoCategoria.html">
+    <link rel="stylesheet" href="CSS/editProdutoCategoria.css">
   </head>
   <body>
     <header>
@@ -223,12 +223,13 @@
       }
 
       function mostrarPopupProduto() {
-          document.getElementById("popupProduto").style.display = "block";
-        }
-        
+        document.getElementById("popupProduto").style.display = "flex";
+      }
+
       function esconderPopupProduto() {
         document.getElementById("popupProduto").style.display = "none";
       }
+
 
       function mostrarPopupCategoria() {
           document.getElementById("popupCategoria").style.display = "block";
@@ -253,6 +254,34 @@
       function esconderPopupPromocao() {
         document.getElementById("popupPromocao").style.display = "none";
       }
+
+      // teste da Categoria
+      
+const botaoConfirmar = document.querySelector('button[onclick="mostrarPopupSeguranca()"]');
+    const textoOriginal = botaoConfirmar.textContent;
+    botaoConfirmar.textContent = 'Criando...';
+    botaoConfirmar.disabled = true;
+    
+    try {
+        // Fazer a requisição para a API
+        const response = await fetch('http://127.0.0.1:8000/api/categorias/criar/', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'X-CSRFToken': getCSRFToken() // Necessário para proteção CSRF do Django
+            },
+            body: JSON.stringify({
+                nome_categoria: nomeCategoria
+            })
+        });
+        
+        const data = await response.json();
+        
+        if (!response.ok) {
+            // Se a API retornar um erro
+            throw new Error(data.error || 'Erro ao criar categoria');
+        }
+    }
     </script>
     <script src="/templates/JS/padrao.js"></script>
   </body>
