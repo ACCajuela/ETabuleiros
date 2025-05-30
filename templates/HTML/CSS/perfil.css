@@ -13,7 +13,10 @@
 }
 
 .infosNFoto{
-    
     display: flex;
     flex-direction: column;
+}
+.headerPerfil{
+    display: flex;
+    flex-direction: row;
 }

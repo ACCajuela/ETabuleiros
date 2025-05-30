@@ -27,6 +27,7 @@ def test_criar_produto():
     assert produto.nome == 
     assert produto.nome == 
 
+
 def test_criar_promocao(nome_promocao=" ", desconto= , data_inicio= , data_fim= ):
     promocao = Promocao.objects.create()
     assert promocao.nome_promocao == 
@@ -34,4 +35,3 @@ def test_criar_promocao(nome_promocao=" ", desconto= , data_inicio= , data_fim= 
     assert promocao.data_inicio ==
     assert promocao.data_fim ==
 
-S
