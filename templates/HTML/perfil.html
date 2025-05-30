@@ -34,20 +34,27 @@
 
     <main>
         <div class="perfil">
-            <h2 id="nomeUsuario">Carregando...</h2>
-            <button onclick="mostrarPopup()">Deletar Conta</button>
+            <div class="headerPerfil">
+                <h2 id="nomeUsuario">Carregando...</h2>
+                <button onclick="mostrarPopup()">Deletar Conta</button>
+            </div>
             <div class="infoUser">
                 <img src="" alt="Foto de perfil do usuário" id="fotoPerfil">
-                <p id="nomeCompleto">Carregando...</p>
-                <p id="idadeUsuario">Carregando...</p>
-                <p id="cpfUsuario">Carregando...</p>
-                <p id="enderecoUsuario">Carregando...</p>
-                <p id="cepUsuario">Carregando...</p>
-                <p id="telefoneUsuario">Carregando...</p>
-                <p id="emailUsuario">Carregando...</p>
+                <div class="infosNFoto">
+                    <p id="nomeCompleto">Carregando...</p>
+                    <p id="idadeUsuario">Carregando...</p>
+                    <p id="cpfUsuario">Carregando...</p>
+                    <p id="enderecoUsuario">Carregando...</p>
+                    <p id="cepUsuario">Carregando...</p>
+                    <p id="telefoneUsuario">Carregando...</p>
+                    <p id="emailUsuario">Carregando...</p> 
+                </div>  
             </div>
-            <button>Fale Conosco</button>
-            <button onclick="mostrarPopupSeguranca()">Segurança</button>
+            <div class="footerPerfil">
+                <button id="faleConosco">Fale Conosco</button>
+                <button id="seguranca" onclick="mostrarPopupSeguranca()">Segurança</button>
+            </div>
+            
         </div>
         <div class="pedidos">
             <h2>Acompanhe seus pedidos</h2>
