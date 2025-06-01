@@ -202,4 +202,63 @@ function redirectToLogin() {
 }
 
 
-// Criação produto
+// Criação categoria
+
+// Variável para armazenar o token de autenticação
+let authToken = null;
+
+// Função para fazer login do administrador
+async function fazerLoginAdmin() {
+    const email = document.querySelector('#popupSeguranca input[type="text"]').value.trim();
+    const password = document.querySelector('#popupSeguranca input[type="password"]').value;
+    const botaoConfirmar = document.querySelector('#popupSeguranca button:not(.close)');
+    
+    // Validação
+    if (!email || !password) {
+        alert('Por favor, preencha ambos os campos');
+        return;
+    }
+
+    // Mostrar loading no botão
+    const textoOriginal = botaoConfirmar.textContent;
+    botaoConfirmar.textContent = 'Autenticando...';
+    botaoConfirmar.disabled = true;
+
+    try {
+        // Chamada à API de login
+        const response = await fetch('http://127.0.0.1:8000/api/login/', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+                email: email,
+                password: password
+            })
+        });
+
+        if (!response.ok) {
+            const errorData = await response.json();
+            throw new Error(errorData.detail || 'Falha na autenticação');
+        }
+
+        const data = await response.json();
+        authToken = data.token; // Armazena o token recebido
+        
+        // Fecha o popup de segurança
+        esconderPopupSeguranca();
+        
+        // Retorna true para indicar sucesso
+        return true;
+        
+    } catch (error) {
+        console.error('Erro no login:', error);
+        alert(error.message || 'Erro ao fazer login');
+        return false;
+    } finally {
+        // Restaura o botão
+        botaoConfirmar.textContent = textoOriginal;
+        botaoConfirmar.disabled = false;
+    }
+}
+
