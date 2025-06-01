@@ -1,4 +1,4 @@
- <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="pt-br">
   <head>
     <meta charset="UTF-8" />
@@ -257,31 +257,41 @@
 
       // teste da Categoria
       
-const botaoConfirmar = document.querySelector('button[onclick="mostrarPopupSeguranca()"]');
+  async function criarCategoria(nomeCategoria) {
+    const botaoConfirmar = document.querySelector('button[onclick="mostrarPopupSeguranca()"]');
     const textoOriginal = botaoConfirmar.textContent;
     botaoConfirmar.textContent = 'Criando...';
     botaoConfirmar.disabled = true;
-    
+
     try {
-        // Fazer a requisição para a API
         const response = await fetch('http://127.0.0.1:8000/api/categorias/criar/', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
-                'X-CSRFToken': getCSRFToken() // Necessário para proteção CSRF do Django
+                // CSRF só se você realmente precisa
+                // 'X-CSRFToken': getCSRFToken()
             },
             body: JSON.stringify({
                 nome_categoria: nomeCategoria
             })
         });
-        
+
         const data = await response.json();
-        
+
         if (!response.ok) {
-            // Se a API retornar um erro
-            throw new Error(data.error || 'Erro ao criar categoria');
+            alert(data.error || 'Erro ao criar categoria');
+        } else {
+            alert('Categoria criada com sucesso!');
+            esconderPopupCategoria();
         }
+    } catch (error) {
+        console.error(error);
+        alert('Erro ao criar categoria');
+    } finally {
+        botaoConfirmar.textContent = textoOriginal;
+        botaoConfirmar.disabled = false;
     }
+  }
     </script>
     <script src="/templates/JS/padrao.js"></script>
   </body>
