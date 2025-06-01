@@ -2,7 +2,7 @@
 import pytest
 from unittest.mock import patch, MagicMock
 from datetime import date
-from etabuleiros.models import Usuario, Produto, Categoria, Editora, Promocao, CarrinhoCompras, AvalicaoProduto
+from etabuleiros.models import Usuario, Produto, Categoria, Editora, Promocao, CarrinhoCompras, AvaliacaoProduto
 
 
 #Teste de Integração
@@ -84,10 +84,10 @@ def test_carrinho_integracao():
         data_adicao=data_adicao
     )
 
-    assert user=usuario
-    assert produto=produto
-    assert quantidade=quantidade
-    assert data_adicao=data_adicao
+    assert CarrinhoCompras.user==usuario
+    assert CarrinhoCompras.produto==produto
+    assert CarrinhoCompras.quantidade==quantidade
+    assert CarrinhoCompras.data_adicao==data_adicao
 
 @pytest.mark.labbd2
 def test_avaliar_produto_integracao():
@@ -118,18 +118,18 @@ def test_avaliar_produto_integracao():
     )   
 
     avaliacao = AvaliacaoProduto.objects.crate(
-        ava_prod = produto
-        ava_user = usuario
-        nota = 4.2
-        comentario = "Uau! Muito giro!"
+        ava_prod = produto,
+        ava_user = usuario,
+        nota = 4.2,
+        comentario = "Uau! Muito giro!",
         data_avalicao=data_avalicao
     )
 
-    assert ava_prod = produto
-    assert ava_user = usuario
-    assert nota = 4.2
-    assert comentario = "Uau! Muito giro!"
-    assert data_avaliacao = data_avaliacao
+    assert AvaliacaoProduto.ava_prod == produto
+    assert AvaliacaoProduto.ava_user == usuario
+    assert AvaliacaoProduto.nota == 4.2
+    assert AvaliacaoProduto.comentario == "Uau! Muito giro!"
+    assert AvaliacaoProduto.data_avaliacao == data_avaliacao
 
 #Testes unitarios
 def test_criar_usuario_unitario():
@@ -242,7 +242,7 @@ def criar_promocao_unitario():
     mock_promocao.data_inicio = data_criacao
     mock_promocao.data_fim = data_fim
 
-        with patch('etabuleiros.models.Promocao.objects.create', return_value=mock_promocao) as mock_create:
+    with patch('etabuleiros.models.Promocao.objects.create', return_value=mock_promocao) as mock_create:
         promocao = Promocao.objects.create(
             nome="Promocao Primavera",
             decimal=4.5,
@@ -260,5 +260,5 @@ def criar_promocao_unitario():
         assert promocao.nome == "Promocao Primavera"
         assert promocao.decimal == 4.5
         assert promocao.data_inicio == data_criacao
-        assert promocao.data_fim == data_fimS
+        assert promocao.data_fim == data_fim
     
