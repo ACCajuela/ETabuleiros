@@ -1,288 +1,209 @@
- <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="pt-br">
-  <head>
-    <meta charset="UTF-8" />
-    <title>Finalização do Pedido - StarMeeple</title>
-    <link rel="stylesheet" href="CSS/padrao.css">
-    <link rel="stylesheet" href="CSS/editProdutoCategoria.css">
-  </head>
-  <body>
-    <header>
-      <nav>
-        <div>
-          <img id="logoSite" src="midia/logoStarMeeple.png" alt="StarMeeple">
-          <input type="text" placeholder="O que você está procurando?" />
-          <button>🔍</button>
-          <button>💬</button>
-          <img id="logoUsuario" src="avatar.png" alt="Avatar do usuário">
-          <span>3</span>
-        </div>
-        <ul>
+<head>
+  <meta charset="UTF-8" />
+  <title>Finalização do Pedido - StarMeeple</title>
+  <link rel="stylesheet" href="CSS/padrao.css">
+  <link rel="stylesheet" href="CSS/editProdutoCategoria.css">
+</head>
+<body>
+  <header>
+    <nav>
+      <div>
+        <img id="logoSite" src="midia/logoStarMeeple.png" alt="StarMeeple">
+        <input type="text" placeholder="O que você está procurando?" />
+        <button>🔍</button>
+        <button>💬</button>
+        <img id="logoUsuario" src="avatar.png" alt="Avatar do usuário">
+        <span>3</span>
+      </div>
+      <ul>
         <li id="linkJogosCartas">Jogos de Cartas</li>
         <li id="linkJogosTabuleiro">Jogos de tabuleiro</li>
         <li id="linkQuebraCabecas">Quebra-cabeças</li>
-        <li id="linkFamilia">Familia</li>
+        <li id="linkFamilia">Família</li>
         <li id="linkRPG">RPG</li>
         <li id="link18">+18</li>
-        </ul>
-      </nav>
-    </header>
+      </ul>
+    </nav>
+  </header>
 
-    <main>
-      <h1>Edição de Produtos</h1>
-      <div class="produtos">
-        <button onclick="mostrarPopupProduto()">+ Novo Produto</button>
-        <div class="listaProdutos">
-          <div class="infoProduto">
-            <p>NomeProduto</p>
-            <img src="" alt="Foto do Produto" />
-            <button onclick="mostrarPopupProduto()">Editar</button>
-            <button onclick="esconderPopupProduto()">Excluir</button>
-          </div>
-          <div class="infoProduto">
-            <p>NomeProduto</p>
-            <img src="" alt="Foto do Produto" />
-            <button onclick="mostrarPopupProduto()">Editar</button>
-            <button onclick="esconderPopupProduto()">Excluir</button>
-          </div>
-          <div class="infoProduto">
-            <p>NomeProduto</p>
-            <img src="" alt="Foto do Produto" />
-            <button onclick="mostrarPopupProduto()">Editar</button>
-            <button onclick="esconderPopupProduto()">Excluir</button>
-          </div>
-          <div class="infoProduto">
-            <p>NomeProduto</p>
-            <img src="" alt="Foto do Produto" />
-            <button onclick="mostrarPopupProduto()">Editar</button>
-            <button onclick="esconderPopupProduto()">Excluir</button>
-          </div>
-          <div class="infoProduto">
-            <p>NomeProduto</p>
-            <img src="" alt="Foto do Produto" />
-            <button onclick="mostrarPopupProduto()">Editar</button>
-            <button onclick="esconderPopupProduto()">Excluir</button>
-          </div>
+  <main>
+    <h1>Edição de Produtos</h1>
+    <div class="produtos">
+      <button onclick="mostrarPopupProduto()">+ Novo Produto</button>
+      <button onclick="mostrarPopupCategoria()">+ Nova Categoria</button>
+      <div class="listaProdutos">
+        <div class="infoProduto">
+          <p>NomeProduto</p>
+          <img src="" alt="Foto do Produto" />
+          <button onclick="mostrarPopupProduto()">Editar</button>
+          <button onclick="mostrarPopupSeguranca()">Excluir</button>
         </div>
       </div>
-      <h3>Cupons e Promoções</h3>
-      <div class="cupons">
-        <button onclick="mostrarPopupCupom()">+ Novo Cupom</button>
-        <div class="listaCupons">
-          <div class="InfoCupom">
-            <p>nomeCupom</p>
-            <button onclick="mostrarPopupCupom()">Editar</button>
-            <button onclick="mostrarPopupSeguranca()">Excluir</button>
-          </div>
-          <div class="InfoCupom">
-            <p>nomeCupom</p>
-            <button onclick="mostrarPopupCupom()">Editar</button>
-            <button onclick="mostrarPopupSeguranca()">Excluir</button>
-          </div>
-          <div class="InfoCupom">
-            <p>nomeCupom</p>
-            <button onclick="mostrarPopupCupom()">Editar</button>
-            <button onclick="mostrarPopupSeguranca()">Excluir</button>
-          </div>
-          <div class="InfoCupom">
-            <p>nomeCupom</p>
-            <button onclick="mostrarPopupCupom()">Editar</button>
-            <button onclick="mostrarPopupSeguranca()">Excluir</button>
-          </div>
+    </div>
+
+    <h3>Cupons e Promoções</h3>
+    <div class="cupons">
+      <button onclick="mostrarPopupCupom()">+ Novo Cupom</button>
+      <div class="listaCupons">
+        <div class="InfoCupom">
+          <p>nomeCupom</p>
+          <button onclick="mostrarPopupCupom()">Editar</button>
+          <button onclick="mostrarPopupSeguranca()">Excluir</button>
         </div>
       </div>
-      <div class="promocoes">
-        <button>+ Nova Promoção</button>
-        <div class="listaPromocoes">
-          <div class="InfoPromocao">
-            <p>nomePromocao</p>
-            <button>Editar</button>
-            <button>Excluir</button>
-          </div>
-          <div class="InfoPromocao">
-            <p>nomePromocao</p>
-            <button>Editar</button>
-            <button>Excluir</button>
-          </div>
-          <div class="InfoPromocao">
-            <p>nomePromocao</p>
-            <button>Editar</button>
-            <button>Excluir</button>
-          </div>
-          <div class="InfoPromocao">
-            <p>nomePromocao</p>
-            <button>Editar</button>
-            <button>Excluir</button>
-          </div>
+    </div>
+
+    <div class="promocoes">
+      <button onclick="mostrarPopupPromocao()">+ Nova Promoção</button>
+      <div class="listaPromocoes">
+        <div class="InfoPromocao">
+          <p>nomePromocao</p>
+          <button onclick="mostrarPopupPromocao()">Editar</button>
+          <button onclick="mostrarPopupSeguranca()">Excluir</button>
         </div>
       </div>
+    </div>
 
-      <!-- ------------------------------POPUPS------------------------------------ -->
-
-      <div class="popupSeguranca" id="popupSeguranca">
-        <div class="popup-content">
-            <p>Coloque seu usuário de administrador</p>
-            <input type="text">
-            <p>Coloque sua senha</p>
-            <input type="text">
-            <button>Confirmar</button>
-            <button class="close" onclick="esconderPopupSeguranca()">Cancelar</button>
-        </div>
+    <!-- POPUPS -->
+    <div class="popupSeguranca" id="popupSeguranca">
+      <div class="popup-content">
+        <p>Coloque seu usuário de administrador</p>
+        <input type="text">
+        <p>Coloque sua senha</p>
+        <input type="password">
+        <button>Confirmar</button>
+        <button class="close" onclick="esconderPopupSeguranca()">Cancelar</button>
       </div>
+    </div>
 
-      <div class="popupProduto" id="popupProduto">
-        <div class="popup-content">
-          <h3>Novo Produto</h3>
-            <p>Nome</p>
-            <input type="text">
-            <p>Categoria</p>
-            <input type="text">
-            <p>N° de jogadores</p>
-            <input type="text">
-            <p>Descrição</p>
-            <input type="text">
-            <p>Quantidade em estoque</p>
-            <input type="text">
-            <p>Autor</p>
-            <input type="text">
-            <p>Editora</p>
-            <input type="text">
-            <p>Classificação Indicativa</p>
-            <input type="text">
-
-            <button onclick="mostrarPopupSeguranca()">Confirmar</button>
-            <button class="close" onclick="esconderPopupProduto()">Cancelar</button>
-        </div>
+    <div class="popupProduto" id="popupProduto">
+      <div class="popup-content">
+        <h3>Novo Produto</h3>
+        <p>Nome</p>
+        <input type="text">
+        <p>Categoria</p>
+        <input type="text">
+        <p>N° de jogadores</p>
+        <input type="text">
+        <p>Descrição</p>
+        <input type="text">
+        <p>Quantidade em estoque</p>
+        <input type="text">
+        <p>Autor</p>
+        <input type="text">
+        <p>Editora</p>
+        <input type="text">
+        <p>Classificação Indicativa</p>
+        <input type="text">
+        <button onclick="mostrarPopupSeguranca()">Confirmar</button>
+        <button class="close" onclick="esconderPopupProduto()">Cancelar</button>
       </div>
+    </div>
 
-      <div class="popupCategoria" id="popupCategoria">
-        <div class="popup-content">
-          <h3>Nova Categoria</h3>
-            <p>Nome</p>
-            <input type="text">
-
-            <button onclick="mostrarPopupSeguranca()">Confirmar</button>
-            <button class="close" onclick="esconderPopupCategoria()">Cancelar</button>
-        </div>
+    <div class="popupCategoria" id="popupCategoria">
+      <div class="popup-content">
+        <h3>Nova Categoria</h3>
+        <p>Nome</p>
+        <input type="text">
+        <button onclick="mostrarPopupSeguranca()">Confirmar</button>
+        <button class="close" onclick="esconderPopupCategoria()">Cancelar</button>
       </div>
+    </div>
 
-      <div class="popupCupom" id="popupCupom">
-        <div class="popup-content">
-          <h3>Novo Cupom</h3>
-            <p>Nome</p>
-            <input type="text">
-            <p>Situação</p>
-            <input type="text">
-            <p>Metodo de desconto</p>
-            <select name="metodoDesconto" id="metodoDesconto">
-              <option value="percentual">Percentual</option>
-              <option value="preco">Preço</option>
-            </select>
-            <p>Preço de desconto</p>
-            <input type="text">
-            <p>Data de validação</p>
-            <input type="date">
-            <input type="date">
-
-            <button onclick="mostrarPopupSeguranca()">Confirmar</button>
-            <button class="close" onclick="esconderPopupCupom()">Cancelar</button>
-        </div>
+    <div class="popupCupom" id="popupCupom">
+      <div class="popup-content">
+        <h3>Novo Cupom</h3>
+        <p>Nome</p>
+        <input type="text">
+        <p>Situação</p>
+        <input type="text">
+        <p>Método de desconto</p>
+        <select name="metodoDesconto" id="metodoDesconto">
+          <option value="percentual">Percentual</option>
+          <option value="preco">Preço</option>
+        </select>
+        <p>Preço de desconto</p>
+        <input type="text">
+        <p>Data de validação</p>
+        <input type="date">
+        <input type="date">
+        <button onclick="mostrarPopupSeguranca()">Confirmar</button>
+        <button class="close" onclick="esconderPopupCupom()">Cancelar</button>
       </div>
+    </div>
 
-    </main>
-
-    <footer>
-      <div class="formPagamento">
-          <p>Formas de Pagamento</p>
-          <div class="imgsPagamento">
-            <img src="visa.png" alt="Visa">
-            <img src="mastercard.png" alt="Mastercard">
-            <img src="elo.png" alt="Elo">
-          </div>  
+    <div class="popupPromocao" id="popupPromocao">
+      <div class="popup-content">
+        <h3>Nova Promoção</h3>
+        <p>Nome</p>
+        <input type="text">
+        <p>Descrição</p>
+        <input type="text">
+        <p>Desconto (%)</p>
+        <input type="number">
+        <button onclick="mostrarPopupSeguranca()">Confirmar</button>
+        <button class="close" onclick="esconderPopupPromocao()">Cancelar</button>
       </div>
+    </div>
+  </main>
 
-      <div class="logoStar">
-          <img src="logo.png" alt="StarMeeple logo">
-          <p>StarMeeple 2025</p>
-      </div>
+  <footer>
+    <div class="formPagamento">
+      <p>Formas de Pagamento</p>
+      <div class="imgsPagamento">
+        <img src="visa.png" alt="Visa">
+        <img src="mastercard.png" alt="Mastercard">
+        <img src="elo.png" alt="Elo">
+      </div>  
+    </div>
+    <div class="logoStar">
+      <img src="logo.png" alt="StarMeeple logo">
+      <p>StarMeeple 2025</p>
+    </div>
+    <div class="linkSocial">
+      <p>Nos sigam nas redes sociais:</p>
+      <a href="https://www.instagram.com">Instagram</a>
+      <a href="https://www.facebook.com">Facebook</a>
+    </div>
 
-      <div class="linkSocial">
-          <p>Nos sigam nas redes sociais:</p>
-          <a href="https://www.instagram.com">Instagram</a>
-          <a href="https://www.facebook.com">Facebook</a>
-      </div>
-    </footer>
-
-    <script>
-      function mostrarPopupSeguranca() {
-          document.getElementById("popupSeguranca").style.display = "block";
-        }
-        
-      function esconderPopupSeguranca() {
-        document.getElementById("popupSeguranca").style.display = "none";
-      }
-
-      function mostrarPopupProduto() {
-        document.getElementById("popupProduto").style.display = "flex";
-      }
-
-      function esconderPopupProduto() {
-        document.getElementById("popupProduto").style.display = "none";
-      }
-
-
-      function mostrarPopupCategoria() {
-          document.getElementById("popupCategoria").style.display = "block";
-        }
-        
-      function esconderPopupCategoria() {
-        document.getElementById("popupCategoria").style.display = "none";
-      }
-
-      function mostrarPopupCupom() {
-          document.getElementById("popupCupom").style.display = "block";
-        }
-        
-      function esconderPopupCupom() {
-        document.getElementById("popupCupom").style.display = "none";
-      }
-
-      function mostrarPopupPromocao() {
-          document.getElementById("popupPromocao").style.display = "block";
-        }
-        
-      function esconderPopupPromocao() {
-        document.getElementById("popupPromocao").style.display = "none";
-      }
-
-      // teste da Categoria
-      
-const botaoConfirmar = document.querySelector('button[onclick="mostrarPopupSeguranca()"]');
-    const textoOriginal = botaoConfirmar.textContent;
-    botaoConfirmar.textContent = 'Criando...';
-    botaoConfirmar.disabled = true;
-    
-    try {
-        // Fazer a requisição para a API
-        const response = await fetch('http://127.0.0.1:8000/api/categorias/criar/', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-                'X-CSRFToken': getCSRFToken() // Necessário para proteção CSRF do Django
-            },
-            body: JSON.stringify({
-                nome_categoria: nomeCategoria
-            })
-        });
-        
-        const data = await response.json();
-        
-        if (!response.ok) {
-            // Se a API retornar um erro
-            throw new Error(data.error || 'Erro ao criar categoria');
-        }
-    }
-    </script>
     <script src="/templates/JS/padrao.js"></script>
-  </body>
+    <script src="/templates/JS/editProdutoCategoria.js"></script>
+
+  </footer>
+  
+  <script>
+    function mostrarPopupProduto() {
+      document.getElementById("popupProduto").style.display = "flex";
+    }
+    function esconderPopupProduto() {
+      document.getElementById("popupProduto").style.display = "none";
+    }
+    function mostrarPopupCupom() {
+      document.getElementById("popupCupom").style.display = "flex";
+    }
+    function esconderPopupCupom() {
+      document.getElementById("popupCupom").style.display = "none";
+    }
+    function mostrarPopupPromocao() {
+      document.getElementById("popupPromocao").style.display = "flex";
+    }
+    function esconderPopupPromocao() {
+      document.getElementById("popupPromocao").style.display = "none";
+    }
+    function mostrarPopupCategoria() {
+      document.getElementById("popupCategoria").style.display = "flex";
+    }
+    function esconderPopupCategoria() {
+      document.getElementById("popupCategoria").style.display = "none";
+    }
+    function mostrarPopupSeguranca() {
+      document.getElementById("popupSeguranca").style.display = "block";
+    }
+    function esconderPopupSeguranca() {
+      document.getElementById("popupSeguranca").style.display = "none";
+    }
+  </script>
+</body>
 </html>

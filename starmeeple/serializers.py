@@ -61,7 +61,7 @@ class CategoriaSerializer(serializers.ModelSerializer):
 
 class ProdutoSerializer(serializers.ModelSerializer):
     class Meta:
-        model = Produtos
+        model = Produto
         fields = '__all__'
     
     def validate_cat(self, value):
