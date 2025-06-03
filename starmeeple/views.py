@@ -6,7 +6,7 @@ from rest_framework import generics, status
 from rest_framework.response import Response
 from rest_framework_simplejwt.tokens import RefreshToken
 from etabuleiros.models import Produto, Usuario, Categoria, Editora
-from .serializers import ProdutoRecomendadoSerializer, UsuarioSerializer, LoginSerializer, CategoriaSerializer, ProdutoSerializer, PerfilSerializer
+from .serializers import ProdutoRecomendadoSerializer, UsuarioSerializer, LoginSerializer, ProdutoSerializer, PerfilSerializer
 from django.contrib.auth import get_user_model
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.decorators import api_view, permission_classes

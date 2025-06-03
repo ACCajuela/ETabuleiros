@@ -61,6 +61,7 @@ INSTALLED_APPS = [
 REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': (
         'rest_framework_simplejwt.authentication.JWTAuthentication',
+        'rest_framework.authentication.SessionAuthentication'
     )
 }
 
@@ -106,9 +107,7 @@ WSGI_APPLICATION = 'etabuleiros.wsgi.application'
 
 CORS_ALLOWED_ORIGINS = [
     "http://127.0.0.1:5500",
-    "http://localhost:5500",
-    "http://localhost:8000",
-    "http://127.0.0.1:8000"
+    "http://localhost:5500"
 ]
 
 CORS_ALLOW_ALL_ORIGINS = True

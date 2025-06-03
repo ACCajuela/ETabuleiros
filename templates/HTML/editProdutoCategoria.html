@@ -7,8 +7,7 @@
   <link rel="stylesheet" href="CSS/editProdutoCategoria.css">
 </head>
 <body>
-  {% csrf_token %}
-  <header>
+  <header id="header">
     <nav>
       <div>
         <img id="logoSite" src="midia/logoStarMeeple.png" alt="StarMeeple">
@@ -29,58 +28,49 @@
     </nav>
   </header>
 
-  <main>
+  <main id="main">
     <h1>Edição de Produtos</h1>
     <div class="produtos">
-      <button onclick="mostrarPopupProduto()">+ Novo Produto</button>
-      <button onclick="mostrarPopupCategoria()">+ Nova Categoria</button>
+      <button id="newProduto" onclick="mostrarPopupProduto()">+ Novo Produto</button>
       <div class="listaProdutos">
         <div class="infoProduto">
           <p>NomeProduto</p>
           <img src="" alt="Foto do Produto" />
-          <button onclick="mostrarPopupProduto()">Editar</button>
-          <button onclick="mostrarPopupSeguranca()">Excluir</button>
+          <button id="btnEdit" onclick="mostrarPopupProduto()">Editar</button>
+          <button id="btnExcluir" onclick="mostrarPopupSeguranca()">Excluir</button>
         </div>
       </div>
     </div>
 
-    <h3>Cupons e Promoções</h3>
+    <h1>Cupons e Promoções</h1>
     <div class="cupons">
-      <button onclick="mostrarPopupCupom()">+ Novo Cupom</button>
+      <button id="newCupom" onclick="mostrarPopupCupom()">+ Novo Cupom</button>
       <div class="listaCupons">
-        <div class="InfoCupom">
+        <div class="infoCupom">
           <p>nomeCupom</p>
-          <button onclick="mostrarPopupCupom()">Editar</button>
-          <button onclick="mostrarPopupSeguranca()">Excluir</button>
+          <div class="btns">
+            <button id="btnEditCP" onclick="mostrarPopupProduto()">Editar</button>
+            <button id="btnExcluirCP" onclick="mostrarPopupSeguranca()">Excluir</button>
+          </div>
         </div>
       </div>
     </div>
 
     <div class="promocoes">
-      <button onclick="mostrarPopupPromocao()">+ Nova Promoção</button>
+      <button id="newPromocao" onclick="mostrarPopupPromocao()">+ Nova Promoção</button>
       <div class="listaPromocoes">
-        <div class="InfoPromocao">
+        <div class="infoPromocao">
           <p>nomePromocao</p>
-          <button onclick="mostrarPopupPromocao()">Editar</button>
-          <button onclick="mostrarPopupSeguranca()">Excluir</button>
+          <div class="btns">
+            <button id="btnEditCP" onclick="mostrarPopupProduto()">Editar</button>
+            <button id="btnExcluirCP" onclick="mostrarPopupSeguranca()">Excluir</button>
+          </div>
         </div>
       </div>
     </div>
 
-    <!-- POPUPS -->
-     <!--
-    <div class="popupSeguranca" id="popupSeguranca">
-      <div class="popup-content">
-        <p>Coloque seu usuário de administrador</p>
-        <input type="text">
-        <p>Coloque sua senha</p>
-        <input type="password">
-        <button id="fazerLoginAdmin()">Confirmar</button>
-        <button class="close" onclick="esconderPopupSeguranca()">Cancelar</button>
-      </div>
-    </div>
--->
     <div class="popupProduto" id="popupProduto">
+      {% csrf_token %}
       <div class="popup-content">
         <h3>Novo Produto</h3>
         <p>Nome</p>
@@ -99,18 +89,8 @@
         <input type="text">
         <p>Classificação Indicativa</p>
         <input type="text">
-        <button onclick="mostrarPopupSeguranca()">Confirmar</button>
+        <button onclick="cadastrarProduto()">Confirmar</button>
         <button class="close" onclick="esconderPopupProduto()">Cancelar</button>
-      </div>
-    </div>
-
-    <div class="popupCategoria" id="popupCategoria">
-      <div class="popup-content">
-        <h3>Nova Categoria</h3>
-        <p>Nome</p>
-        <input type="text" id="nomeCategoriaInput">
-        <button id="btnConfirmarCategoria">Confirmar</button>
-        <button class="close" onclick="esconderPopupCategoria()">Cancelar</button>
       </div>
     </div>
 
@@ -151,90 +131,112 @@
     </div>
   </main>
 
-  <footer>
-    <div class="formPagamento">
-      <p>Formas de Pagamento</p>
-      <div class="imgsPagamento">
-        <img src="visa.png" alt="Visa">
-        <img src="mastercard.png" alt="Mastercard">
-        <img src="elo.png" alt="Elo">
-      </div>  
-    </div>
-    <div class="logoStar">
-      <img src="logo.png" alt="StarMeeple logo">
-      <p>StarMeeple 2025</p>
-    </div>
-    <div class="linkSocial">
-      <p>Nos sigam nas redes sociais:</p>
-      <a href="https://www.instagram.com">Instagram</a>
-      <a href="https://www.facebook.com">Facebook</a>
-    </div>
+  <footer id="footer">
+      <div class="formPagamento">
+        <p>Formas de Pagamento</p>
+        <div class="imgsPagamento">
+          <img src="midia/pix.png" alt="Pix" />
+          <img src="midia/visa.png" alt="Visa" />
+          <img src="midia/mastercard.png" alt="Mastercard" />
+          <img src="midia/amex.png" alt="Elo" />
+        </div>
+      </div>
 
-    <script src="/templates/JS/padrao.js"></script>
-    <script src="/templates/JS/editProdutoCategoria.js"></script>
+      <div class="logoStar">
+        <img src="midia/logoStarMeeple.png" alt="StarMeeple logo" />
+        <p>StarMeeple 2025</p>
+      </div>
 
-  </footer>
-  
+      <div class="linkSocial">
+        <p>Nos sigam nas redes sociais:</p>
+        <a href="https://www.instagram.com"
+          ><img src="midia/instagram.jpg" alt="" />Instagram</a
+        >
+        <a href="https://www.facebook.com"
+          ><img src="midia/facebook.png" alt="" />Facebook</a
+        >
+      </div>
+    </footer>
 
   <script>
-    
-    function getCookie(name) {
-  let cookieValue = null;
-  if (document.cookie && document.cookie !== '') {
-    const cookies = document.cookie.split(';');
-    for (let i = 0; i < cookies.length; i++) {
-      const cookie = cookies[i].trim();
-      // Verifica se o cookie começa com o nome desejado
-      if (cookie.substring(0, name.length + 1) === (name + '=')) {
-        cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
-        break;
-      }
+
+    // Função para obter cookies
+function getCookie(name) {
+    let cookieValue = null;
+    if (document.cookie && document.cookie !== '') {
+        const cookies = document.cookie.split(';');
+        for (let i = 0; i < cookies.length; i++) {
+            const cookie = cookies[i].trim();
+            if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                break;
+            }
+        }
     }
-  }
-  return cookieValue;
+    return cookieValue;
 }
 
-  
-    document.getElementById('btnConfirmarCategoria').addEventListener('click', function () {
-    const nomeCategoria = document.getElementById('nomeCategoriaInput').value;
 
-    fetch('http://127.0.0.1:8000/api/criar-categoria/', {
+    async function cadastrarProduto() {
+    // Verifique se o CSRF token existe
+    const csrftoken = getCookie('csrftoken');
+    if (!csrftoken) {
+        alert('Erro de segurança: Token CSRF não encontrado!');
+        return;
+    }
+
+    const inputs = document.querySelectorAll('.popupProduto input');
+    const produtoData = {
+        nome: inputs[0].value,
+        categoria: inputs[1].value,
+        num_jogadores: inputs[2].value,
+        descricao: inputs[3].value,
+        qtd_estoque: parseInt(inputs[4].value) || 0,
+        autor: inputs[5].value,
+        editora: inputs[6].value,
+        classificacao_indicativa: inputs[7].value
+    };
+
+    try {
+    const response = await fetch('http://localhost:5500/api/produtos/', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
-            'X-CSRFToken': getCookie('csrftoken'),
+            'X-CSRFToken': csrftoken
         },
-        body: JSON.stringify({
-            'nome_categoria': nomeCategoria
-        })
-    })
-    .then(response => {
-        if (!response.ok) {
-            throw new Error(`Erro HTTP: ${response.status}`);
-        }
-        return response.text(); // Recebe como texto primeiro
-    })
-    .then(text => {
-        try {
-            const data = JSON.parse(text); // Tenta converter para JSON
-            if (data.status === 'success') {
-                alert('Categoria criada com sucesso!');
-                esconderPopupCategoria();
-            } else {
-                alert('Erro: ' + (data.message || 'Resposta desconhecida da API'));
-            }
-        } catch (e) {
-            console.error('Resposta não é um JSON válido:', text);
-            alert('Erro: resposta inesperada do servidor.');
-        }
-    })
-    .catch(error => {
-        console.error('Erro:', error);
-        alert('Ocorreu um erro ao criar a categoria');
+        body: JSON.stringify(produtoData),
+        credentials: 'include'
     });
-});
 
-</script>
+    const contentType = response.headers.get("content-type");
+
+    if (!response.ok) {
+        if (contentType && contentType.includes("application/json")) {
+            const error = await response.json();
+            throw new Error(error.detail || JSON.stringify(error));
+        } else {
+            const errorText = await response.text(); // erro não-JSON
+            throw new Error(`Erro ${response.status}: ${errorText}`);
+        }
+    }
+
+    if (contentType && contentType.includes("application/json")) {
+        const data = await response.json();
+        alert(`Produto "${data.nome}" cadastrado com sucesso!`);
+    } else {
+        alert("Produto cadastrado com sucesso (sem resposta JSON)");
+    }
+
+    esconderPopupProduto();
+    inputs.forEach(input => input.value = '');
+    
+} catch (error) {
+    console.error('Erro completo:', error);
+    alert(`Erro ao cadastrar: ${error.message}`);
+}
+
+}
+  </script>
 
   <script>
     function mostrarPopupProduto() {

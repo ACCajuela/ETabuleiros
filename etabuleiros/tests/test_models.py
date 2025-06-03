@@ -52,6 +52,14 @@ def test_criar_produto_integracao():
 def test_carrinho_integracao():
     data_adicao = (1999, 7, 13)
 
+    categoria = Categoria.objects.create(
+        nome="Mais 18"
+    )
+    
+    editora = Editora.objects.create(
+        nome="Tristeza"
+    )
+
     produto = Produto.objects.create(
         nome="Nome de Jogo",
         qtd=30,
@@ -65,7 +73,7 @@ def test_carrinho_integracao():
         recomendado=False,
         clas_ind='18',
         autor="Fulano",
-        data_criacao=data_criacao
+        data_criacao=data_adicao
     )
 
     usuario = Usuario.objects.create(
@@ -84,14 +92,14 @@ def test_carrinho_integracao():
         data_adicao=data_adicao
     )
 
-    assert CarrinhoCompras.user==usuario
-    assert CarrinhoCompras.produto==produto
-    assert CarrinhoCompras.quantidade==quantidade
-    assert CarrinhoCompras.data_adicao==data_adicao
+    assert carrinho.user==usuario
+    assert carrinho.produto==produto
+    assert carrinho.quantidade==10
+    assert carrinho.data_adicao==data_adicao
 
 @pytest.mark.labbd2
 def test_avaliar_produto_integracao():
-    data_avaliacao=(2003, 8, 17)
+    data_criacao=(2003, 8, 17)
     produto = Produto.objects.create(
         nome="Nome de Jogo",
         qtd=30,
@@ -122,14 +130,14 @@ def test_avaliar_produto_integracao():
         ava_user = usuario,
         nota = 4.2,
         comentario = "Uau! Muito giro!",
-        data_avalicao=data_avalicao
+        data_avalicao=data_criacao
     )
 
-    assert AvaliacaoProduto.ava_prod == produto
-    assert AvaliacaoProduto.ava_user == usuario
-    assert AvaliacaoProduto.nota == 4.2
-    assert AvaliacaoProduto.comentario == "Uau! Muito giro!"
-    assert AvaliacaoProduto.data_avaliacao == data_avaliacao
+    assert avaliacao.ava_prod == produto
+    assert avaliacao.ava_user == usuario
+    assert avaliacao.nota == 4.2
+    assert avaliacao.comentario == "Uau! Muito giro!"
+    assert avaliacao.data_avaliacao == data_criacao
 
 #Testes unitarios
 def test_criar_usuario_unitario():

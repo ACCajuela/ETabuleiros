@@ -1,3 +1,156 @@
+#main{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+/* --------------------- PRODUTOS -------------------- */
+.produtos{
+  margin-top: 15px;
+  margin-bottom: 15px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+}
+
+#newProduto{
+  padding: 5px 10px;
+  gap: 5px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: white;
+  font-size: 15px;
+  box-shadow: #00000059 0px 5px 15px;
+  border: 0.5px black;
+  margin-bottom: 8px;
+}
+#newProduto:hover{
+  box-shadow: none;
+  border: none;
+}
+
+.listaProdutos{
+  width: 100%;
+  max-width: 800px;
+  margin: 0 auto;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+.infoProduto{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 5px;
+  background-color: #f3efef;
+  width: 100px;
+  height: 150px;
+  font-size: 15px;
+}
+.infoProduto img{
+  width: 80%;
+  margin: 6px;
+}
+#btnEdit, #btnExcluir{
+  width: 80%;
+  margin: 5px;
+  padding: 3px 5px;
+  border: none;
+}
+#btnEdit{
+  background-color: yellow;
+}
+#btnExcluir{
+  background-color: #dc3545;
+}
+
+/* --------------------- CUPONS E PROMOÇÕES -------------------- */
+.cupons, .promocoes{
+  margin-top: 15px;
+  margin-bottom: 15px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 80%;
+}
+
+#newCupom{
+  padding: 5px 10px;
+  gap: 5px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: white;
+  font-size: 15px;
+  box-shadow: #00000059 0px 5px 15px;
+  border: 0.5px black;
+  margin-bottom: 8px;
+}
+#newCupom:hover{
+  box-shadow: none;
+  border: none;
+}
+
+#newPromocao{
+  padding: 5px 10px;
+  gap: 5px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: white;
+  font-size: 15px;
+  box-shadow: #00000059 0px 5px 15px;
+  border: 0.5px black;
+  margin-bottom: 8px;
+}
+#newPromocao:hover{
+  box-shadow: none;
+  border: none;
+}
+
+.listaCupons, .listaPromocoes{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  width: 80%;
+  gap: 5px;
+}
+
+.infoCupom, .infoPromocao{
+  padding: 5px 10px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-direction: row;
+  width: 80%;
+  background-color: white;
+}
+
+.btns{
+  gap: 8px;
+}
+
+#btnEditCP, #btnExcluirCP{
+  width: 100px;
+  margin: 5px;
+  padding: 3px 5px;
+  border: none;
+}
+#btnEditCP{
+  background-color: yellow;
+}
+#btnExcluirCP{
+  background-color: #dc3545;
+}
+
+/* --------------------- POPUPS -------------------- */
 #popupSeguranca {
   display: none; 
   position: fixed;
@@ -9,7 +162,7 @@
   align-items: center;
 }
 
-#popupSeguranca .popup-content {
+#popupSeguranca, .popup-content {
   margin: 0; 
   padding: 30px;
   background-color: #fff;
