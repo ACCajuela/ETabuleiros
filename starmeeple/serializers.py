@@ -47,18 +47,6 @@ class UsuarioSerializer(serializers.ModelSerializer):
 
 User = get_user_model()
 
-class CategoriaSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = Categoria
-        fields = ['cat_id', 'nome_categoria']
-        extra_kwargs = {
-            'nome_categoria': {
-                'error_messages': {
-                    'unique': 'Esta categoria já existe.'
-                }
-            }
-        }
-
 class ProdutoSerializer(serializers.ModelSerializer):
     class Meta:
         model = Produto
@@ -124,3 +112,8 @@ class LoginSerializer(serializers.Serializer):
 
         attrs['user'] = user
         return attrs
+
+class CategoriaSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Categoria
+        fields = ['cat_id', 'nome_categoria']

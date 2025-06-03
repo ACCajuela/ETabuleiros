@@ -18,7 +18,7 @@ from django.contrib import admin
 from django.urls import path
 from starmeeple import views
 from django.urls import path, include
-from starmeeple.views import ProdutosRecomendadosAPIView, CadastroUsuarioView, LoginView, perfil_api, CriarCategoriaView
+from starmeeple.views import ProdutosRecomendadosAPIView, CadastroUsuarioView, LoginView, perfil_api, criar_categoria
 from django.conf import settings
 from django.conf.urls.static import static
 
@@ -46,7 +46,7 @@ urlpatterns = [
     path('custSuport', views.suporteCliente, name='suporteCliente'),
     path('adm/custSuport', views.suporteFuncionario, name='suporteFuncionario'),
     path('api/', include('starmeeple.urls')),
-    path('api/categorias/criar/', CriarCategoriaView.as_view(), name='criar-categoria')
+    path('api/criar-categoria/', criar_categoria, name='criar_categoria'),
 ]
 
 if settings.DEBUG:

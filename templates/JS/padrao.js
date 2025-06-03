@@ -261,4 +261,3 @@ async function fazerLoginAdmin() {
         botaoConfirmar.disabled = false;
     }
 }
-

@@ -12,36 +12,37 @@ from rest_framework.permissions import IsAuthenticated
 from rest_framework.decorators import api_view, permission_classes
 from rest_framework.views import APIView
 from django.utils import timezone
+from django.http import JsonResponse
+from django.views.decorators.csrf import csrf_exempt
+from django.views.decorators.http import require_POST
+import json
+from django.utils.decorators import method_decorator 
+from django.views.generic import View
+from django.db import IntegrityError
 
-class CriarCategoriaView(APIView):
-    def post(self, request):
-        serializer = CategoriaSerializer(data=request.data)
+@csrf_exempt
+def criar_categoria(request):
+    if request.method == 'POST':
+        try:
+            data = json.loads(request.body)
+            nome = data.get('nome_categoria', '').strip()
+
+            if not nome:
+                return JsonResponse({'status': 'error', 'message': 'Nome da categoria é obrigatório'}, status=400)
+
+            # Tenta criar a nova categoria
+            categoria = Categoria(nome_categoria=nome)
+            categoria.save()
+
+            return JsonResponse({'status': 'success', 'message': f'Categoria \"{nome}\" criada com sucesso!'})
         
-        if serializer.is_valid():
-            try:
-                categoria = serializer.save()
-                return Response(
-                    {
-                        "success": "Categoria criada com sucesso",
-                        "cat_id": categoria.cat_id,
-                        "nome_categoria": categoria.nome_categoria
-                    },
-                    status=status.HTTP_201_CREATED
-                )
-            except Exception as e:
-                return Response(
-                    {"error": str(e)},
-                    status=status.HTTP_500_INTERNAL_SERVER_ERROR
-                )
+        except IntegrityError:
+            return JsonResponse({'status': 'error', 'message': 'Esta categoria já existe.'}, status=400)
         
-        # Tratamento especial para erros de unicidade
-        if 'nome_categoria' in serializer.errors and 'unique' in serializer.errors['nome_categoria'][0].code:
-            return Response(
-                {"error": "Esta categoria já existe."},
-                status=status.HTTP_400_BAD_REQUEST
-            )
-            
-        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+        except Exception as e:
+            return JsonResponse({'status': 'error', 'message': f'Erro interno: {str(e)}'}, status=500)
+
+    return JsonResponse({'status': 'error', 'message': 'Método não permitido'}, status=405)
 
 class CriarProdutoView(APIView):
     def post(self, request):
