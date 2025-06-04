@@ -51,7 +51,6 @@ urlpatterns = [
     path('api/', include('starmeeple.urls')),
     path('api/criar-categoria/', criar_categoria, name='criar_categoria'),
     path('produtos/adicionar/', adicionar_produto, name='adicionar_produto'),
-    path('teste', teste, name = 'teste'),
     path('editProdutoCategoria/', views.editProdutoCategoria, name='editProdutoCategoria'),
     path('editFuncionarioAdm/', views.editFuncionarioAdm, name='editFuncionarioAdm'),
     path('exportaFinanca/', views.exportaFinanca, name='exportaFinanca')
