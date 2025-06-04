@@ -1,3 +1,7 @@
+
+
+
+/*
 document.addEventListener("DOMContentLoaded", () => {
   const familia = document.getElementById("linkFamilia");
   familia.addEventListener("click", () => {
@@ -92,3 +96,4 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
 // Criação categoria
+*/

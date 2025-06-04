@@ -20,30 +20,7 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.bundle.min.js"></script>
   </head>
   <body>
-    <header id="header">
-      <nav>
-        <div>
-          <img id="logoSite" src="midia/logoStarMeeple.png" alt="StarMeeple" />
-          <input type="text" placeholder="O que você está procurando?" />
-          <button>🔍</button>
-          <button id="buttonChat">💬</button>
-          <img
-            id="logoUsuario"
-            src="midia/avatar.png"
-            alt="Avatar do usuário"
-          />
-          <span>3</span>
-        </div>
-        <ul>
-          <li id="linkJogosCartas">Jogos de Cartas</li>
-          <li id="linkJogosTabuleiro">Jogos de tabuleiro</li>
-          <li id="linkQuebraCabecas">Quebra-cabeças</li>
-          <li id="linkFamilia">Familia</li>
-          <li id="linkRPG">RPG</li>
-          <li id="link18">+18</li>
-        </ul>
-      </nav>
-    </header>
+    {% include "HTML/partials/header.html" %}
 
     <div class="conteudo">
       <!-- CARROSSEL LANÇAMENTOS -->
@@ -257,25 +234,25 @@
       <div class="formPagamento">
         <p>Formas de Pagamento</p>
         <div class="imgsPagamento">
-          <img src="midia/pix.png" alt="Pix" />
-          <img src="midia/visa.png" alt="Visa" />
-          <img src="midia/mastercard.png" alt="Mastercard" />
-          <img src="midia/amex.png" alt="Elo" />
+          <img src="/media/pix.png" alt="Pix" />
+          <img src="/media/visa.png" alt="Visa" />
+          <img src="/media/mastercard.png" alt="Mastercard" />
+          <img src="/media/amex.png" alt="Elo" />
         </div>
       </div>
 
       <div class="logoStar">
-        <img src="midia/logoStarMeeple.png" alt="StarMeeple logo" />
+        <img src="/media/Completa (2).png" alt="StarMeeple logo" />
         <p>StarMeeple 2025</p>
       </div>
 
       <div class="linkSocial">
         <p>Nos sigam nas redes sociais:</p>
         <a href="https://www.instagram.com"
-          ><img src="midia/instagram.jpg" alt="" />Instagram</a
+          ><img src="/media/instagram.jpg" alt="" />Instagram</a
         >
         <a href="https://www.facebook.com"
-          ><img src="midia/facebook.png" alt="" />Facebook</a
+          ><img src="/media/facebook.png" alt="" />Facebook</a
         >
       </div>
     </footer>
