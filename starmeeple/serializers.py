@@ -51,17 +51,10 @@ class ProdutoSerializer(serializers.ModelSerializer):
     class Meta:
         model = Produto
         fields = '__all__'
-    
-    def validate_cat(self, value):
-        # Verifica se a categoria existe
-        if not Categoria.objects.filter(id=value.id).exists():
-            raise serializers.ValidationError("Categoria não encontrada")
-        return value
-    
-    def validate_editora(self, value):
-        if value and not Editora.objects.filter(id=value.id).exists():
-            raise serializers.ValidationError("Editora não encontrada")
-        return value
+        extra_kwargs = {
+            'prod_id': {'read_only': True},
+            'data_criacao': {'read_only': True}
+        }
 
 class PerfilSerializer(serializers.ModelSerializer):
     idade = serializers.SerializerMethodField()

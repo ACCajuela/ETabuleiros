@@ -6,11 +6,10 @@ from rest_framework import generics, status
 from rest_framework.response import Response
 from rest_framework_simplejwt.tokens import RefreshToken
 from etabuleiros.models import Produto, Usuario, Categoria, Editora
-from .serializers import ProdutoRecomendadoSerializer, UsuarioSerializer, LoginSerializer, ProdutoSerializer, PerfilSerializer
+from .serializers import ProdutoRecomendadoSerializer, UsuarioSerializer, LoginSerializer, PerfilSerializer
 from django.contrib.auth import get_user_model
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.decorators import api_view, permission_classes
-from rest_framework.views import APIView
 from django.utils import timezone
 from django.http import JsonResponse
 from django.views.decorators.csrf import csrf_exempt
@@ -19,6 +18,14 @@ import json
 from django.utils.decorators import method_decorator 
 from django.views.generic import View
 from django.db import IntegrityError
+from rest_framework.response import Response
+from rest_framework import status
+from .models import Produto
+from django.views.decorators.csrf import csrf_exempt
+from django.utils.decorators import method_decorator
+from rest_framework import generics
+from django.shortcuts import render, redirect
+from etabuleiros.forms import ProdutoForm  # Importe o formulário
 
 @csrf_exempt
 def criar_categoria(request):
@@ -44,49 +51,30 @@ def criar_categoria(request):
 
     return JsonResponse({'status': 'error', 'message': 'Método não permitido'}, status=405)
 
-class CriarProdutoView(APIView):
-    def post(self, request):
-        serializer = ProdutoSerializer(data=request.data)
-        
-        if serializer.is_valid():
-            # Processar os dados antes de salvar
-            produto_data = serializer.validated_data
-            
-            # Verificar e obter categoria
-            if 'cat' in produto_data:
-                try:
-                    categoria = Categoria.objects.get(id=produto_data['cat'].id)
-                except Categoria.DoesNotExist:
-                    return Response(
-                        {"error": "Categoria não encontrada"},
-                        status=status.HTTP_400_BAD_REQUEST
-                    )
-            
-            # Verificar e obter editora
-            if 'editora' in produto_data and produto_data['editora']:
-                try:
-                    editora = Editora.objects.get(id=produto_data['editora'].id)
-                except Editora.DoesNotExist:
-                    return Response(
-                        {"error": "Editora não encontrada"},
-                        status=status.HTTP_400_BAD_REQUEST
-                    )
-            
-            # Adicionar data de criação
-            produto_data['data_criacao'] = timezone.now()
-            
-            # Salvar o produto
-            produto = Produtos.objects.create(**produto_data)
-            
-            return Response(
-                {"success": "Produto criado com sucesso", "produto_id": produto.prod_id},
-                status=status.HTTP_201_CREATED
-            )
-        
-        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 def home(request):
     return render(request, 'HTML/home.html')
+
+def editProdutoCategoria(request):
+    return render(request, 'HTML/editProdutoCategoria.html')
+
+def adicionar_produto(request):
+    print('entrou')
+    if request.method == 'GET':
+        return JsonResponse({}, status=200)
+    
+    if request.method == 'POST':
+        form = ProdutoForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('lista_produtos')  # Redireciona após salvar
+    else:
+        form = ProdutoForm()
+    
+    return render(request, 'adicionar_produto.html', {'form': form})
+
+
+
 
 def cadastro(request):
     return render(request, 'HTML/cadastro.html')
@@ -110,19 +98,19 @@ def carrinho(request):
     return render(request, 'HTML/carrinho.html')
 
 def categoriaJogosCartas(request):
-    return render(request, 'HTML/cateoriaJogosCartas.html')
+    return render(request, 'HTML/categoriaJogosCartas.html')
 
 def categoriaJogosTabuleiros(request):
-    return render(request, 'HTML/cateoriaJogosTabuleiros.html')
+    return render(request, 'HTML/categoriaJogosTabuleiros.html')
 
 def categoriaProibidao(request):
-    return render(request, 'HTML/cateoriaProibidao.html')
+    return render(request, 'HTML/categoriaProibidao.html')
 
 def categoriaQuebraCabeca(request):
-    return render(request, 'HTML/cateoriaQuebraCabeca.html')
+    return render(request, 'HTML/categoriaQuebraCabeca.html')
 
 def categoriaRPG(request):
-    return render(request, 'HTML/cateoriaRPG.html')
+    return render(request, 'HTML/categoriaRPG.html')
 
 def editCliente(request):
     return render(request, 'HTML/editCliente.html')
@@ -192,16 +180,19 @@ def perfil_api(request):
     return Response(serializer.data)
 
 def problemaPedido(request):
-    return render(request, 'HTML/problemaPedido.html')
+    return render(request, 'templates/HTML/problemaPedido.html')
 
 def produto(request):
-    return render(request, 'HTML/produto.html')
+    return render(request, 'templates/HTML/produto.html')
 
 def suporteCliente(request):
-    return render(request, 'HTML/suporteCliente.html')
+    return render(request, 'templates/HTML/suporteCliente.html')
 
 def suporteFuncionario(request):
-    return render(request, 'HTML/suporteFuncionario.html')
+    return render(request, 'templates/HTML/suporteFuncionario.html')
+
+def categoriaFamilia(request):
+    return render(request, 'templates/HTML/categoriaFamilia.html')
 
 
 def cadastrar_usuario(request):

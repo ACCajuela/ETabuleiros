@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8" />
   <title>Finalização do Pedido - StarMeeple</title>
-  <link rel="stylesheet" href="CSS/padrao.css">
-  <link rel="stylesheet" href="CSS/editProdutoCategoria.css">
+  <link rel="stylesheet" href="/media/CSS/padrao.css">
+  <link rel="stylesheet" href="/media/CSS/editProdutoCategoria.css">
 </head>
 <body>
   <header id="header">
@@ -69,30 +69,49 @@
       </div>
     </div>
 
-    <div class="popupProduto" id="popupProduto">
+<div class="popupProduto" id="popupProduto">
+  <div class="popup-content">
+    <h3>Novo Produto</h3>
+    <form method="post" action="/produtos/adicionar/">
       {% csrf_token %}
-      <div class="popup-content">
-        <h3>Novo Produto</h3>
-        <p>Nome</p>
-        <input type="text">
-        <p>Categoria</p>
-        <input type="text">
-        <p>N° de jogadores</p>
-        <input type="text">
-        <p>Descrição</p>
-        <input type="text">
-        <p>Quantidade em estoque</p>
-        <input type="text">
-        <p>Autor</p>
-        <input type="text">
-        <p>Editora</p>
-        <input type="text">
-        <p>Classificação Indicativa</p>
-        <input type="text">
-        <button onclick="cadastrarProduto()">Confirmar</button>
-        <button class="close" onclick="esconderPopupProduto()">Cancelar</button>
-      </div>
-    </div>
+      
+      <p>Nome</p>
+      <input type="text" name="nome_prod">
+      
+      <p>Categoria (ID)</p>
+      <input type="number" name="cat">
+      
+      <p>N° de jogadores</p>
+      <input type="text" name="numero_jogadores">
+      
+      <p>Descrição</p>
+      <input type="text" name="descri">
+      
+      <p>Quantidade em estoque</p>
+      <input type="number" name="qtd">
+      
+      <p>Autor</p>
+      <input type="text" name="autor">
+      
+      <p>Editora (ID)</p>
+      <input type="number" name="editora">
+      
+      <p>Classificação Indicativa</p>
+      <select name="clas_ind">
+        <option value="">---------</option>
+        <option value="L">L</option>
+        <option value="10">10</option>
+        <option value="12">12</option>
+        <option value="14">14</option>
+        <option value="16">16</option>
+        <option value="18">18</option>
+      </select>
+      
+      <button type="submit">Confirmar</button>
+      <button type="button" class="close" onclick="esconderPopupProduto()">Cancelar</button>
+    </form>
+  </div>
+</div>
 
     <div class="popupCupom" id="popupCupom">
       <div class="popup-content">
@@ -158,118 +177,38 @@
       </div>
     </footer>
 
-  <script>
-
-    // Função para obter cookies
-function getCookie(name) {
-    let cookieValue = null;
-    if (document.cookie && document.cookie !== '') {
-        const cookies = document.cookie.split(';');
-        for (let i = 0; i < cookies.length; i++) {
-            const cookie = cookies[i].trim();
-            if (cookie.substring(0, name.length + 1) === (name + '=')) {
-                cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
-                break;
-            }
-        }
-    }
-    return cookieValue;
-}
-
-
-    async function cadastrarProduto() {
-    // Verifique se o CSRF token existe
-    const csrftoken = getCookie('csrftoken');
-    if (!csrftoken) {
-        alert('Erro de segurança: Token CSRF não encontrado!');
-        return;
-    }
-
-    const inputs = document.querySelectorAll('.popupProduto input');
-    const produtoData = {
-        nome: inputs[0].value,
-        categoria: inputs[1].value,
-        num_jogadores: inputs[2].value,
-        descricao: inputs[3].value,
-        qtd_estoque: parseInt(inputs[4].value) || 0,
-        autor: inputs[5].value,
-        editora: inputs[6].value,
-        classificacao_indicativa: inputs[7].value
-    };
-
-    try {
-    const response = await fetch('http://localhost:5500/api/produtos/', {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json',
-            'X-CSRFToken': csrftoken
-        },
-        body: JSON.stringify(produtoData),
-        credentials: 'include'
-    });
-
-    const contentType = response.headers.get("content-type");
-
-    if (!response.ok) {
-        if (contentType && contentType.includes("application/json")) {
-            const error = await response.json();
-            throw new Error(error.detail || JSON.stringify(error));
-        } else {
-            const errorText = await response.text(); // erro não-JSON
-            throw new Error(`Erro ${response.status}: ${errorText}`);
-        }
-    }
-
-    if (contentType && contentType.includes("application/json")) {
-        const data = await response.json();
-        alert(`Produto "${data.nome}" cadastrado com sucesso!`);
-    } else {
-        alert("Produto cadastrado com sucesso (sem resposta JSON)");
-    }
-
-    esconderPopupProduto();
-    inputs.forEach(input => input.value = '');
-    
-} catch (error) {
-    console.error('Erro completo:', error);
-    alert(`Erro ao cadastrar: ${error.message}`);
-}
-
-}
-  </script>
-
-  <script>
-    function mostrarPopupProduto() {
-      document.getElementById("popupProduto").style.display = "flex";
-    }
-    function esconderPopupProduto() {
-      document.getElementById("popupProduto").style.display = "none";
-    }
-    function mostrarPopupCupom() {
-      document.getElementById("popupCupom").style.display = "flex";
-    }
-    function esconderPopupCupom() {
-      document.getElementById("popupCupom").style.display = "none";
-    }
-    function mostrarPopupPromocao() {
-      document.getElementById("popupPromocao").style.display = "flex";
-    }
-    function esconderPopupPromocao() {
-      document.getElementById("popupPromocao").style.display = "none";
-    }
-    function mostrarPopupCategoria() {
-      document.getElementById("popupCategoria").style.display = "flex";
-    }
-    function esconderPopupCategoria() {
-      document.getElementById("popupCategoria").style.display = "none";
-    }
-    function mostrarPopupSeguranca() {
-      document.getElementById("popupSeguranca").style.display = "block";
-    }
-    function esconderPopupSeguranca() {
-      document.getElementById("popupSeguranca").style.display = "none";
-    }
-  </script>
+    <script>
+      function mostrarPopupProduto() {
+        document.getElementById("popupProduto").style.display = "flex";
+      }
+      function esconderPopupProduto() {
+        document.getElementById("popupProduto").style.display = "none";
+      }
+      function mostrarPopupCupom() {
+        document.getElementById("popupCupom").style.display = "flex";
+      }
+      function esconderPopupCupom() {
+        document.getElementById("popupCupom").style.display = "none";
+      }
+      function mostrarPopupPromocao() {
+        document.getElementById("popupPromocao").style.display = "flex";
+      }
+      function esconderPopupPromocao() {
+        document.getElementById("popupPromocao").style.display = "none";
+      }
+      function mostrarPopupCategoria() {
+        document.getElementById("popupCategoria").style.display = "flex";
+      }
+      function esconderPopupCategoria() {
+        document.getElementById("popupCategoria").style.display = "none";
+      }
+      function mostrarPopupSeguranca() {
+        document.getElementById("popupSeguranca").style.display = "block";
+      }
+      function esconderPopupSeguranca() {
+        document.getElementById("popupSeguranca").style.display = "none";
+      }
+    </script>
 
 </body>
 </html>
