@@ -230,33 +230,8 @@
       </div>
     </div>
 
-    <footer id="footer">
-      <div class="formPagamento">
-        <p>Formas de Pagamento</p>
-        <div class="imgsPagamento">
-          <img src="/media/pix.png" alt="Pix" />
-          <img src="/media/visa.png" alt="Visa" />
-          <img src="/media/mastercard.png" alt="Mastercard" />
-          <img src="/media/amex.png" alt="Elo" />
-        </div>
-      </div>
-
-      <div class="logoStar">
-        <img src="/media/Completa (2).png" alt="StarMeeple logo" />
-        <p>StarMeeple 2025</p>
-      </div>
-
-      <div class="linkSocial">
-        <p>Nos sigam nas redes sociais:</p>
-        <a href="https://www.instagram.com"
-          ><img src="/media/instagram.jpg" alt="" />Instagram</a
-        >
-        <a href="https://www.facebook.com"
-          ><img src="/media/facebook.png" alt="" />Facebook</a
-        >
-      </div>
-    </footer>
-
+    {% include "HTML/partials/footer.html" %}
+    
     <script>
       document.addEventListener("DOMContentLoaded", () => {
         const carregarCarrossel = (url, seletorCarousel, seletorErro) => {

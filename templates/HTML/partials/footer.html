@@ -1,0 +1,37 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>StarMeeple</title>
+  
+  <!-- Link para o arquivo CSS -->
+  <link rel="stylesheet" href="{% static '/media/CSS/padrao.css' %}" />
+</head>
+<footer id="footer">
+  <div class="formPagamento">
+    <p>Formas de Pagamento</p>
+    <div class="imgsPagamento">
+      <img src="{% static 'pix.png' %}" alt="Pix" />
+      <img src="{% static 'visa.png' %}" alt="Visa" />
+      <img src="{% static 'mastercard.png' %}" alt="Mastercard" />
+      <img src="{% static 'amex.png' %}" alt="Elo" />
+    </div>
+  </div>
+
+  <div class="logoStar">
+    <img src="{% static 'Completa.png' %}" alt="StarMeeple logo" />
+    <p>StarMeeple {% now "Y" %}</p>  {# Dynamic year using template tag #}
+  </div>
+
+  <div class="linkSocial">
+    <p>Nos sigam nas redes sociais:</p>
+    <a href="https://www.instagram.com">
+      <img src="{% static 'instagram.jpg' %}" alt="Instagram" />Instagram
+    </a>
+    <a href="https://www.facebook.com">
+      <img src="{% static 'facebook.png' %}" alt="Facebook" />Facebook
+    </a>
+  </div>
+</footer>
