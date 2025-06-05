@@ -31,7 +31,7 @@
             <button id="btnSubmit" type="submit">Entrar</button>
         </form>
 
-        <p>Não tem uma conta? <button id="btnCadastro">Cadastre-se</button></p>
+        <p>Não tem uma conta? <button id="btnCadastro" href="{% url 'cadastro'}">Cadastre-se</button></p>
 
         <script>
             document.getElementById('loginForm').addEventListener('submit', function(e) {
@@ -42,7 +42,7 @@
                     password: document.getElementById('senha').value
                 };
 
-                fetch('http://localhost:8000/api/login/', {
+                fetch('/api/login/', {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',
@@ -61,9 +61,9 @@
                     localStorage.setItem('user', JSON.stringify(data.user));
             
                     if (data.user.tipo === 'admin') {
-                        window.location.href = 'http://localhost:8000/adm/panel';
+                        window.location.href = '/adm/panel';
                     } else {
-                        window.location.href = 'http://localhost:8000/perfil';
+                        window.location.href = '/perfil';
                     }
                 })
                 .catch(error => {

@@ -78,30 +78,20 @@ class PerfilSerializer(serializers.ModelSerializer):
 
 class LoginSerializer(serializers.Serializer):
     email = serializers.EmailField()
-    password = serializers.CharField(
-        style={'input_type': 'password'},
-        trim_whitespace=False,
-        write_only=True
-    )
+    password = serializers.CharField(write_only=True)
 
     def validate(self, attrs):
         email = attrs.get('email')
         password = attrs.get('password')
 
-        if email and password:
-            # Corrigindo a chamada do authenticate
-            user = authenticate(
-                request=self.context.get('request'),
-                email=email,
-                password=password
-            )
-            
-            if not user:
-                msg = 'Não foi possível fazer login com as credenciais fornecidas.'
-                raise serializers.ValidationError(msg, code='authorization')
-        else:
-            msg = 'Deve incluir "email" e "senha".'
-            raise serializers.ValidationError(msg, code='authorization')
+        user = authenticate(
+            request=self.context.get('request'),
+            username=email,
+            password=password
+        )
+
+        if not user:
+            raise serializers.ValidationError("Credenciais inválidas")
 
         attrs['user'] = user
         return attrs

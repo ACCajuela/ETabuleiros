@@ -66,7 +66,8 @@ REST_FRAMEWORK = {
         'rest_framework.authentication.TokenAuthentication',  # Se estiver usando tokens
     ],
     'DEFAULT_PERMISSION_CLASSES': [
-        'rest_framework.permissions.IsAuthenticated',  # Ou AllowAny para testes
+        'rest_framework.permissions.IsAuthenticated',
+        'rest_framework_simplejwt.authentication.JWTAuthentication'# Ou AllowAny para testes
     ]
 }
 

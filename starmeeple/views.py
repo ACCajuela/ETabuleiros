@@ -133,36 +133,38 @@ class LoginView(generics.GenericAPIView):
     serializer_class = LoginSerializer
 
     def post(self, request, *args, **kwargs):
-        serializer = self.get_serializer(data=request.data)
-        serializer.is_valid(raise_exception=True)
-        user = serializer.validated_data['user']
-        
-        # Verifica se o usuário está ativo
-        if not user.is_active:
-            return Response(
-                {"detail": "Esta conta está inativa."},
-                status=status.HTTP_401_UNAUTHORIZED
-            )
+        try:
+            serializer = self.get_serializer(data=request.data)
+            serializer.is_valid(raise_exception=True)
+            user = serializer.validated_data['user']
 
-        # Gera tokens JWT
-        refresh = RefreshToken.for_user(user)
-        
-        # Adiciona o user_id customizado ao token
-        refresh['user_id'] = user.user_id
-        
-        return Response({
-            "message": "Login realizado com sucesso",
-            "user": {
-                "user_id": user.user_id,  # Usando user_id em vez de id
-                "email": user.email,
-                "nome": user.nome,
-                "tipo": user.tipo
-            },
-            "tokens": {
-                "refresh": str(refresh),
-                "access": str(refresh.access_token),
-            }
-        }, status=status.HTTP_200_OK)
+            if not user.is_active:
+                return Response(
+                    {"detail": "Conta inativa. Contate o administrador."},
+                    status=status.HTTP_403_FORBIDDEN
+                )
+
+            refresh = RefreshToken.for_user(user)
+            refresh['user_id'] = user.user_id  # Custom claim
+
+            return Response({
+                "tokens": {
+                    "access": str(refresh.access_token),
+                    "refresh": str(refresh),
+                },
+                "user": {
+                    "user_id": user.user_id,
+                    "email": user.email,
+                    "nome": user.nome or user.email.split('@')[0],  # Fallback
+                    "tipo": user.tipo
+                }
+            }, status=status.HTTP_200_OK)
+
+        except Exception as e:
+            return Response(
+                {"detail": str(e)},
+                status=status.HTTP_400_BAD_REQUEST
+            )
 
 def painelADM(request):
     return render(request, 'HTML/painelADM.html')
