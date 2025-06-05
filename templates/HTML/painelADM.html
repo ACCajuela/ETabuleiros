@@ -9,57 +9,18 @@
 </head>
 <body>
 
-    <header>
-        <nav>
-        <div>
-            <img id="logoSite" src="midia/logoStarMeeple.png" alt="StarMeeple">
-            <input type="text" placeholder="O que você está procurando?">
-            <button>🔍</button>
-            <button>💬</button>
-            <img id="logoUsuario" src="avatar.png" alt="Avatar do usuário">
-            <span>3</span>
-        </div>
-        <ul>
-        <li id="linkJogosCartas">Jogos de Cartas</li>
-        <li id="linkJogosTabuleiro">Jogos de tabuleiro</li>
-        <li id="linkQuebraCabecas">Quebra-cabeças</li>
-        <li id="linkFamilia">Familia</li>
-        <li id="linkRPG">RPG</li>
-        <li id="link18">+18</li>
-        </ul>
-        </nav>
-    </header>
+    {% include "HTML/partials/header.html" %}
 
     <main>
         <h1>Painel de Administrador</h1>  
-        <button id="edProdutoCategoria">Edição de Produtos e Categorias</button>   
+        <a href= "{% url 'editProdutoCategoria' %}"><button id="edProdutoCategoria">Edição de Produtos e Categorias</button></a> 
         <button id="edFuncionarioAdm">Edição de Funcionários e Adms</button>
         <button id="edCliente">Edição de Clientes</button>
         <button id="Dindin">Exportação de Finanças</button>
     </main>
 
-    <footer>
-        <div class="formPagamento">
-            <p>Formas de Pagamento</p>
-            <div class="imgsPagamento">
-              <img src="visa.png" alt="Visa">
-              <img src="mastercard.png" alt="Mastercard">
-              <img src="elo.png" alt="Elo">
-            </div>  
-        </div>
-  
-        <div class="logoStar">
-            <img src="logo.png" alt="StarMeeple logo">
-            <p>StarMeeple 2025</p>
-        </div>
-  
-        <div class="linkSocial">
-            <p>Nos sigam nas redes sociais:</p>
-            <a href="https://www.instagram.com">Instagram</a>
-            <a href="https://www.facebook.com">Facebook</a>
-        </div>
-      </footer>
-      <script src="/templates/JS/padrao.js"></script>
+    {% include "HTML/partials/footer.html" %}
+    <script src="/templates/JS/padrao.js"></script>
 
 </body>
 </html>

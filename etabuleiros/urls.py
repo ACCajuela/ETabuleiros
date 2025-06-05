@@ -18,7 +18,7 @@ from django.contrib import admin
 from django.urls import path
 from starmeeple import views
 from django.urls import path, include
-from starmeeple.views import ProdutosRecomendadosAPIView, CadastroUsuarioView, LoginView, adicionar_produto, criar_categoria
+from starmeeple.views import ProdutosRecomendadosAPIView, CadastroUsuarioView, LoginView, adicionar_produto, criar_categoria, CadastroUsuarioView, ProdutosRecomendadosAPIView, LoginView, perfil_api
 from django.conf import settings
 from django.conf.urls.static import static
 
@@ -53,7 +53,10 @@ urlpatterns = [
     path('produtos/adicionar/', adicionar_produto, name='adicionar_produto'),
     path('editProdutoCategoria/', views.editProdutoCategoria, name='editProdutoCategoria'),
     path('editFuncionarioAdm/', views.editFuncionarioAdm, name='editFuncionarioAdm'),
-    path('exportaFinanca/', views.exportaFinanca, name='exportaFinanca')
+    path('exportaFinanca/', views.exportaFinanca, name='exportaFinanca'),
+    path('recomendados/', ProdutosRecomendadosAPIView.as_view(), name='api-recomendados'),
+    path('api/login/', LoginView.as_view(), name='loginAPI'),
+    path('perfil/', perfil_api, name='api-perfil')
 ]
 
 if settings.DEBUG:
