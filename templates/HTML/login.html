@@ -31,7 +31,7 @@
             <button id="btnSubmit" type="submit">Entrar</button>
         </form>
 
-        <p>Não tem uma conta? <button id="btnCadastro" href="{% url 'cadastro'%}">Cadastre-se</button></p>
+        <p>Não tem uma conta? <a href="{% url 'cadastro'%}"><button id="btnCadastro">Cadastre-se</button></a></p>
 
         <script>
 document.getElementById('loginForm').addEventListener('submit', function(e) {
