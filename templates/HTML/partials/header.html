@@ -1,0 +1,53 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>StarMeeple</title>
+  
+  <!-- Link para o arquivo CSS -->
+  <link rel="stylesheet" href="{% static '/media/CSS/home.css' %}" />
+  <link rel="stylesheet" href="{% static '/media/CSS/padrao.css' %}" />
+</head>
+<body>
+  <header id="header">   
+    <nav>
+      <div>
+        <!-- Logo como link para home -->
+        <a href="{% url 'home' %}">
+          <img id="logoSite" src="{% static 'media/Completa.png' %}" alt="StarMeeple" />
+        </a>
+
+        <input type="text" placeholder="O que você está procurando?" />
+        <button>🔍</button>
+        
+        <!-- Botão chat pode ser um botão mesmo, sem link -->
+        <button id="buttonChat">💬</button>
+        
+        <!-- Avatar como link para perfil ou login -->
+        {% if user.is_authenticated %}
+          <a href="{% url 'perfil' %}">
+            <img id="logoUsuario" src="{% static 'media/avatar.png' %}" alt="Avatar do usuário" />
+          </a>
+        {% else %}
+          <a href="{% url 'login' %}">
+            <img id="logoUsuario" src="{% static 'media/avatar.png' %}" alt="Avatar do usuário" />
+          </a>
+        {% endif %}
+
+        <span>3</span>
+      </div>
+
+      <ul>
+        <li><a href="{% url 'categoriaCartas' %}">Jogos de Cartas</a></li>
+        <li><a href="{% url 'categoriaTabuleiro' %}">Jogos de tabuleiro</a></li>
+        <li><a href="{% url 'categoriaQuebraCabeca' %}">Quebra-cabeças</a></li>
+        <li><a href="{% url 'categoriaFamilia' %}">Família</a></li>
+        <li><a href="{% url 'categoriaRPG' %}">RPG</a></li>
+        <li><a href="{% url 'categoriaAdulto' %}">+18</a></li>
+      </ul>
+    </nav>
+  </header>
+</body>
+</html>

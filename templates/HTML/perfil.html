@@ -7,30 +7,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Star Meeple</title>
-    <link rel="stylesheet" href="CSS/padrao.css">
-    <link rel="stylesheet" href="CSS/perfil.css">
+    <link rel="stylesheet" href="/media/CSS/padrao.css">
+    <link rel="stylesheet" href="/media/CSS/perfil.css">
 </head>
 <body>
-    <header>
-        <nav>
-        <div>
-            <img id="logoSite" src="midia/logoStarMeeple.png" alt="StarMeeple">
-            <input type="text" placeholder="O que você está procurando?">
-            <button>🔍</button>
-            <button>💬</button>
-            <img id="logoUsuario" src="avatar.png" alt="Avatar do usuário">
-            <span>3</span>
-        </div>
-        <ul>
-        <li id="linkJogosCartas">Jogos de Cartas</li>
-        <li id="linkJogosTabuleiro">Jogos de tabuleiro</li>
-        <li id="linkQuebraCabecas">Quebra-cabeças</li>
-        <li id="linkFamilia">Familia</li>
-        <li id="linkRPG">RPG</li>
-        <li id="link18">+18</li>
-        </ul>
-        </nav>
-    </header>
+    {% include "HTML/partials/header.html" %}
 
     <main>
         <div class="perfil">

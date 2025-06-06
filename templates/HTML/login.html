@@ -4,12 +4,14 @@
 <head>
     <meta charset="UTF-8">
     <title>Login - StarMeeple</title>
-    <link rel="stylesheet" href="CSS/login.css">
+    <link rel="stylesheet" href="/media/CSS/login.css">
+    <link rel="stylesheet" href="/media/CSS/padrao.css"/>
+    
 </head>
 <body>
     
     <header id="header">
-        <img id="logoSite" src="midia/logoStarMeeple.png" alt="StarMeeple">
+        <img id="logoSite" src="media/logoStarMeeple.png" alt="StarMeeple">
         <h1>StarMeeple</h1>
     </header>
     
@@ -29,56 +31,70 @@
             <button id="btnSubmit" type="submit">Entrar</button>
         </form>
 
-        <p>Não tem uma conta? <button id="btnCadastro">Cadastre-se</p>
+        <p>Não tem uma conta? <a href="{% url 'cadastro'%}"><button id="btnCadastro">Cadastre-se</button></a></p>
 
         <script>
-            document.getElementById('loginForm').addEventListener('submit', function(e) {
-                e.preventDefault();
-        
-                const formData = {
-                    email: document.getElementById('email').value,
-                    password: document.getElementById('senha').value
-                };
+document.getElementById('loginForm').addEventListener('submit', function(e) {
+    e.preventDefault();
 
-                fetch('http://localhost:8000/api/login/', {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                    },
-                    body: JSON.stringify(formData)
-                })
-                .then(response => {
-                    if (!response.ok) {
-                        return response.json().then(err => { throw err; });
-                    }
-                    return response.json();
-                })
-                .then(data => {
-                    // Armazena os tokens e redireciona
-                    localStorage.setItem('access_token', data.tokens.access);
-                    localStorage.setItem('refresh_token', data.tokens.refresh);
-                    localStorage.setItem('user', JSON.stringify(data.user));
-            
-            // Redireciona conforme o tipo de usuário
-            if (data.user.tipo === 'admin') {
-                window.location.href = 'http://localhost:8000/adm/panel';
-            } else {
-                window.location.href = 'http://localhost:8000/perfil';
-            }
-        })
-        .catch(error => {
-            console.error('Erro:', error);
-            alert('Erro no login: ' + (error.detail || 'Credenciais inválidas'));
-        });
+    const formData = {
+        email: document.getElementById('email').value,
+        password: document.getElementById('senha').value
+    };
+
+    fetch('/api/login/', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+            // 'X-CSRFToken': getCookie('csrftoken'), // Descomente se necessário
+        },
+        body: JSON.stringify(formData)
+    })
+    .then(response => {
+        if (!response.ok) {
+            return response.json()
+                .then(err => { throw err; })
+                .catch(() => { throw { detail: `Erro HTTP: ${response.status}` }; });
+        }
+        return response.json();
+    })
+    .then(data => {
+        // Armazena tokens e user (melhor usar cookies em produção)
+        localStorage.setItem('access_token', data.tokens.access);
+        localStorage.setItem('refresh_token', data.tokens.refresh);
+        localStorage.setItem('user', JSON.stringify(data.user));
+
+        // Redireciona com fallback seguro
+        const userType = data.user?.tipo || 'default';
+        window.location.href = userType === 'admin' ? '/adm/panel' : '/perfil';
+    })
+    .catch(error => {
+        console.error('Erro:', error);
+        const errorMsg = error.detail || error.message || 'Credenciais inválidas';
+        alert('Erro no login: ' + errorMsg);
     });
+});
+
+// Função auxiliar para pegar cookies (se precisar de CSRF)
+function getCookie(name) {
+    let cookieValue = null;
+    if (document.cookie && document.cookie !== '') {
+        const cookies = document.cookie.split(';');
+        for (let i = 0; i < cookies.length; i++) {
+            const cookie = cookies[i].trim();
+            if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                break;
+            }
+        }
+    }
+    return cookieValue;
+}
         </script>
     </main>
     
-    <footer id="footer">
-        <p>© StarMeeple 2025</p>
-    </footer>
+    {% include "HTML/partials/footer.html" %}
     
-    <script src="/templates/JS/padrao.js"></script>
+    <script src="media/JS/padrao.js"></script>
 </body>
 </html>
-    

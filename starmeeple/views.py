@@ -6,86 +6,75 @@ from rest_framework import generics, status
 from rest_framework.response import Response
 from rest_framework_simplejwt.tokens import RefreshToken
 from etabuleiros.models import Produto, Usuario, Categoria, Editora
-from .serializers import ProdutoRecomendadoSerializer, UsuarioSerializer, LoginSerializer, CategoriaSerializer, ProdutoSerializer, PerfilSerializer
+from .serializers import ProdutoRecomendadoSerializer, UsuarioSerializer, LoginSerializer, PerfilSerializer
 from django.contrib.auth import get_user_model
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.decorators import api_view, permission_classes
-from rest_framework.views import APIView
 from django.utils import timezone
+from django.http import JsonResponse
+from django.views.decorators.csrf import csrf_exempt
+from django.views.decorators.http import require_POST
+import json
+from django.utils.decorators import method_decorator 
+from django.views.generic import View
+from django.db import IntegrityError
+from rest_framework.response import Response
+from rest_framework import status
+from .models import Produto
+from django.views.decorators.csrf import csrf_exempt
+from django.utils.decorators import method_decorator
+from rest_framework import generics
+from django.shortcuts import render, redirect
+from etabuleiros.forms import ProdutoForm  # Importe o formulário
 
-class CriarCategoriaView(APIView):
-    def post(self, request):
-        serializer = CategoriaSerializer(data=request.data)
-        
-        if serializer.is_valid():
-            try:
-                categoria = serializer.save()
-                return Response(
-                    {
-                        "success": "Categoria criada com sucesso",
-                        "cat_id": categoria.cat_id,
-                        "nome_categoria": categoria.nome_categoria
-                    },
-                    status=status.HTTP_201_CREATED
-                )
-            except Exception as e:
-                return Response(
-                    {"error": str(e)},
-                    status=status.HTTP_500_INTERNAL_SERVER_ERROR
-                )
-        
-        # Tratamento especial para erros de unicidade
-        if 'nome_categoria' in serializer.errors and 'unique' in serializer.errors['nome_categoria'][0].code:
-            return Response(
-                {"error": "Esta categoria já existe."},
-                status=status.HTTP_400_BAD_REQUEST
-            )
-            
-        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+@csrf_exempt
+def criar_categoria(request):
+    if request.method == 'POST':
+        try:
+            data = json.loads(request.body)
+            nome = data.get('nome_categoria', '').strip()
 
-class CriarProdutoView(APIView):
-    def post(self, request):
-        serializer = ProdutoSerializer(data=request.data)
+            if not nome:
+                return JsonResponse({'status': 'error', 'message': 'Nome da categoria é obrigatório'}, status=400)
+
+            # Tenta criar a nova categoria
+            categoria = Categoria(nome_categoria=nome)
+            categoria.save()
+
+            return JsonResponse({'status': 'success', 'message': f'Categoria \"{nome}\" criada com sucesso!'})
         
-        if serializer.is_valid():
-            # Processar os dados antes de salvar
-            produto_data = serializer.validated_data
-            
-            # Verificar e obter categoria
-            if 'cat' in produto_data:
-                try:
-                    categoria = Categoria.objects.get(id=produto_data['cat'].id)
-                except Categoria.DoesNotExist:
-                    return Response(
-                        {"error": "Categoria não encontrada"},
-                        status=status.HTTP_400_BAD_REQUEST
-                    )
-            
-            # Verificar e obter editora
-            if 'editora' in produto_data and produto_data['editora']:
-                try:
-                    editora = Editora.objects.get(id=produto_data['editora'].id)
-                except Editora.DoesNotExist:
-                    return Response(
-                        {"error": "Editora não encontrada"},
-                        status=status.HTTP_400_BAD_REQUEST
-                    )
-            
-            # Adicionar data de criação
-            produto_data['data_criacao'] = timezone.now()
-            
-            # Salvar o produto
-            produto = Produtos.objects.create(**produto_data)
-            
-            return Response(
-                {"success": "Produto criado com sucesso", "produto_id": produto.prod_id},
-                status=status.HTTP_201_CREATED
-            )
+        except IntegrityError:
+            return JsonResponse({'status': 'error', 'message': 'Esta categoria já existe.'}, status=400)
         
-        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+        except Exception as e:
+            return JsonResponse({'status': 'error', 'message': f'Erro interno: {str(e)}'}, status=500)
+
+    return JsonResponse({'status': 'error', 'message': 'Método não permitido'}, status=405)
+
 
 def home(request):
     return render(request, 'HTML/home.html')
+
+def editProdutoCategoria(request):
+    return render(request, 'HTML/editProdutoCategoria.html')
+
+def adicionar_produto(request):
+    print('entrou')
+    if request.method == 'GET':
+        return JsonResponse({}, status=200)
+    
+    if request.method == 'POST':
+        form = ProdutoForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('lista_produtos')  # Redireciona após salvar
+    else:
+        form = ProdutoForm()
+    
+    return render(request, 'adicionar_produto.html', {'form': form})
+
+
+
 
 def cadastro(request):
     return render(request, 'HTML/cadastro.html')
@@ -109,19 +98,19 @@ def carrinho(request):
     return render(request, 'HTML/carrinho.html')
 
 def categoriaJogosCartas(request):
-    return render(request, 'HTML/cateoriaJogosCartas.html')
+    return render(request, 'HTML/categoriaJogosCartas.html')
 
 def categoriaJogosTabuleiros(request):
-    return render(request, 'HTML/cateoriaJogosTabuleiros.html')
+    return render(request, 'HTML/categoriaJogosTabuleiros.html')
 
 def categoriaProibidao(request):
-    return render(request, 'HTML/cateoriaProibidao.html')
+    return render(request, 'HTML/categoriaProibidao.html')
 
 def categoriaQuebraCabeca(request):
-    return render(request, 'HTML/cateoriaQuebraCabeca.html')
+    return render(request, 'HTML/categoriaQuebraCabeca.html')
 
 def categoriaRPG(request):
-    return render(request, 'HTML/cateoriaRPG.html')
+    return render(request, 'HTML/categoriaRPG.html')
 
 def editCliente(request):
     return render(request, 'HTML/editCliente.html')
@@ -144,36 +133,38 @@ class LoginView(generics.GenericAPIView):
     serializer_class = LoginSerializer
 
     def post(self, request, *args, **kwargs):
-        serializer = self.get_serializer(data=request.data)
-        serializer.is_valid(raise_exception=True)
-        user = serializer.validated_data['user']
-        
-        # Verifica se o usuário está ativo
-        if not user.is_active:
-            return Response(
-                {"detail": "Esta conta está inativa."},
-                status=status.HTTP_401_UNAUTHORIZED
-            )
+        try:
+            serializer = self.get_serializer(data=request.data)
+            serializer.is_valid(raise_exception=True)
+            user = serializer.validated_data['user']
 
-        # Gera tokens JWT
-        refresh = RefreshToken.for_user(user)
-        
-        # Adiciona o user_id customizado ao token
-        refresh['user_id'] = user.user_id
-        
-        return Response({
-            "message": "Login realizado com sucesso",
-            "user": {
-                "user_id": user.user_id,  # Usando user_id em vez de id
-                "email": user.email,
-                "nome": user.nome,
-                "tipo": user.tipo
-            },
-            "tokens": {
-                "refresh": str(refresh),
-                "access": str(refresh.access_token),
-            }
-        }, status=status.HTTP_200_OK)
+            if not user.is_active:
+                return Response(
+                    {"detail": "Conta inativa. Contate o administrador."},
+                    status=status.HTTP_403_FORBIDDEN
+                )
+
+            refresh = RefreshToken.for_user(user)
+            refresh['user_id'] = user.user_id  # Custom claim
+
+            return Response({
+                "tokens": {
+                    "access": str(refresh.access_token),
+                    "refresh": str(refresh),
+                },
+                "user": {
+                    "user_id": user.user_id,
+                    "email": user.email,
+                    "nome": user.nome or user.email.split('@')[0],  # Fallback
+                    "tipo": user.tipo
+                }
+            }, status=status.HTTP_200_OK)
+
+        except Exception as e:
+            return Response(
+                {"detail": str(e)},
+                status=status.HTTP_400_BAD_REQUEST
+            )
 
 def painelADM(request):
     return render(request, 'HTML/painelADM.html')
@@ -191,16 +182,19 @@ def perfil_api(request):
     return Response(serializer.data)
 
 def problemaPedido(request):
-    return render(request, 'HTML/problemaPedido.html')
+    return render(request, 'templates/HTML/problemaPedido.html')
 
 def produto(request):
-    return render(request, 'HTML/produto.html')
+    return render(request, 'templates/HTML/produto.html')
 
 def suporteCliente(request):
-    return render(request, 'HTML/suporteCliente.html')
+    return render(request, 'templates/HTML/suporteCliente.html')
 
 def suporteFuncionario(request):
-    return render(request, 'HTML/suporteFuncionario.html')
+    return render(request, 'templates/HTML/suporteFuncionario.html')
+
+def categoriaFamilia(request):
+    return render(request, 'templates/HTML/categoriaFamilia.html')
 
 
 def cadastrar_usuario(request):
