@@ -6,12 +6,12 @@ from etabuleiros.models import Usuario, Produto, Categoria, Editora, Promocao, C
 
 
 #Teste de Integração
-@pytest.mark.labbd2
+@pytest.mark.django_db
 def test_criar_produto_integracao():
     data_criacao = date(2012, 3, 23)
 
     categoria = Categoria.objects.create(
-        nome="Mais 18"
+        nome_categoria="Mais 18"
     )
     
     editora = Editora.objects.create(
@@ -48,9 +48,13 @@ def test_criar_produto_integracao():
     assert produto.autor == "Fulano"
     assert produto.data_criacao == data_criacao
 
-@pytest.mark.labbd2
+@pytest.mark.django_db
 def test_carrinho_integracao():
-    data_adicao = (1999, 7, 13)
+    data_adicao = date(1999, 7, 13)
+    
+    categoria = Categoria.objects.create(nome_categoria="Mais 18")
+    editora = Editora.objects.create(nome="Tristeza")
+    data_criacao = date(2012, 3, 23)
 
     produto = Produto.objects.create(
         nome="Nome de Jogo",
@@ -75,7 +79,7 @@ def test_carrinho_integracao():
         dataNasc=180219999,
         telefone="(19) 99871-4356",
         endereco="rua galvao"
-    )    
+    )
 
     carrinho = CarrinhoCompras.objects.create(
         user=usuario,
@@ -84,14 +88,19 @@ def test_carrinho_integracao():
         data_adicao=data_adicao
     )
 
-    assert CarrinhoCompras.user==usuario
-    assert CarrinhoCompras.produto==produto
-    assert CarrinhoCompras.quantidade==quantidade
-    assert CarrinhoCompras.data_adicao==data_adicao
+    assert carrinho.user == usuario
+    assert carrinho.produto == produto
+    assert carrinho.quantidade == 10
+    assert carrinho.data_adicao == data_adicaoS
 
-@pytest.mark.labbd2
+@pytest.mark.django_db
 def test_avaliar_produto_integracao():
-    data_avaliacao=(2003, 8, 17)
+    data_avaliacao = date(2003, 8, 17)
+
+    categoria = Categoria.objects.create(nome_categoria="Mais 18")
+    editora = Editora.objects.create(nome="Tristeza")
+    data_criacao = date(2012, 3, 23)
+
     produto = Produto.objects.create(
         nome="Nome de Jogo",
         qtd=30,
@@ -115,21 +124,42 @@ def test_avaliar_produto_integracao():
         dataNasc=180219999,
         telefone="(19) 99871-4356",
         endereco="rua galvao"
-    )   
-
-    avaliacao = AvaliacaoProduto.objects.crate(
-        ava_prod = produto,
-        ava_user = usuario,
-        nota = 4.2,
-        comentario = "Uau! Muito giro!",
-        data_avalicao=data_avalicao
     )
 
-    assert AvaliacaoProduto.ava_prod == produto
-    assert AvaliacaoProduto.ava_user == usuario
-    assert AvaliacaoProduto.nota == 4.2
-    assert AvaliacaoProduto.comentario == "Uau! Muito giro!"
-    assert AvaliacaoProduto.data_avaliacao == data_avaliacao
+    avaliacao = AvaliacaoProduto.objects.create(
+        ava_prod=produto,
+        ava_user=usuario,
+        nota=4.2,
+        comentario="Uau! Muito giro!",
+        data_avaliacao=data_avaliacao
+    )
+
+    assert avaliacao.ava_prod == produto
+    assert avaliacao.ava_user == usuario
+    assert avaliacao.nota == 4.2
+    assert avaliacao.comentario == "Uau! Muito giro!"
+    assert avaliacao.data_avaliacao == data_avaliacao
+
+@pytest.mark.django_db
+def test_criar_usuario_integracao():
+    usuario = Usuario.objects.create(
+        nome="Pantaleão",
+        email="pantaleao@gmail.com",
+        cpf="333.333.333-3",
+        dataNasc=180219999,
+        telefone="(19) 99871-4356",
+        endereco="rua galvao"
+    )
+
+    # Verifica se o usuário foi salvo corretamente no banco de dados
+    usuario_db = Usuario.objects.get(id=usuario.id)
+
+    assert usuario_db.nome == "Pantaleão"
+    assert usuario_db.email == "pantaleao@gmail.com"
+    assert usuario_db.cpf == "333.333.333-3"
+    assert usuario_db.dataNasc == 180219999
+    assert usuario_db.telefone == "(19) 99871-4356"
+    assert usuario_db.endereco == "rua galvao"
 
 #Testes unitarios
 def test_criar_usuario_unitario():
@@ -167,7 +197,7 @@ def test_criar_usuario_unitario():
         assert usuario.telefone == "(19) 99871-4356"
         assert usuario.endereco == "rua galvao"
 
-def criar_produto_unitario():
+def test_criar_produto_unitario():
     data_criacao = date(2012, 3, 23)
 
     mock_categoria = MagicMock(spec=Categoria)
@@ -232,7 +262,7 @@ def criar_produto_unitario():
         assert produto.data_criacao == data_criacao
         assert produto.recomendado is False
 
-def criar_promocao_unitario():
+def test_criar_promocao_unitario():
     data_criacao = date(2025, 2, 15)
     data_fim = date(2025, 8, 3)
     
