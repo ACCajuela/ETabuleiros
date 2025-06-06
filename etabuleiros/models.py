@@ -55,7 +55,7 @@ class Produto(models.Model):
     data_criacao = models.DateTimeField(blank=True, null=True)
     
     class Meta:
-        db_table = 'produtos'       
+        db_table = 'produto'       
 
 class AuthGroup(models.Model):
     name = models.CharField(unique=True, max_length=150)
@@ -343,9 +343,9 @@ class Categoria(models.Model):
     )
 
     class Meta:
-        db_table = 'categorias'
+        db_table = 'categoria'
         verbose_name = 'Categoria'
-        verbose_name_plural = 'Categorias'
+        verbose_name_plural = 'Categoria'
         # Equivalent to UNIQUE KEY in SQL
         constraints = [
             models.UniqueConstraint(
@@ -548,9 +548,9 @@ class Editora(models.Model):
     )
 
     class Meta:
-        db_table = 'editoras'
+        db_table = 'editora'
         verbose_name = _('Editora')
-        verbose_name_plural = _('Editoras')
+        verbose_name_plural = _('Editora')
         ordering = ['nome_editora']
         constraints = [
             models.UniqueConstraint(

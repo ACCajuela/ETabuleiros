@@ -237,17 +237,17 @@ INSERT INTO `duvidas` (`duvida_id`, `duvida_user_id`, `duvida_resposta_id`, `duv
 	(39, 7, 2, 'Posso parcelar no boleto?', 'Sim, em até 12x.', 9),
 	(40, 6, 3, 'Qual o prazo de entrega?', 'O prazo varia de 3 a 7 dias úteis.', 1);
 
--- Copiando estrutura para tabela labbd2.editoras
-CREATE TABLE IF NOT EXISTS `editoras` (
+-- Copiando estrutura para tabela labbd2.editora
+CREATE TABLE IF NOT EXISTS `editora` (
   `editora_id` int NOT NULL AUTO_INCREMENT,
   `nome_editora` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   PRIMARY KEY (`editora_id`),
   UNIQUE KEY `nome_editora` (`nome_editora`)
 ) ENGINE=InnoDB AUTO_INCREMENT=21 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- Copiando dados para a tabela labbd2.editoras: ~0 rows (aproximadamente)
-DELETE FROM `editoras`;
-INSERT INTO `editoras` (`editora_id`, `nome_editora`) VALUES
+-- Copiando dados para a tabela labbd2.editora: ~0 rows (aproximadamente)
+DELETE FROM `editora`;
+INSERT INTO `editora` (`editora_id`, `nome_editora`) VALUES
 	(7, 'Buró Jogos'),
 	(6, 'Conclave Editora'),
 	(2, 'Devir'),
@@ -815,8 +815,8 @@ CREATE TABLE IF NOT EXISTS `produtos` (
   PRIMARY KEY (`prod_id`),
   KEY `cat_id` (`cat_id`),
   KEY `editora_id` (`editora_id`),
-  CONSTRAINT `produtos_ibfk_1` FOREIGN KEY (`cat_id`) REFERENCES `categorias` (`cat_id`),
-  CONSTRAINT `produtos_ibfk_2` FOREIGN KEY (`editora_id`) REFERENCES `editoras` (`editora_id`)
+  CONSTRAINT `produtos_ibfk_1` FOREIGN KEY (`cat_id`) REFERENCES `categoria` (`cat_id`),
+  CONSTRAINT `produtos_ibfk_2` FOREIGN KEY (`editora_id`) REFERENCES `editora` (`editora_id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=21 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- Copiando dados para a tabela labbd2.produtos: ~0 rows (aproximadamente)

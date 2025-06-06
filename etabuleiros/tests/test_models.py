@@ -52,6 +52,14 @@ def test_criar_produto_integracao():
 def test_carrinho_integracao():
     data_adicao = (1999, 7, 13)
 
+    categoria = Categoria.objects.create(
+        nome_categoria="Mais 18"
+    )
+
+    editora = Editora.objects.create(
+        nome="Tristeza"
+    )
+
     produto = Produto.objects.create(
         nome="Nome de Jogo",
         qtd=30,
@@ -92,6 +100,15 @@ def test_carrinho_integracao():
 @pytest.mark.labbd2
 def test_avaliar_produto_integracao():
     data_avaliacao=(2003, 8, 17)
+
+    categoria = Categoria.objects.create(
+        nome_categoria="Mais 18"
+    )
+
+    editora = Editora.objects.create(
+        nome="Tristeza"
+    )
+
     produto = Produto.objects.create(
         nome="Nome de Jogo",
         qtd=30,
@@ -167,7 +184,7 @@ def test_criar_usuario_unitario():
         assert usuario.telefone == "(19) 99871-4356"
         assert usuario.endereco == "rua galvao"
 
-def criar_produto_unitario():
+def test_criar_produto_unitario():
     data_criacao = date(2012, 3, 23)
  
     mock_categoria = MagicMock(spec=Categoria)
@@ -232,7 +249,7 @@ def criar_produto_unitario():
         assert produto.data_criacao == data_criacao
         assert produto.recomendado is False
 
-def criar_promocao_unitario():
+def test_criar_promocao_unitario():
     data_criacao = date(2025, 2, 15)
     data_fim = date(2025, 8, 3)
    

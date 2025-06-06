@@ -10,52 +10,61 @@
 <body>
     {% include "HTML/partials/header.html" %}
 
-    <main>  
+    <main id="main">  
         <h1>Carrinho de Compras</h1>
         <div class="products">
-            <div class="produto1">
-                <div class="info">
+            <div class="produto" id="produto">
+                <div class="info" id="info">
+                    <div id="imgInfo"></div>
                    <img src="" alt="Foto do produto">
-                    <p>Nome do produto</p>
-                    <p>QUantidade: - 2 +</p>
-                    <p>Categoria: seilaQual</p> 
+                   <div class="infoText" id="infoText">
+                        <p>Nome do produto</p>
+                        <p>Quantidade: - 2 +</p>
+                        <p>Categoria: seilaQual</p> 
+                   </div>
+                    <p>R$ 129.00</p>
+                    <button>🗑️</button>
                 </div>
-                <p>R$ 129.00</p>
-                <button>🗑️</button>
             </div>
-            <div class="produto2">
-                <div class="info">
+            <div class="produto" id="produto">
+                <div class="info" id="info">
+                    <div id="imgInfo"></div>
                    <img src="" alt="Foto do produto">
-                    <p>Nome do produto</p>
-                    <p>QUantidade: - 2 +</p>
-                    <p>Categoria: seilaQual</p> 
+                   <div class="infoText" id="infoText">
+                        <p>Nome do produto</p>
+                        <p>Quantidade: - 2 +</p>
+                        <p>Categoria: seilaQual</p> 
+                   </div>
+                    <p>R$ 129.00</p>
+                    <button>🗑️</button>
                 </div>
-                <p>R$ 129.00</p>
-                <button>🗑️</button>
             </div>
-            <div class="produto3">
-                <div class="info">
+            <div class="produto" id="produto">
+                <div class="info" id="info">
+                    <div id="imgInfo"></div>
                    <img src="" alt="Foto do produto">
-                    <p>Nome do produto</p>
-                    <p>QUantidade: - 2 +</p>
-                    <p>Categoria: seilaQual</p> 
+                   <div class="infoText" id="infoText">
+                        <p>Nome do produto</p>
+                        <p>Quantidade: - 2 +</p>
+                        <p>Categoria: seilaQual</p> 
+                   </div>
+                    <p>R$ 129.00</p>
+                    <button>🗑️</button>
                 </div>
-                <p>R$ 129.00</p>
-                <button>🗑️</button>
             </div>
         </div>
-        <div class="descricao">
+        <div class="descricao" id="descricao">
             <h2>Descrição</h2>
-            <div class="totais">
+            <div class="totais" id="totais">
                 <p>Total dos produtos: R$516,00</p>
                 <p>Total do frete: R$16,00</p>
             </div>
             <h2>Total do pedido: R$ 616,00</h2>
-            <button>Finalizar Pedido</button>
+            <button id="fimPedido">Finalizar Pedido</button>
         </div>
     </main>
 
-    <footer>
+    <footer id="footer">
         <div class="formPagamento">
             <p>Formas de Pagamento</p>
             <div class="imgsPagamento">
